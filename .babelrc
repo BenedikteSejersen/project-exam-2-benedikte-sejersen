@@ -1,9 +1,10 @@
 {
     "presets": ["@babel/preset-react", "@babel/preset-env"],
     "plugins": [
-        "@emotion", "@babel/plugin-transform-runtime"
-          // {
-          //   "regenerator": true,
-          // },
+        ["@babel/plugin-transform-runtime",
+          {
+            "regenerator": true
+          }
+        ]
       ]
 }

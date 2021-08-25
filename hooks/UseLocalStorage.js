@@ -4,7 +4,10 @@ export default function UseLocalStorage(key, initialValue) {
 
     const [storedValue, setStoredValue] = useState(() => {
         try {
-            const user = window.localStorage.getItem(key);
+            useEffect(() => {
+                const user = window.localStorage.getItem(key);
+                
+            }); 
             return user ? JSON.parse(user) : initialValue;
         } catch(error) {
             console.log(error);
