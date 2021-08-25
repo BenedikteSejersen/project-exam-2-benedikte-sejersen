@@ -1,0 +1,106 @@
+.texture {
+    width: 130%;
+    // height: 160vh;
+    height: 100%;
+    left: 50%;
+    transform: translate( -50%, 0 );
+    background-image: url('../../public/images/texture/bricks-texture.svg');
+    background-repeat: repeat-y;
+    background-size: contain;
+    position: absolute;
+    top: -50px;
+    z-index: -10;
+
+    @include respond-to('small') {
+        height: 130vh;
+    }
+
+    @include respond-to('medium') {
+        top: -100px;
+        height: 130%;
+    }
+
+    @include respond-to('large') {
+        height: 140%;
+    }
+}
+
+.testimonials {
+    position: relative;
+    z-index: 2;
+}
+
+.testimonials__stars {
+
+    @include respond-to('medium') {
+        width: 250px;
+        margin: auto 0;
+    }
+
+    img {
+        width: 30px;
+        height: 30px;
+
+        margin: 0 5px;
+    }
+}
+
+.testimonial__cards-container {
+    @include respond-to('small') {
+        max-width: 80%;
+        margin: 30px auto;
+    }
+
+    @include respond-to('medium') {
+        display: flex;
+        justify-content: center;
+        max-width: 100%;
+    }
+}
+
+.testimonial__card {
+    background-color: #FFF;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+    padding: 15px;
+    margin: 20px 0;
+    
+    @include respond-to('medium') {
+        margin: 0 10px;
+        width: 40%;
+    }
+
+    @include respond-to('large') {
+        margin: 20px;
+        width: 25%;
+        padding: 25px;
+    }
+}
+
+.testimonial__heading {
+    @include respond-to('medium') {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: start;
+    }
+
+    h2 {
+        @include respond-to('medium') {
+            margin-right: 20px;
+        }
+    }
+}
+
+.testimonial__h3 {
+    position: relative;
+    bottom: 20px;
+
+    @include respond-to('medium') {
+        bottom: 40px;
+    }
+}
+
+.testimonial__btn-container {
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+}

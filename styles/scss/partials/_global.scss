@@ -1,0 +1,25 @@
+body {
+    background-color: #F3F3F3;
+    overflow-x: hidden;
+    max-width: 90%;
+    margin: 0 auto;
+
+    @include respond-to('medium') {
+        max-width: 80%;
+    }
+
+    a {
+        display: block;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    section {
+        
+        @include respond-to('medium') {
+            margin: 200px auto;
+        }
+    }
+}

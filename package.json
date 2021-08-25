@@ -1,0 +1,52 @@
+{
+  "name": "project-exam-2-benedikte-sejersen",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^4.0.0",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@hookform/resolvers": "^2.7.1",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-http": "^1.5.17",
+    "axios": "^0.21.1",
+    "graphql": "^15.5.1",
+    "graphql-tag": "^2.12.5",
+    "hamburger-react": "^2.4.1",
+    "isomorphic-unfetch": "^3.1.0",
+    "jquery": "^3.6.0",
+    "next": "11.0.1",
+    "next-with-apollo": "^5.2.1",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.12.2",
+    "react-spinners": "^0.11.0",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.36.0",
+    "yup": "^0.32.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "@emotion/babel-plugin": "^11.3.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-styled-components": "^1.13.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.0.1"
+  },
+  "peerDependencies": {
+    "moment": "2.21.0"
+  }
+}

@@ -1,0 +1,54 @@
+// Primary
+.primary-btn a {
+    padding: 10px 20px;
+    border-radius: 20px;
+    min-width: 10%;
+    max-width: 150px;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    @include respond-to('small') {
+        width: 300px;
+    }
+}
+
+.primary-btn a {
+    background-color: $orange;
+    border: 2px solid $orange;
+}
+
+
+// Secondary
+.secondary-btn__container {
+    display: inline-block;
+}
+
+.secondary-btn {
+    display: flex;
+}
+
+.secondary-btn a {
+}  
+
+.secondary-btn__img {
+    width: 10px;
+    height: 10px;
+    margin: auto auto auto 5px;
+}
+
+
+
+button {
+    border: 0px;
+    background-color: $orange;
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 20px;
+    min-width: 10%;
+    max-width: 150px;
+    text-align: center;
+
+    @include respond-to('small') {
+        width: 300px;
+    }
+}

@@ -1,0 +1,329 @@
+// SoMe
+.index__some {
+    background-color: $light-blue;
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    margin-top: 20px;
+
+    @include respond-to('small') {
+        margin: 60px 0 0 55px;
+        width: 150px;
+    }
+    
+
+    @include respond-to('medium') {
+        position: absolute;
+        left: -100px;
+        top: 0;
+        flex-direction: column;
+
+        width: 50px;
+        height: 200px;  
+    }
+
+    @include respond-to('large') {
+        width: 40px;
+        left: -90px;
+    }
+    
+    .some__img {
+        margin: 10px 15px 0 15px;
+
+        @include respond-to('medium') {
+            margin: 20px auto;
+        }
+
+        @include respond-to('large') {
+            margin-left: 15px;
+        }
+    }
+
+
+    img {
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+    }
+}
+
+// Header
+.index__content-container {
+    margin: 10px 20px;
+
+    @include respond-to('medium') {
+        height: 65vh;
+    }
+
+    @include respond-to('large') {
+        height: 85vh;
+    }
+
+    // Global
+    .index__text-container, .index__btn-container {
+        @include respond-to('small') {
+            position: relative;
+            left: 50px;
+            top: 50px;
+        } 
+
+        @include respond-to('large') {
+            left: 100px;
+            top: 80px;
+        }
+    }
+
+    // Text
+    .index__text--h1 {
+        width: 500px;
+        max-width: 85%;
+        padding-top: 30px;
+
+        @include respond-to('large') {
+            width: 550px;
+            margin-bottom: 50px;
+        }
+    }
+
+    .index__text--h3 {
+        margin: 0 0 0 5px;
+        width: 350px;
+        max-width: 80%;
+
+        @include respond-to('small') {
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+    }
+
+    // Images
+    .index__images-container {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .index__img {
+        position: relative;
+        right: 0;
+        max-width: 100%;
+        max-height: auto;
+    }
+
+    .index__img-1 {
+        top: 70px;
+        height: 100%;
+        width: 125px;
+        left: 70px;
+        z-index: 2;
+
+        @include respond-to('small') {
+            width: 170px;
+            left: 90px;
+        }
+
+        @include respond-to('medium') {
+            top: 0px;
+        }
+
+        @include respond-to('large') {
+            width: 200px;
+            top: -100px;
+            left: 110px;
+        }
+    }
+
+    .index__img-2 {
+        left: 40px;
+        width: 200px;
+        z-index: 1;
+
+        @include respond-to('small') {
+            width : 300px;
+            top: -80px;
+        }
+
+        @include respond-to('medium') {
+            top: -100px;
+        }
+
+        @include respond-to('large') {
+            width: 400px;
+            left: 50px;
+            top: -290px;
+            
+        }
+    }
+
+    // Btn
+    .index__btn-container {
+        margin: 30px 0 0 5px;
+    }
+
+    .our-services-container {
+        .secondary-btn {        
+            // position: relative;
+            display: flex;
+            border: 1px solid blue;
+        }
+        
+        .secondary-btn a {
+            border: 1px solid red;
+        }
+        
+        .secondary-btn__img {        
+            position: absolute;
+            right: 30px;
+            top: -25px;
+        }
+    }
+
+}
+
+// Our services
+.our-services-container {
+    margin: 0 auto;
+    max-width: 80%;
+    display: block;
+
+    @include respond-to('medium') {
+        margin-top: 300px;
+    }
+
+    @include respond-to('large') {
+        margin-top: 100px;
+    }
+
+    .our-services__services {
+        @include respond-to('small') {
+            display: flex;
+        }
+    }
+
+    .our-services__services--img {
+        width: 60px;
+        height: 60px;
+    }
+
+    h2 {
+        text-align: center;
+        margin: 80px 0 30px 0;
+
+        @include respond-to('medium') {
+            margin-bottom: 50px;
+        }
+    }
+
+    .our-services__services-container {
+        position: relative;
+        margin: 0 0 90px 0;
+
+        @include respond-to('medium'){
+            margin: 0 5px 0 5px;
+        }
+
+        @include respond-to('medium'){
+            margin: 0 10px 0 10px;
+        }
+
+        @include respond-to('large') {
+            margin: 0 30px 0 30px;
+        }
+    }
+
+    .our-services__services {
+
+        @include respond-to('small') {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .our_services__services--houseImg {
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        transform: translate(-50%, 0);
+
+        width: 200px;
+        min-height: 280px;
+        max-height: 280px;
+
+        @include respond-to('small') {
+            width: 170px;
+            height: 260px;
+        }
+
+        @include respond-to('large') {
+            width: 230px;
+            
+        }
+
+        
+    }
+
+    .our-services__services--info {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        top: 30px;
+        height: 250px;
+
+        @include respond-to('small') {
+            margin: 0 30px;
+        }
+
+        h4 {
+            position: relative;
+            bottom: 10px;
+        }
+
+        p {
+            width: 150px;
+            position: relative;
+            bottom: 25px;
+            margin: 0 auto;
+
+            @include respond-to('small') {
+                width: 120px;
+            }
+
+            @include respond-to('large') {
+                width: 170px;
+            }
+        }
+
+        .our-services__services--img {
+            width: 50px;
+
+            @include respond-to('small') {
+                width: 35%;
+            }
+        }
+
+        a {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translate(-50%, 0);
+
+            @include respond-to('small') {
+                width: 100%;
+                bottom: 10px;
+            }
+        }
+    }
+}
+
+section {
+    position: relative;
+    z-index: 2;
+}
+
+// Consider rehabilitation
+
+// Use professionals
+
+

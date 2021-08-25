@@ -1,0 +1,46 @@
+h1, h2, h3, h4 {
+    font-family: "libre-franklin", Helvetica, sans-serif;
+    color: $dark-blue;
+}
+
+h1 {
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 50px;
+    letter-spacing: 2px;
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+h3 {
+    font-weight: 400;
+    line-height: 30px;
+    font-size: 18px;
+}
+
+
+
+p,input {
+    font-family: 'RNS Sanz Normal';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+a, button {
+    font-family: 'Gothic A1';
+    font-size: 16px;
+
+}
+
+.nav__phone-number {
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.p__bold {
+    font-weight: 700;
+}
