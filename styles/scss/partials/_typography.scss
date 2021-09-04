@@ -13,6 +13,7 @@ h1 {
 h2 {
     font-size: 25px;
     font-weight: 400;
+    line-height: 35px;
 }
 
 h3 {
@@ -21,19 +22,26 @@ h3 {
     font-size: 18px;
 }
 
+h6 {
+    font-size: 16px;
+    
+}
 
-
-p,input {
+p,input, textarea {
     font-family: 'RNS Sanz Normal';
     font-weight: 400;
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 25px;
+}
+
+.input__required {
+    font-size: 10px;
 }
 
 a, button {
     font-family: 'Gothic A1';
     font-size: 16px;
-
+    font-weight: 500;
 }
 
 .nav__phone-number {
@@ -44,3 +52,4 @@ a, button {
 .p__bold {
     font-weight: 700;
 }
+

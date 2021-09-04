@@ -1,10 +1,8 @@
 import React from 'react'
 
-export default function service() {
+export default function Delete() {
     return (
         <div>
-
-            (SLUG)
             
         </div>
     )

@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
 body {
     background-color: #F3F3F3;
     overflow-x: hidden;
@@ -22,4 +29,59 @@ body {
             margin: 200px auto;
         }
     }
+
+    .breadcrumb {
+        display: flex;
+        padding: 10px;
+
+        .breadcrumb__line {
+            width: 20px;
+            height: 20px;
+            position: relative;
+            
+            &::after, &::before {
+                content: "";
+            }
+
+            &::after {
+                background-color: #000;
+                position: absolute;
+                height: 1px;
+                width: 20%;
+                text-align: center;
+                margin-left: 8px;
+                margin-top: 10px;
+            }
+
+        }
+    }
+
+    // Additional info in circles
+    .circle-info {
+        background-color: $dark-blue;
+        border-radius: 50%;
+
+        .circle-info__h3 {
+            color: #FFF !important;
+        }
+    }
+
+
+    // Social Medias
+    .some__img, .delete {
+        cursor: pointer;
+        transition: ease-in-out 0.3s;
+    }
+
+    .some__img:hover, .delete:hover {
+        transform: scale(1.2);
+    }
+}
+
+// Loader
+.loader-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }

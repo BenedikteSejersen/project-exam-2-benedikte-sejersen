@@ -15,40 +15,156 @@
 .primary-btn a {
     background-color: $orange;
     border: 2px solid $orange;
+    transition: 0.3s ease-in-out;
+}
+
+.primary-btn a:hover {
+    background-color: $dark-blue;
+    color: #FFF;
+    border: 2px solid $dark-blue;
+    font-size: 20px;
+    padding: 7.5px 15px;
 }
 
 
 // Secondary
+
 .secondary-btn__container {
-    display: inline-block;
+    display: block;
+    position: relative;
+
+    padding: 0;
+
+    border: 1px solid red;
+}
+
+.secondary-btn:hover {
+    &::after {
+        opacity: 1;
+        bottom: 1px;
+    }
 }
 
 .secondary-btn {
-    display: flex;
-}
+    display: block;
+    justify-content: center;
+    position: relative;
 
-.secondary-btn a {
-}  
+    &::after, &::before {
+        content: "";
+        position: absolute;
+    }
+
+    &::after {
+        display: block;
+        bottom: -5px;
+        height: 1px;
+        left: 0;
+        background-color: #000;
+        opacity: 0;
+        transition: ease-in-out 0.3s;
+        width: 100%;
+    }
+}
 
 .secondary-btn__img {
     width: 10px;
     height: 10px;
-    margin: auto auto auto 5px;
+    margin: auto auto auto 2px;
+    transition: ease-in-out 0.3s;
 }
 
+.secondary-btn:hover .secondary-btn__img {
+    position: relative;
+    transform: translate(10px, 0);
+}
 
+// Nav
+.nav__link a {
+    position: relative;
+
+    &::before, &::after {
+        content: "";
+        width: 100%;
+    }
+
+    &::after {
+        background-color: $dark-blue;
+        height: 1px;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        opacity: 0;
+        transition: ease-in-out 0.3s;
+    }
+}
+
+.nav__link a:hover {
+    color: $dark-blue;
+    &::after {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+.active {
+    color: $dark-blue;
+    position: relative;
+
+    &::before, &::after {
+        content: "";
+        width: 100%;
+    }
+
+    &::after {
+        background-color: $dark-blue;
+        height: 1px;
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+    }
+}
+
+// Buttons
+.submit {
+    background-color: $orange;
+}
+
+.submit:hover {
+    background-color: $dark-blue;
+    color: #FFF;
+    border: 2px solid $dark-blue;
+    font-size: 20px;
+    padding: 5px 0;
+}
 
 button {
     border: 0px;
-    background-color: $orange;
     cursor: pointer;
     padding: 10px 20px;
     border-radius: 20px;
     min-width: 10%;
     max-width: 150px;
     text-align: center;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s ease-in-out;
 
     @include respond-to('small') {
         width: 300px;
     }
+}
+
+// Dialog boxes
+.success__btn {
+    background-color: $success;
+}
+
+.error__btn {
+    background-color: $error;
+}
+
+.contact-link {
+    cursor: pointer;
 }

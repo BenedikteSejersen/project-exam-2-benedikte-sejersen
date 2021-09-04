@@ -1,0 +1,19 @@
+.white-container {
+    background-color: #FFF;
+    position: relative;
+    z-index: 5;
+
+    padding: 10px;
+
+    @include respond-to('small') {
+        padding: 20px;
+    }
+
+    @include respond-to('medium') {
+        padding: 30px;
+    }
+
+    @include respond-to('large') {
+        padding: 50px;
+    }
+}

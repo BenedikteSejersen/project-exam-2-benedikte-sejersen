@@ -1,0 +1,106 @@
+.admin__h1 {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 50px 0;
+}
+ 
+.admin__user {
+    display: flex;
+    margin: 0 auto; 
+}
+
+.admin-panel__user {
+    max-width: 82.5%;
+    position: relative;
+    bottom: 50px;
+
+    h3 {
+        
+        margin: auto 10px;
+    }
+}
+
+.admin__flex {
+    display: flex;
+    flex-direction: column-reverse;
+
+    position: relative;
+    bottom: 100px;
+
+    @include respond-to('medium') {
+        flex-direction: row;
+    }
+}
+
+.admin__white-container {
+    margin-bottom: 50px;
+
+    @include respond-to('small') {
+        max-width: 80%;
+    }
+
+    @include respond-to('medium') {
+        max-width: 60%;
+        position: relative;
+        bottom: 50px;
+    }
+}
+
+.admin__message-container {
+    overflow-y: scroll;
+}
+
+.admin__white-container:nth-child(1) {
+    @include respond-to('medium') { 
+        margin-left: 50px;
+    }
+}
+
+.admin__white-container:nth-child(2) {
+    @include respond-to('medium') {
+        max-width: 400px;
+        width: 100%;
+        position: absolute;
+        right: 0;
+        top: -40%;
+    }
+}
+
+.admin__crud {
+    margin-bottom: 50px;
+
+    @include respond-to('medium') {
+        margin: 40px;
+    }
+}
+
+.admin__p {
+    max-width: 200px;
+}
+
+// Delete
+.red-circle {
+    width: 60px;
+    height: 60px;
+    background-color: $error;
+    border-radius: 50%;
+}
+
+// Messages
+.admin__message--id {
+    display: flex;
+    margin: 20px 0;
+    border-bottom: 1px solid #000;
+}
+
+.admin__messages {
+    border: 0;
+}
+
+.admin__message--delete {
+    margin: auto 10px auto 0;
+}
+
+.admin__messages--subject, .admin__messages--name {
+    margin: 0;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
@@ -9,39 +9,32 @@ import PhoneBlackIcon from '../../public/images/icons/phone-icon.png'
 import PhoneWhiteIcon from '../../public/images/icons/phone-white-icon.png'
 import SearchBlackIcon from '../../public/images/icons/search-black-icon.png'
 import SearchWhiteIcon from '../../public/images/icons/search-white-icon.png'
+import User from '../../public/images/icons/user.svg'
+import UserWhite from '../../public/images/icons/user-white.svg'
 
 import { Squash as Hamburger } from 'hamburger-react';
 import Dropdown from '../dropdown/Dropdown'
-// import axios from 'axios'
+import SecondaryBtn from '../btn/SecondaryBtn'
+import Logout from '../login/Logout'
 
-// export async function getStaticProps() {
-
-//     let result = [];
-
-//     try {
-//         const res = axios.get(process.env.API_SERVICES);
-//         const result = res.data
-//     } catch(err) {
-//         console.log(err);
-//     }
-
-//     return {
-//         props: {
-//             result,
-//         }
-//     };
-// }
-
-
-export default function Navigation() {
+export default function Navigation({ service }) {
 
     const router = useRouter();
 
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
+    const [authKey, setAuthKey] = useState("");
+    const [userId, setUserId] = useState("");
 
     const toggleHamburger = () => {
         setHamburgerOpen(!hamburgerOpen);
     }
+
+    useEffect(() => {
+        const auth = window.localStorage.getItem("auth");
+        setAuthKey(auth);
+        const user = JSON.parse(window.localStorage.getItem("user"));
+        setUserId(user);
+    }, [])
 
     return (
         
@@ -79,15 +72,15 @@ export default function Navigation() {
 
                         {hamburgerOpen ? 
                         <div className="circle"></div>
-                        : ""}
+                        : ""} 
                         
-                        <div className="nav__menu-links">
+                        <div className="nav__menu-links"> 
                             
                             {router.pathname != "/" ?   <li className="nav__link">
                                                             <Link href="/">Home</Link>
                                                         </li>
                                                         :
-                                                        ""}
+                                                        ""} 
 
                             <li className={`nav__link ${router.pathname == "/services" ? "active" : ""}`} >
                                     < Dropdown />
@@ -117,6 +110,26 @@ export default function Navigation() {
                                 {hamburgerOpen ? <img src={SearchWhiteIcon.src} alt="search icon" width="30" height="30" /> : <img src={SearchBlackIcon.src} alt="search icon" width="30" height="30" />}
                             </span> 
                         </div>
+
+                        {authKey ?  
+                        <div className="nav__user">
+                            <a href="/admin">
+                                {hamburgerOpen ? 
+                                <div className="nav__user--img">
+                                    <Image src={UserWhite.src} alt="user icon" width="30" height="35" />
+                                </div> 
+                                : 
+                                <div className="nav__user--img">
+                                    <Image src={User.src} alt="user icon" width="30" height="35" />
+                                </div>}
+                                <p className="nav__user--id">{userId}</p> 
+                            </a>
+                        
+                            <div className="nav__user--log-out">
+                                <Logout />
+                            </div>
+                        </div>
+                        : "" }
 
                     </div>
                 </div>

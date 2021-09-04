@@ -67,6 +67,7 @@
     @include respond-to('medium') {
         margin: 0 10px;
         width: 40%;
+        padding: 25px; 
     }
 
     @include respond-to('large') {
@@ -92,15 +93,15 @@
 
 .testimonial__h3 {
     position: relative;
-    bottom: 20px;
-
-    @include respond-to('medium') {
-        bottom: 40px;
-    }
 }
 
 .testimonial__btn-container {
     position: absolute;
     right: 0;
     bottom: -30px;
+    // width: 135px;
+}
+
+.testimonial__card--heading {
+    margin: 10px 0 20px 0;
 }

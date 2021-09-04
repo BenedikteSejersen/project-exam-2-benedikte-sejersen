@@ -1,0 +1,108 @@
+.admin-message__blue-container {
+    @include respond-to('small') {
+        padding-bottom: 0; 
+    }
+}
+
+.admin-message {
+    @include respond-to('small') {
+        display: flex;
+    }
+}
+
+.admin-message__text {
+    margin: 10px 0 10px 10px;
+
+    @include respond-to('small') {
+        margin: 100px 0 0 30px;
+    }
+
+    @include respond-to('large')  {
+        margin-left: 50px;
+    }
+}
+
+.admin-message__user-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.admin-message__contact {
+    margin: 20px 0;
+}
+
+.admin-message__contact-info {
+    display: flex;
+}
+
+.admin-message__icon {
+    width: 15px;
+    height: 15px;
+    margin: auto 10px auto 0;
+}
+
+// Message
+.admin-message__white-container {
+    position: relative;
+
+    @include respond-to('small') {
+        top: 150px;
+        left: 100px;
+        width: 50%;
+        top: 50px;
+        display: flex;
+    }
+
+    @include respond-to('medium') {
+        width: 60%;
+    }
+
+    @include respond-to('large') {
+        width: 50%;
+    }
+}
+
+.admin-message__message--text {
+    @include respond-to('small') {
+        width: 70%;
+    }
+}
+
+.admin-message__message--name {
+    margin: 50px 0 0 0;
+}
+
+.admin-message__message--subject {
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.admin-message__message--contact {
+    @include respond-to('small') {
+        width: 40%;
+        margin-top: 30px;
+    }
+
+    @include respond-to('large') {
+        width: 50%;
+    }
+}
+
+.admin-message__message--call, .admin-message__message--email {
+    margin: 10px 0;
+}
+
+.admin-message__message--message {
+    margin: 50px 0 30px 0;
+
+    @include respond-to('small') {
+        max-width: 350px;
+        width: 100%;
+        overflow-x: auto;
+    }
+}
+
+.admin-message__message--p {
+    max-width: 400px;
+    width: 100%;
+}

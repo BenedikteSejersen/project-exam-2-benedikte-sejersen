@@ -88,12 +88,11 @@
     }
 
     .index__text--h3 {
-        margin: 0 0 0 5px;
+        margin: 40px 0 0 5px;
         width: 350px;
         max-width: 80%;
 
         @include respond-to('small') {
-            margin-top: 20px;
             margin-bottom: 40px;
         }
     }
@@ -125,12 +124,12 @@
         }
 
         @include respond-to('medium') {
-            top: 0px;
+            top: -20px;
         }
 
         @include respond-to('large') {
-            width: 200px;
-            top: -100px;
+            width: 240px;
+            top: -80px;
             left: 110px;
         }
     }
@@ -146,13 +145,13 @@
         }
 
         @include respond-to('medium') {
-            top: -100px;
+            top: -140px;
         }
 
         @include respond-to('large') {
             width: 400px;
             left: 50px;
-            top: -290px;
+            top: -200px;
             
         }
     }
@@ -247,18 +246,18 @@
         left: 50%;
         transform: translate(-50%, 0);
 
-        width: 200px;
-        min-height: 280px;
-        max-height: 280px;
+        width: 180px;
+        height: auto;
+        height: 300px;
 
         @include respond-to('small') {
             width: 170px;
-            height: 260px;
+            height: 300px;
         }
 
         @include respond-to('large') {
-            width: 230px;
-            
+            width: 200px;
+            height: auto;
         }
 
         
@@ -275,15 +274,9 @@
             margin: 0 30px;
         }
 
-        h4 {
-            position: relative;
-            bottom: 10px;
-        }
-
         p {
-            width: 150px;
+            width: 170px;
             position: relative;
-            bottom: 25px;
             margin: 0 auto;
 
             @include respond-to('small') {
@@ -302,17 +295,18 @@
                 width: 35%;
             }
         }
+    }
+    
+    .our-services__btn {
+        margin-top: 20px;
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 100%;
 
-        a {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translate(-50%, 0);
-
-            @include respond-to('small') {
-                width: 100%;
-                bottom: 10px;
-            }
+        @include respond-to('large') {
+            bottom: 5%;
         }
     }
 }
@@ -321,9 +315,5 @@ section {
     position: relative;
     z-index: 2;
 }
-
-// Consider rehabilitation
-
-// Use professionals
 
 

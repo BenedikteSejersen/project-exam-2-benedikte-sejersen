@@ -23,6 +23,7 @@ export default function LoginForm() {
     const [userAuth, setUserAuth] = UseLocalStorage("auth", "");
     const [username, setUsername] = useState(undefined);
     const [password, setPassword] = useState(undefined);
+    const [userId, setUserId] = UseLocalStorage("user", "");
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
@@ -35,8 +36,6 @@ export default function LoginForm() {
 		setLoginError(null);
         setIsLoading(false);
 
-		console.log(username, password);
-
         const authUser = {
             "identifier": username,
             "password": password,
@@ -48,12 +47,12 @@ export default function LoginForm() {
             history.push("/admin");
             setUsername(username);
             setPassword(password);
-
+            setUserId(response.data.user.username);
             setUserAuth(response.data.jwt)
 			
 		} catch (error) {
 			console.log("error", error);
-			setLoginError(error.toString());
+			setLoginError("Please check that you're username and password are correct.");
 		} finally {
 			setSubmitting(false);
             setIsLoading(false);
@@ -61,25 +60,25 @@ export default function LoginForm() {
 	}
 
     return (
-        <div>
-
-            {submitting ? <ClimbingBoxLoader /> : 
+        <div> 
             
             <form onSubmit={handleSubmit(onSubmit)} className="form">
 				{loginError && <FormError>{loginError}</FormError>}
 				<fieldset disabled={submitting}>
 					<div className="login__input-container">
-						<input className="input" name="username" placeholder="Username" onChange={ (e) => setUsername(e.target.value) } {...register("username")} />
+                        <div>Username:</div>
+						<input className={`input login__input ${loginError ? "red-border" : ""}`} name="username" placeholder="Username" onChange={ (e) => setUsername(e.target.value) } {...register("username")} />
 						{errors.username && <FormError>{errors.username.message}</FormError>}
 					</div>
 
 					<div className="login__input-container">
-						<input className="input" name="password" placeholder="Password" type="password" onChange={ (e) => setPassword(e.target.value) } {...register("password")} />
+                        <div>Password:</div>
+						<input className={`input login__input ${loginError ? "red-border" : ""}`} name="password" placeholder="Password" type="password" onChange={ (e) => setPassword(e.target.value) } {...register("password")} />
 						{errors.password && <FormError>{errors.password.message}</FormError>}
 					</div>
-					<button className="primary-btn login__btn">{submitting ? "Loggin in..." : "Login"}</button>
+                    <button className="primary-btn login__btn">{submitting ? "Loggin in..." : "Login"}</button>
 				</fieldset>
-			</form>}
+			</form>
             
         </div>
     )

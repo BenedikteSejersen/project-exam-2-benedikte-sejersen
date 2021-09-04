@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import LoginForm from '../components/login/LoginForm'
 import Navigation from '../components/nav/Nav'
 import BlueContainer from '../components/containers/BlueContainer'
+import Breadcrumb from '../components/breadcrumb/Breadcrumb'
+import WhiteContainer from '../components/containers/WhiteContainer'
+import { useRouter } from 'next/router'
+// import Footer from '../components/footer/Footer'
 
 export default function login() {
+
+    const [authKey, setAuthKey] = useState(null);
+    const history = useRouter();
+
+    useEffect(() => {
+        const auth = window.localStorage.getItem("auth");
+
+        if (auth) {
+            setAuthKey(auth);
+            history.push("/admin");
+        } else {
+            setAuthKey(null);
+        }
+    }, [])
+
+
     return (
         <>
             <Head>
@@ -18,9 +38,11 @@ export default function login() {
 
             <div className="blue-container login">
 
-                <div>
-                    <h1>Login</h1>
-                    <p>
+                <Breadcrumb path="login" />
+
+                <div className="login__text">
+                    <h1 className="login__text--h1">Login</h1>
+                    <p className="login__text--p">
                         This page is only for admin. 
                         Click here to og back to the homepage
                     </p>
@@ -28,9 +50,11 @@ export default function login() {
 
             </div>
 
-            <div className="login__form-container">
+            <WhiteContainer classname="login__white-container">
                <LoginForm /> 
-            </div>
+            </WhiteContainer>
+
+            {/* <Footer /> */}
             
             
         </>

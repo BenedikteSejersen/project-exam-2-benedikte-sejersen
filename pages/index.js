@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Nav from '../components/nav/Nav'
 import axios from 'axios';
@@ -13,48 +13,11 @@ import Testimonials from '../components/home-constants/Testimonials';
 import Footer from '../components/footer/Footer';
 import HomeContact from '../components/home-constants/HomeContact';
 
-export async function getStaticProps() {
-
-    // const [isLoading, setIsLoading] = useState(false);
-
-    let result = [];
-    let service = [];
-
-    try {
-        const res = await axios.get(process.env.API_HOME);
-        result = res.data;
-
-        const response = await axios.get(process.env.API_SERVICES);
-        service = response.data;
-        // setIsLoading(true);
-
-    } catch(err) {
-        console.log(err)
-    }
-
-    // setIsLoading(false);
-
-    // if (!isLoading) {
-    //   <ClimbingBoxLoader />
-    // } else {
-      return {
-        props: {
-            result: result,
-            service: service,
-        },
-      };
-    // }
-    
-    
-}
-
-
-
 export default function Home(props) {
+
+  // const [error, setError] = useState(null);
+
   const result = props.result;
-  console.log(result.rehabilitation)
-  // console.log(props.service)
-  console.log(result.rehabilitation.img)
 
   return (
     <div >
@@ -66,6 +29,10 @@ export default function Home(props) {
       </Head>
 
       <Nav />
+
+      {/* {error ? 
+      <div>{error}</div>
+      : ""} */}
 
         <div className="parent__blue-container">
           <div className="blue-container">
@@ -84,20 +51,23 @@ export default function Home(props) {
                 <div className="index__btn--primary-container">
                   <PrimaryBtn link="/contact" text="Contact us" />
                 </div>
-                {/* <div className="index__btn--secondary-container">
-                  <SecondaryBtn link="#services" text="Our services" />
-                </div> */}
               </div>
 
-              <SoMe classname="index__some" />
+              <SoMe classname="index__some" width="30" height="30" />
 
               <div className="index__images-container">
-                <img src={result.img_2[0].formats.medium.url} alt="picture" className="index__img-1 index__img" />
-                <img src={result.img_1[0].formats.medium.url} alt="picture" className="index__img-2 index__img" />
+                <div className="index__img-1 index__img">
+                  <Image src={result.img_2[0].formats.medium.url} alt="picture" width="300" height="400" />
+                </div>
+
+                <div className="index__img-2 index__img">
+                  <Image src={result.img_1[0].formats.medium.url} alt="picture" width="400" height="400" />
+                </div> 
               </div>
 
             </header>
 
+            {/* Our services */}
             <main className="our-services-container">
               <div>
                 <h2>Our services</h2>
@@ -107,13 +77,15 @@ export default function Home(props) {
                     return (
                         <div key={result.our_services.service.id} className="our-services__services-container">
 
-                            <img src={s.house_img[0].formats.medium.url} alt="oven icon" className="our_services__services--houseImg" />
+                              <img src={s.house_img[0].formats.medium.url} alt={s.title} className="our_services__services--houseImg"/>
                           
                           <div className="our-services__services--info">
-                            <img src={s.icon[0].formats.medium.url} alt="oven icon" className="our-services__services--img" />
+                            <img src={s.icon[0].formats.medium.url} alt={s.title} className="our-services__services--img" />
                               <h4>{s.title}</h4>
                               <p>{s.description}</p>
-                              <SecondaryBtn text="Read more" link={s.link} />
+                              <div className="our-services__btn">
+                                <SecondaryBtn text="Read more" link={s.link} />
+                              </div>
                           </div>
                         </div>
                       )}
@@ -132,7 +104,9 @@ export default function Home(props) {
         <section className="consider-rehab">
           <div className="consider-rehab__text">
             <h2>{result.rehabilitation.heading}</h2>
-            < SecondaryBtn link="/" text="Read more" />
+            <div className="consider-rehab__btn">
+              < SecondaryBtn link="/" text="Read more" />
+            </div>
           </div>
 
           <div className="consider-rehab__all-cards">
@@ -149,7 +123,10 @@ export default function Home(props) {
           
 
           <div className="consider-rehab__img--container">
-            <img src={result.rehabilitation.img[0].formats.medium.url} alt="Rehabilitation a chimney" className="consider-rehab__img" />
+            <div className="consider-rehab__img">
+               <img src={result.rehabilitation.img[0].formats.medium.url} alt="Rehabilitation a chimney" width="400" height="400" />
+            </div>
+           
           </div>
           
         </section>
@@ -162,14 +139,16 @@ export default function Home(props) {
 
           <div className="use-pro__center">
             <div className="use-pro__content">
-                <h2>{result.use_professionals.heading}</h2>
+                <h2 className="use-pro__content--subheading">{result.use_professionals.heading}</h2>
                 <p className="p__bold">
                   {result.use_professionals.description}
                 </p>
                 <p>
                   {result.use_professionals.description_2}
                 </p>
-                < SecondaryBtn link="/about" text="Read more" />
+                <div className="use-pro__content--btn">
+                  < SecondaryBtn link="/about" text="Read more" />
+                </div>
             </div>
 
             <div className="use-pro__img-container">
@@ -190,9 +169,38 @@ export default function Home(props) {
             ))
           }
         />
+        <PrimaryBtn link="/contact" text="Contact us" />
 
         <Footer />
       
     </div>
   )
+}
+
+export async function getStaticProps() {
+  // const [error, setError] = useState(null);
+
+  let result = [];
+  // let service = [];
+
+  // const [service, setService] = useState({});
+
+  try {
+      const res = await axios.get(process.env.API_HOME);
+      result = res.data;
+
+      // const response = await axios.get(process.env.API_SERVICES);
+      // service = response.data;
+      // setService(response.data);
+
+  } catch(err) {
+      console.log(err)
+  }
+
+    return {
+      props: {
+          result: result,
+          // service: service,
+      },
+    };
 }

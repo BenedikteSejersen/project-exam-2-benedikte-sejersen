@@ -1,0 +1,176 @@
+.about {
+    position: relative;
+}
+
+.about__blue-container {
+    @include respond-to('medium') {
+         padding-bottom: 20px;
+        }
+}
+   
+
+.about__heading-text {
+    max-width: 100%;
+    margin-left: 23px;
+    margin-top: 50px;
+
+    @include respond-to('medium') {
+        margin: 70px auto 0 auto;
+        max-width: 90%;
+    }
+
+    @include respond-to('large') {
+        max-width: 87%;
+    }
+}
+
+.about__text-btn {
+    
+    @include respond-to('medium') {
+        margin-top: -60px;
+    }
+    
+}
+
+
+.about__p--bold {
+    max-width: 250px;
+}
+
+.about__p--normal {
+    margin-bottom: 30px;
+    @include respond-to('small') {
+        max-width: 400px;
+        
+    }
+}
+
+.about__img-some {
+    @include respond-to('medium') {
+        position: absolute;
+        top: 80px;
+        right: 100px;
+
+        z-index: 5;
+    }
+
+    @include respond-to('large') {
+        right: 200px;
+    }
+}
+
+.about__img {
+    max-width: 200px;
+    width: 100%;
+    margin: 20px auto;
+
+    @include respond-to('medium')  {
+        max-width: 250px;
+    }
+}
+
+.about__some {
+    display: flex;
+    max-width: 100px;
+    justify-content: space-between;
+    margin: 10px auto; 
+}
+
+.about__btn {
+    width: 100px;
+}
+
+
+
+// Circle info
+.about__circle {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    z-index: 3;
+    padding: 20px 10px;
+
+    @include respond-to('medium') {
+        top: 30px;
+    }
+
+    p {
+        max-width: 100px;
+        text-align: center;
+    }
+}
+
+// Services
+.about__services {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 90%;
+    margin: 50px auto;
+
+    border: 1px solid red;
+
+    @include respond-to('small') {
+        flex-direction: row;
+        margin: 100px auto;
+    }
+    
+}
+
+.about__service-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+    width: 180px;
+
+    border: 1px solid blue;
+}
+
+.about__service--img {
+    width: 50px;
+    height: 50px;
+    margin: 10px auto;
+}
+
+.about__service--btn {
+    width: 100%;
+    text-align: center;
+}
+
+// Good to know
+.about__good-to-know-container {
+    text-align: center;
+    margin: 50px auto;
+    width: 100%;
+    max-width: 400px;
+
+    @include respond-to('medium') {
+        max-width: 500px;
+        margin: 150px auto;
+    }
+
+}
+
+// Gallery
+.about__gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+
+    @include respond-to('medium') {
+        width: 120%;
+        margin-left: -10%;
+    }
+}
+
+.about__galler--img {
+    max-width: 40%;
+    margin: 10px;
+
+    @include respond-to('medium') {
+        max-width: 30%;
+    }
+    
+}

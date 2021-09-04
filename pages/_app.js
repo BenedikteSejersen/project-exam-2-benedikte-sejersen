@@ -1,35 +1,54 @@
-// import '../styles/globals.css'
-// import '../styles/scss/style.css'
-// import '../styles/fonts/rns-sanz/stylesheet.css';
-// import '../styles/fonts/gothic-a1/stylesheet.css';
-// import React from "react";
-// import { ApolloProvider } from "@apollo/react-hooks";
-// import withData from "../utils/apollo";
-
-// function MyApp({ Component, pageProps, apollo }) {
-//   return (
-//     <ApolloProvider client={apollo}>
-//       <Component {...pageProps} />
-//     </ApolloProvider>
-//   )
-// }
-
-// export default withData(MyApp)
 
 import '../styles/globals.css'
 import '../styles/scss/style.css'
 import '../styles/fonts/rns-sanz/stylesheet.css';
 import '../styles/fonts/gothic-a1/stylesheet.css';
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from 'axios'
 
 import "regenerator-runtime/runtime.js";
+import {Router} from 'next/router';
+import { ClimbingBoxLoader } from 'react-spinners';
 const regeneratorRuntime = require("regenerator-runtime");
-// import { ApolloProvider } from "@apollo/react-hooks";
-// import withData from "../utils/apollo";
+
+
 
 function MyApp({ Component, pageProps }) {
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+
+    const start = () => {
+      setLoading(true);
+    };
+    const end = () => {
+      setLoading(false);
+    };
+
+    Router.events.on("routeChangeStart", start);
+    Router.events.on("routeChangeComplete", end);
+    Router.events.on("routeChangeError", end);
+
+    return () => {
+      Router.events.off("routeChangeStart", start);
+      Router.events.off("routeChangeComplete", end);
+      Router.events.off("routeChangeError", end);
+    };
+
+  }, []);
+
+
   return (
-      <Component {...pageProps} />
+      <>
+      {loading ? (
+        <div className="loader-container">
+          <ClimbingBoxLoader />
+        </div>
+      ) : (
+        <Component {...pageProps} />
+      )}
+    </>
   )
 }
 

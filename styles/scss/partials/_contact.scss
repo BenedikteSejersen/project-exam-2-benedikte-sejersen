@@ -1,0 +1,155 @@
+.contact__white-container {
+    @include respond-to('medium') {
+        height: 30%;
+        width: 600px;
+        top: 50px;
+    }
+
+    @include respond-to('large') {
+        width: 700px
+    } 
+}
+
+.contact {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-top: 50px;
+
+    @include respond-to('medium') {
+        flex-direction: row;
+        max-width: 90%;
+        margin: 0 auto;
+        position: relative;
+        justify-content: center;
+    }
+}
+
+.contact__h1 {
+    margin-left: 10px;
+
+    @include respond-to('medium') {
+        margin: -20px 0 -10px 20px;
+    }
+    
+}
+
+.contact__img {
+    width: 100%;
+    height: auto;
+
+    @include respond-to('medium') {
+        position: relative;
+        max-width: 350px;
+        width: 100%;
+        height: 100%;
+        margin: auto 0;
+        top: 50px;
+    }
+
+    @include respond-to('large') {
+        max-width: 500px;
+        top: 30px;
+        margin: auto 0;
+    }
+} 
+
+.contact__form-heading {
+    @include respond-to('small') {
+        margin: auto;
+    }
+}
+
+.contact__form-info {
+    display: flex;
+    flex-direction: column;
+
+    @include respond-to('small') {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+}
+
+// Contact form
+.contact__input-container {
+    margin: 25px 10px;
+
+    @include respond-to('medium') {
+        margin: 5px;
+    }
+}
+
+.contact__form--flex {
+    @include respond-to('small') {
+        display: flex;
+    }
+}
+
+.contact__input, .contact__dropdown {
+    width: 90%;
+
+    @include respond-to('small') {
+        width: 90%;
+    }
+}
+
+.contact__dropdown {
+    width: 100%;
+}
+
+.contact__btn {
+    max-width: 300px;
+    width: 100%;
+    margin: 30px auto 0 auto;
+
+    button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+.contact__btn--required {
+    text-align: center;
+}
+
+.contact__dropdown {
+    cursor: pointer;
+}
+
+// .contact__dropdown--options {
+//     border: 1px solid red;
+// }
+
+// Contact info
+.contact__info-container {
+    @include respond-to('small') {
+        margin-bottom: 40px; 
+    }
+
+    @include respond-to('medium') {
+        height: 200px;
+    }
+}
+
+.contact__info {
+    display: flex;
+    margin-left: 10px;
+    margin: -20px 0px -20px 10px;
+}
+
+.contact__info--img {
+    min-width: 30px;
+    width: 30px;
+    height: 30px;
+    min-height: 30px;
+    margin: auto 10px auto 0px;
+}
+
+// SoMe
+.contact__some {
+    display: flex;
+    justify-content: center;
+
+    .some__img {
+        margin: 10px 25px;
+    }
+}
