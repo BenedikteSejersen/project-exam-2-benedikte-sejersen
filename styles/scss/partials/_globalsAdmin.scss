@@ -1,0 +1,43 @@
+.admin__blue-container {
+    @include respond-to('small') {
+        padding-bottom: 0; 
+    }
+}
+
+.admin__layout-flex {
+    @include respond-to('small') {
+        display: flex;
+    }
+}
+
+.admin__header--section {
+    margin: 10px 0 10px 10px;
+
+    @include respond-to('small') {
+        margin: 100px 0 0 30px;
+    }
+
+    @include respond-to('large')  {
+        margin-left: 100px;
+    }
+}
+
+.admin__user {
+    display: flex;
+    margin: 0 auto; 
+    position: relative;
+    // display: inline-block;
+}
+
+.admin__header--user {
+    width: 50px;
+    height: 50px;
+}
+
+
+
+.admin__header--user-id {
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+}

@@ -32,8 +32,6 @@ export default function Dropdown() {
         getServices();
     }, []);
 
-    console.log(service)
-
 
     return (
         <div className="dropdown">
@@ -70,19 +68,19 @@ export default function Dropdown() {
                 {/* TERNARY OPERATOR ISDESKTOP.... */}
                 <div 
                 className={dropdownOpen ? "dropdown__down" : "dropdown__up"}
-                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseEnter={() => setDropdownOpen(true)} 
                 onMouseLeave={() => setDropdownOpen(false)}
                 >
             
                 <div className="dropdown__select">
 
                     {service.map((s) => (
-                        <a href={`/service/${s.slug}`} className="dropdown__option--link">
+                        <a key={s.id} href={`/service/${s.slug}`} className="dropdown__option--link">
                             <div as="option" className="dropdown__option">
-                                <img src={s.icon[0].formats.thumbnail.url} alt={`service icon ${s.title}`} className="dropdown__option--img" />
-                                <a className="dropdown__option--a">{s.title}</a> 
+                                <img src={s.icon.formats.thumbnail.url} alt={`service icon ${s.title}`} className="dropdown__option--img" />
+                                <span className="dropdown__option--a">{s.title}</span> 
                             </div>
-                        </a>
+                        </a> 
                     ))}
 
                 </div> 

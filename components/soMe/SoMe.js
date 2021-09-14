@@ -10,11 +10,19 @@ export default function SoMe({classname, width, height}) {
         <div className={classname}>
 
             <div className="some__img">
-                <Link href="https://www.instagram.com/norskpiperehabiliteringas/"><Image src={Instagram.src} alt="SoMe instagram" width={width} height={height} /></Link>
+                <Link href="https://www.instagram.com/norskpiperehabiliteringas/">
+                    <a>
+                        <Image src={Instagram.src} alt="SoMe instagram" width={width} height={height} />
+                    </a>
+                </Link>
             </div>
 
             <div className="some__img">
-                <Link href="https://www.facebook.com/norskpiperehabiliteringas/"><Image src={Facebook.src} alt="SoMe facebook" width={width} height={height} /></Link>
+                <Link href="https://www.facebook.com/norskpiperehabiliteringas/">
+                    <a>
+                        <Image src={Facebook.src} alt="SoMe facebook" width={width} height={height} />
+                    </a>
+                </Link>
             </div>
             
         </div>

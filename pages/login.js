@@ -18,11 +18,14 @@ export default function login() {
 
         if (auth) {
             setAuthKey(auth);
-            history.push("/admin");
         } else {
             setAuthKey(null);
         }
     }, [])
+
+    if (authKey) {
+        history.push("/admin");
+    }
 
 
     return (

@@ -4,11 +4,14 @@ import Nav from '../components/nav/Nav';
 import { useRouter } from 'next/router';
 import Footer from '../components/footer/Footer';
 import UseLocalStorage from '../hooks/UseLocalStorage';
+import Breadcrumb from '../components/breadcrumb/Breadcrumb';
+import FileUpload from '../components/upload/FileUpload';
 
 
-export default function uploadImage() {
+export default function AdminUploadImage() {
 
     const [authKey, setAuthKey] = useState(null);
+    const [userId, setUserId] = useState(null);
 
     const history = useRouter();
     const store = UseLocalStorage();
@@ -41,16 +44,17 @@ export default function uploadImage() {
 
                     <div className="blue-container">
 
-                        <h1>Update</h1>
+                        <Breadcrumb path="/admin-upload-image" />
+
+                        <h1>Upload new images to the gallery</h1>
+
+                        <FileUpload />
 
                     </div>
 
                     <Footer />
                 </>
-            ) : 
-            
-            ""
-            }
+            ) : ""}
 
         </>
     )

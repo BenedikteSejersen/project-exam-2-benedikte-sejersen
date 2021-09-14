@@ -4,9 +4,6 @@ import Nav from '../components/nav/Nav';
 import Footer from '../components/footer/Footer';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from 'react-hook-form';
-import FormError from '../components/login/FormError';
 import UseLocalStorage from '../hooks/UseLocalStorage';
 import WhiteContainer from '../components/containers/WhiteContainer';
 import SecondaryBtn from '../components/btn/SecondaryBtn';
@@ -15,7 +12,6 @@ import SecondaryBtn from '../components/btn/SecondaryBtn';
 import UserIcon from '../public/images/icons/user.svg';
 import Image from 'next/image';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
-import Trash from '../public/images/icons-confirmation/trash.svg';
 import HandleDelete from '../components/dialogBox/HandleDelete';
 
 export default function Admin(props) {
@@ -80,8 +76,8 @@ export default function Admin(props) {
                                 <div className="admin__crud">
                                     <h2>Create</h2>
                                     <ul>
-                                        <li><SecondaryBtn link="/" text="New Service" /></li>
-                                        <li><SecondaryBtn link="/" text="Add images" /></li>
+                                        <li className="admin__create--link"><SecondaryBtn link="/admin-create-service" text="New Service" /></li>
+                                        <li className="admin__create--link"><SecondaryBtn link="/admin-upload-image" text="Add images" /></li>
                                     </ul>
                                 </div>
 
@@ -89,10 +85,9 @@ export default function Admin(props) {
                                     <h2>Delete service</h2>
                                     <ul>
                                         {props.service.map((s) => (
-                                            <li>
+                                            <li className="admin__delete-services">
                                                 <span className="red-circle">
                                                     <HandleDelete url="http://localhost:1337/categories" id={s.id} /> 
-                                                    {/* <Image src={Trash.src} alt="trash icon" width="50" height="50" /> */}
                                                 </span>
                                                 <p>{s.title}</p>
                                             </li>
@@ -108,6 +103,10 @@ export default function Admin(props) {
                             <>
                                 <h2>Messages</h2>
 
+                                {messages.length === 0 && (
+                                    <div className="admin__message--empty">There is no new messages now.</div>
+                                )}
+
                                 {messages.map((m) => (
                                     <>
                                     <div className="admin__message--id" key={m.id}>
@@ -121,22 +120,16 @@ export default function Admin(props) {
                                             </div>
                                         </a> 
                                     </div>
-                                    </>
-                                    
+                                    </> 
                                 ))}
                             </>
                         )} />
                     </div>
-
-                    
-
-                    {/* <Footer /> */}
                 </>
             ) : 
-            
             ""
             }
-
+            <Footer />
         </>
     )
 }

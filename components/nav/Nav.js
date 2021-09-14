@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-
+import Filter from '../filtering/Filter'
 import NavLogo from '../../public/images/logo/logo-black.png'
 import NavLogoWhite from '../../public/images/logo/npr-logo-white.png'
 import PhoneBlackIcon from '../../public/images/icons/phone-icon.png'
@@ -11,19 +11,22 @@ import SearchBlackIcon from '../../public/images/icons/search-black-icon.png'
 import SearchWhiteIcon from '../../public/images/icons/search-white-icon.png'
 import User from '../../public/images/icons/user.svg'
 import UserWhite from '../../public/images/icons/user-white.svg'
-
 import { Squash as Hamburger } from 'hamburger-react';
 import Dropdown from '../dropdown/Dropdown'
-import SecondaryBtn from '../btn/SecondaryBtn'
 import Logout from '../login/Logout'
 
-export default function Navigation({ service }) {
+export default function Navigation() {
 
     const router = useRouter();
 
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
     const [authKey, setAuthKey] = useState("");
     const [userId, setUserId] = useState("");
+    const [open, setOpen] = useState(false);
+
+    function handleClick() {
+        setOpen(!open);
+    }
 
     const toggleHamburger = () => {
         setHamburgerOpen(!hamburgerOpen);
@@ -41,6 +44,7 @@ export default function Navigation({ service }) {
         <>
         <nav>
             <ul>
+                <div className="nav__flex--desktop">
 
                 <div className="nav__mobile">
                     <li>
@@ -76,22 +80,28 @@ export default function Navigation({ service }) {
                         
                         <div className="nav__menu-links"> 
                             
-                            {router.pathname != "/" ?   <li className="nav__link">
-                                                            <Link href="/">Home</Link>
+                            {router.pathname != "/" ?   <li className="nav__link nav__link--extra">
+                                                            <Link href="/">
+                                                                <a className="nav__link--extra-a">Home</a>
+                                                            </Link>
                                                         </li>
-                                                        :
+                                                        : 
                                                         ""} 
 
-                            <li className={`nav__link ${router.pathname == "/services" ? "active" : ""}`} >
-                                    < Dropdown />
+                            <li className={`nav__link--dropdown nav__link ${router.pathname == "/services" ? "active" : "nav__link--extra"}`} >
+                                    <Dropdown />
                             </li>
 
-                            <li className={`nav__link ${router.pathname == "/about" ? "active" : ""}`}>
-                                <Link href="/about">About us</Link>
+                            <li className={`nav__link ${router.pathname == "/about" ? "active" : "nav__link--extra"}`}>
+                                <Link href="/about">
+                                    <a className="nav__link--extra-a">About us</a>
+                                </Link>
                             </li>
 
-                            <li className={`nav__link ${router.pathname == "/contact" ? "active" : ""}`}>
-                                <Link href="/contact">Contact us</Link>
+                            <li className={`nav__link ${router.pathname == "/contact" ? "active" : "nav__link--extra"}`}>
+                                <Link href="/contact">
+                                    <a className="nav__link--extra-a">Contact us</a>
+                                </Link>
                             </li>
                             
                         </div>
@@ -107,8 +117,11 @@ export default function Navigation({ service }) {
                                 
                             </span>
                             <span className="nav__search-option">
-                                {hamburgerOpen ? <img src={SearchWhiteIcon.src} alt="search icon" width="30" height="30" /> : <img src={SearchBlackIcon.src} alt="search icon" width="30" height="30" />}
+                                <div className="search__icon">
+                                    <Image onClick={() => handleClick()} src={hamburgerOpen ? SearchWhiteIcon.src : SearchBlackIcon.src} width="30" height="30" alt="search" />
+                                </div>
                             </span> 
+                        </div>
                         </div>
 
                         {authKey ?  
@@ -137,7 +150,9 @@ export default function Navigation({ service }) {
             </ul> 
         </nav>
 
-        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <span className="nav__search-option">
+            {open && (<Filter click={() => handleClick()} />)}
+        </span>
         </>
     )
 }

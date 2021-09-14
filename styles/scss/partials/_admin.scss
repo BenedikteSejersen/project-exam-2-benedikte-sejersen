@@ -3,11 +3,6 @@
     margin: 0 auto;
     padding: 50px 0;
 }
- 
-.admin__user {
-    display: flex;
-    margin: 0 auto; 
-}
 
 .admin-panel__user {
     max-width: 82.5%;
@@ -46,8 +41,16 @@
     }
 }
 
-.admin__message-container {
+.admin__message-container { 
     overflow-y: scroll;
+}
+
+.admin__message--empty {
+    margin: 20px 0;
+
+    @include respond-to('medium') {
+        margin-top: 50px;
+    }
 }
 
 .admin__white-container:nth-child(1) {
@@ -74,16 +77,25 @@
     }
 }
 
+.admin__create--link {
+    margin: 10px 0;
+}
+
 .admin__p {
     max-width: 200px;
 }
 
 // Delete
-.red-circle {
-    width: 60px;
-    height: 60px;
-    background-color: $error;
-    border-radius: 50%;
+// .red-circle {
+//     width: 60px;
+//     height: 60px;
+//     background-color: $error;
+//     border-radius: 50%;
+// }
+
+.admin__delete-services {
+    display: flex;
+    margin: 10px 0;
 }
 
 // Messages

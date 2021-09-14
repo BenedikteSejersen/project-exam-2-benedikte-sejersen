@@ -1,19 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from '../../public/images/logo/npr-logo-white.png'
 import Link from 'next/link'
 import Instagram from '../../public/images/icons/instagram-white.svg'
 import Facebook from '../../public/images/icons/facebook-white.svg'
 import PhoneWhiteIcon from '../../public/images/icons/phone-white-icon.png'
-import Dropdown from '../dropdown/Dropdown';
 import Image from 'next/image'
+import axios from 'axios'
+import SoMe from '../soMe/SoMe'
 
 export default function Footer() {
+
+    const [service, setService] = useState([]);
+
+    async function getServices() {
+        try {
+            const res = await axios.get("http://localhost:1337/categories");
+            setService(res.data);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(() => {
+        getServices();
+    }, []);
+
     return (
         <footer className="footer">
 
             <div className="footer__logo-container">
                 <Link href="/">
-                    <Image src={Logo.src} alt="npr logo" className="footer__logo" width="250" height="100" />
+                    <a>
+                        <Image src={Logo.src} alt="npr logo" className="footer__logo" width="250" height="100" />
+                    </a>
                 </Link>  
             </div>
 
@@ -22,34 +41,34 @@ export default function Footer() {
                 <div className="footer__links-container">
                     <h6 className="footer__h6">Navigation</h6>
                     <ul>
-                        <li><Dropdown /></li>
-                        <li><Link href="/about">About us</Link></li>
-                        <li><Link href="/contact">Contact us</Link></li>
+                        {service.map((s) => (
+                            <div key={s.title}>
+                                <li className="footer__links">
+                                    <Link href={`/service/s.slug`}>{s.title}</Link>
+                                </li>  
+                            </div>
+                        ))}
+                        <li className="footer__links">
+                            <Link href="/about">About us</Link>
+                        </li>
+                        <li className="footer__links">
+                            <Link href="/contact">Contact us</Link>
+                        </li>
                     </ul>
                 </div>
 
                 <div className="footer__links-container">
                     <h6 className="footer__h6">Admin</h6>
                     <ul>
-                        <li><Link href="/login">Admin</Link></li>
+                        <li className="footer__links">
+                            <Link href="/login">Admin</Link>
+                        </li>
                     </ul>
                 </div>
 
                 <div className="footer__links-container">
                     <h6 className="footer__h6">Social media</h6>
-                    <ul className="footer__some">
-                        <li className="footer__some--link">
-                            <Link href="https://www.facebook.com/norskpiperehabiliteringas">
-                                <Image src={Facebook.src} alt="facebook icon" width="300" height="300" />
-                            </Link>
-                        </li>
-                        <li className="footer__some--link">
-                            <Link href="https://www.instagram.com/norskpiperehabiliteringas/?fbclid=IwAR3PU2R8efz3yPDdubWPhYu-dVwbsW_ULw1NxlfmyHBAaFEpTf_zcjES1b0">
-                                <Image src={Instagram.src} alt="instagram icon" width="300" height="300" />
-                            </Link>
-                        </li>
-                    </ul>
-
+                    <SoMe classname="footer__some" width="30" height="30" />
                 </div>
 
                 <div className="footer__links-containe">

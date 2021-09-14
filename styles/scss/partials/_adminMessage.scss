@@ -1,31 +1,14 @@
-.admin-message__blue-container {
-    @include respond-to('small') {
-        padding-bottom: 0; 
-    }
-}
+// .admin-message__blue-container {
+//     @include respond-to('small') {
+//         padding-bottom: 0; 
+//     }
+// }
 
-.admin-message {
-    @include respond-to('small') {
-        display: flex;
-    }
-}
-
-.admin-message__text {
-    margin: 10px 0 10px 10px;
-
-    @include respond-to('small') {
-        margin: 100px 0 0 30px;
-    }
-
-    @include respond-to('large')  {
-        margin-left: 50px;
-    }
-}
-
-.admin-message__user-icon {
-    width: 50px;
-    height: 50px;
-}
+// .admin-message {
+//     @include respond-to('small') {
+//         display: flex;
+//     }
+// }
 
 .admin-message__contact {
     margin: 20px 0;
@@ -69,7 +52,7 @@
 }
 
 .admin-message__message--name {
-    margin: 50px 0 0 0;
+    margin: 50px 0 0 0; 
 }
 
 .admin-message__message--subject {

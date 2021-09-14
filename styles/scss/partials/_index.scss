@@ -55,6 +55,7 @@
 
     @include respond-to('medium') {
         height: 65vh;
+        margin: 0;
     }
 
     @include respond-to('large') {
@@ -129,7 +130,7 @@
 
         @include respond-to('large') {
             width: 240px;
-            top: -80px;
+            top: -110px;
             left: 110px;
         }
     }
@@ -151,7 +152,7 @@
         @include respond-to('large') {
             width: 400px;
             left: 50px;
-            top: -200px;
+            top: -250px;
             
         }
     }
@@ -188,22 +189,11 @@
     display: block;
 
     @include respond-to('medium') {
-        margin-top: 300px;
+        max-width: 100%;
     }
 
     @include respond-to('large') {
-        margin-top: 100px;
-    }
-
-    .our-services__services {
-        @include respond-to('small') {
-            display: flex;
-        }
-    }
-
-    .our-services__services--img {
-        width: 60px;
-        height: 60px;
+        max-width: 100%;
     }
 
     h2 {
@@ -217,26 +207,29 @@
 
     .our-services__services-container {
         position: relative;
-        margin: 0 0 90px 0;
+        margin: 0 10px 90px 10px;
 
         @include respond-to('medium'){
-            margin: 0 5px 0 5px;
-        }
-
-        @include respond-to('medium'){
-            margin: 0 10px 0 10px;
+            margin: 20px 30px 50px 30px;
         }
 
         @include respond-to('large') {
-            margin: 0 30px 0 30px;
+            margin: 0 50px 50px 50px;
         }
     }
 
     .our-services__services {
-
         @include respond-to('small') {
             display: flex;
             justify-content: center;
+        }
+    }
+
+    .our-services__wrap {
+        @include respond-to('small') {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
         }
     }
 
@@ -246,21 +239,23 @@
         left: 50%;
         transform: translate(-50%, 0);
 
-        width: 180px;
+        max-width: 220px;
         height: auto;
-        height: 300px;
 
         @include respond-to('small') {
-            width: 170px;
-            height: 300px;
+            max-width: 170px;
+            height: 330px;
+        }
+
+        @include respond-to('medium') {
+            max-width: 200px;
+            height: 330px;
         }
 
         @include respond-to('large') {
-            width: 200px;
-            height: auto;
+            width: 220px;
+            height: 300px;
         }
-
-        
     }
 
     .our-services__services--info {
@@ -268,28 +263,30 @@
         z-index: 2;
         text-align: center;
         top: 30px;
-        height: 250px;
+        height: 230px;
 
-        @include respond-to('small') {
-            margin: 0 30px;
+        .our-services__h4 {
+            margin: 10px 0;
         }
 
         p {
-            width: 170px;
+            width: 200px;
             position: relative;
             margin: 0 auto;
 
             @include respond-to('small') {
-                width: 120px;
+                width: 160px;
             }
 
             @include respond-to('large') {
-                width: 170px;
+                width: 180px;
             }
         }
 
         .our-services__services--img {
-            width: 50px;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto;
 
             @include respond-to('small') {
                 width: 35%;
@@ -305,8 +302,12 @@
         transform: translate(-50%, 0);
         width: 100%;
 
+        @include respond-to('small') {
+            bottom: -50px;
+        }
+
         @include respond-to('large') {
-            bottom: 5%;
+            bottom: -15px;
         }
     }
 }
@@ -314,6 +315,96 @@
 section {
     position: relative;
     z-index: 2;
+}
+
+// Contact
+.index-contact {
+    background-color: #FFF;
+    margin-top: 50px;
+    margin-bottom: -50px;
+    width: 120%;
+    margin-left: -5%;
+
+    @include respond-to('small') {
+        margin-top: 100px;
+    }
+
+    @include respond-to('medium') {
+        width: 130%;
+        margin-left: -15%;
+        margin-top: 150px;
+    }
+
+    @include respond-to('large') {
+        margin-top: 200px;
+    }
+}
+
+.index-contact__flex {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    padding: 50px 0;
+    margin: auto;
+
+    @include respond-to('medium') {
+        flex-direction: row;
+        max-width: 77%;
+        justify-content: space-between;
+        padding: 100px 0;
+    }
+}
+
+.index-contact__text {
+    margin-bottom: 50px;
+
+    @include respond-to('medium') {
+        width: 30%;
+    }
+}
+
+.index-contact__h2 {
+    margin-bottom: 40px;
+    max-width: 130px;
+}
+
+.index-container__children {
+    @include respond-to('medium') {
+        margin-bottom: 50px;
+    }
+}
+
+.index-contact__contact-info {
+    display: flex;
+    margin: 20px 0;
+
+    h4 {
+        margin: auto 0;
+    }
+}
+
+.index-contact__img {
+    width: 30px;
+    height: 30px;
+    margin-right: 30px;
+}
+
+.index-contact__map-container {
+    width: 50%;
+    height: 10%;
+    @include respond-to('medium') {
+        width: 70%;
+    }
+}
+
+.index-contact__map {
+    width: 220%;
+    margin-left: -15%;
+
+    @include respond-to('medium') {
+        width: 118%;
+        margin-left: 0;
+    }
 }
 
 

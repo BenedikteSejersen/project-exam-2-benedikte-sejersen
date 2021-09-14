@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Head from 'next/head'
 import Nav from '../components/nav/Nav';
 import axios from 'axios';
@@ -12,10 +12,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from '../components/login/FormError';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
-import SuccessImg from '../public/images/icons-confirmation/success-dialog.png'
-import ModalBox from '../components/dialogBox/ModalBox';
-import DialogApi from './api/hello';
-import { useRouter } from 'next/router';
+import TextareaAutosize from 'react-textarea-autosize';
+
+import Success from '../components/dialogBox/Success';
+import ErrorConf from '../components/dialogBox/ErrorConf';
 
 
 const schema = yup.object().shape({
@@ -26,53 +26,47 @@ const schema = yup.object().shape({
     Message: yup.string().min(10).required("Message is required")
 });
 
-export async function getStaticProps() { 
-
-    let contact = [];
-
-    try {
-        const resHome = await axios.get(process.env.API_HOME);
-        contact = resHome.data;
-    } catch(err) {
-        console.log(err);
-    }
-
-    return {
-        props: {
-            contact: contact,
-        },
-    };
-}
-
 export default function Contact(props) {
 
     const [submitting, setSubmitting] = useState(false);
-    const [serverError, setServerError] = useState(null);
-    const [success, setSuccess] = useState(null);
+    const [serverError, setServerError] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
 
+    const form = useRef();
+
+    // Form yup resolver
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
+    console.log(errors)
+
+    // Confirmation dialog form successfully sent
+    const handleConfirm = () => {
+        form.current.submit();
+    }
+
+    const handleConfrimMsg = () => {
+        if (Object.entries(errors).length === 0) {
+            return setShowConfirm(false);
+        } 
+        return false;
+    }
+
+    // Form submit function
     async function onSubmit(data) {
         setSubmitting(true);
 		setServerError(false);
-        setSuccess(true);
-
-        console.log(data)
 
         try {
             const resMes = await axios.post("http://localhost:1337/messages", data)
-            console.log(resMes.data)
-            confirm("Succes");
-            setSuccess(true);
+            setShowConfirm(true);
 
         } catch(err) {
             console.log(err);
-            setServerError(err.toString());
-        } finally {
-            setSubmitting(false);
-        }
+            setServerError(true);
+            setShowConfirm(false);
+        } 
     }
 
     return (
@@ -101,7 +95,7 @@ export default function Contact(props) {
                                 <h1 className="contact__h1">Contact us</h1>
                     
                                 <div>
-                                    <form onSubmit={handleSubmit(onSubmit)}  className="form">
+                                    <form ref={form} onSubmit={handleSubmit(onSubmit)}  className="form">
                                         <fieldset disabled={submitting}>
                                         <div className="contact__form--flex">
                                             <div className="contact__input-container">
@@ -110,10 +104,7 @@ export default function Contact(props) {
                                                     {errors.Name ? 
                                                         <FormError>{errors.Name.message}</FormError> 
                                                     :
-                                                        <div className="input__required">Requires at least 3 characters</div>}
-                                                    
-                                                    
-                                                    
+                                                        <div className="input__required">Requires at least 3 characters</div>}  
                                             </div>
                                                 {/* Dropdown */}
                                             <div className="contact__input-container">
@@ -140,7 +131,10 @@ export default function Contact(props) {
                                             <div className="contact__input-container">
                                                 <div>Phone:</div>
                                                 <input className={`input contact__input ${errors.Number ? "red-border" : ""}`} {...register("Number")} />
-                                                {errors.Number && <FormError>{errors.Number.message}</FormError>}
+                                                {errors.Number ? 
+                                                        <FormError>{errors.Number.message}</FormError> 
+                                                    :
+                                                        <div className="input__required">Requires at least 8 numbers</div>}
                                             </div>
                                             <div className="contact__input-container">
                                                 <div>Email:</div>
@@ -151,21 +145,19 @@ export default function Contact(props) {
 
                                         <div className="contact__input-container">
                                             <div>Message:</div>
-                                            <textarea className={`input contact__input ${errors.Message ? "red-border" : ""}`} {...register("Message")} />
-                                            {errors.Name ? 
+                                            <TextareaAutosize className={`input contact__input ${errors.Message ? "red-border" : ""}`} {...register("Message")}  />
+                                            {errors.Message ? 
                                                         <FormError>{errors.Message.message}</FormError> 
                                                     :
                                                         <div className="input__required">Requires at least 10 characters</div>}
                                         </div>
 
-                                        {/* {loginError && <FormError>{loginError}</FormError>} */}
                                         <div className="contact__btn">
-                                            <button className="submit">Submit</button>
-                                            <div className="input__required contact__btn--required">All fields are required *</div>
+                                            <button onClick={handleConfrimMsg} className="submit">Submit</button>
+                                            <div className="input__required contact__btn--required">All fields are required</div>
                                         </div>
                                         </fieldset>
                                     </form>
-
                                 </div>
                             </div>
 
@@ -175,7 +167,7 @@ export default function Contact(props) {
                                         <div  className="contact__info--img">
                                             <Image src={c.contact_icon[0].url} alt="contact icon" width="30" height="30" />
                                         </div>
-                                        <h4>{c.contact_info}</h4>
+                                        <h4 className="p__normal">{c.contact_info}</h4>
                                     </div>
                                 ))}
 
@@ -188,24 +180,32 @@ export default function Contact(props) {
                     
             </div>
 
-            {/* If message is sent */}
-            {/* {success ? <ModalBox 
-                img={SuccessImg.src} 
-                heading="Yes, message is sent!"
-                bodyText="Thank you for your message.  We will be answering you as fast as possible."
-                btnText="Continue"
-                classname="success"
-                />: ""} */}
-
-            {/*{serverError ? <ModalBox
-                img={SuccessImg.src}
-                heading="Oh no! Something went wrong"
-                bodyText="Unfortunately, your message did not arrive."
-                btnText="Try again"
-                classname="error"     />
-            : ""} */}
-
             <Footer />
+
+            {showConfirm &&  (
+                <Success confirm={handleConfirm} />
+            )}
+            {serverError && (
+                <ErrorConf confirm={handleConfirm} />
+            )}
         </>
     )
+}
+
+export async function getStaticProps() { 
+
+    let contact = [];
+
+    try {
+        const resHome = await axios.get(process.env.API_HOME);
+        contact = resHome.data;
+    } catch(err) {
+        console.log(err);
+    }
+
+    return {
+        props: {
+            contact: contact,
+        },
+    };
 }

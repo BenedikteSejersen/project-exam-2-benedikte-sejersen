@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
-import Link from 'next/link'
 import Nav from '../components/nav/Nav';
 import axios from 'axios';
 import SecondaryBtn from '../components/btn/SecondaryBtn';
@@ -9,45 +8,31 @@ import Footer from '../components/footer/Footer';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import CircleInfo from '../components/containers/CircleInfo';
 import SoMe from '../components/soMe/SoMe';
-
-export async function getStaticProps() {
-
-    let about = [];
-    let gallery = [];
-    let services = [];
-
-    try {
-        // const res = await axios.get(process.env.API_ABOUT);
-        const res = await axios.get("http://localhost:1337/about");
-        about = res.data;
-
-        // Gallery
-        const res1 = await axios.get("http://localhost:1337/galleries");
-        gallery = res1.data;
-
-        const res2 = await axios.get("http://localhost:1337/categories");
-        services = res2.data;
-
-    } catch(err) {
-        console.log(err);
-    } 
-
-    return {
-        props: {
-            data: about,
-            gallery: gallery,
-            services: services
-        },
-    };
-}
+import UpdateIcon from '../public/images/icons/update-icon.png'
 
 export default function About(props) {
+
+    const [authKey, setAuthKey] = useState("");
 
     const result = props.data;
     const gallery = props.gallery;
     const service = props.services;
 
-    console.log(service)
+    // const store = UseLocalStorage();
+    useEffect(() => {
+        // setAuthKey(JSON.parse(window.localStorage.getItem("auth")));
+        const auth = window.localStorage.getItem("auth");
+
+        if (!auth) {
+            setAuthKey(null);
+        } else {
+            setAuthKey(auth);
+        }
+    }, [])
+
+    console.log(authKey)
+
+    // console.log(service)
 
     return (
         <>  
@@ -63,6 +48,12 @@ export default function About(props) {
                <div className="blue-container about__blue-container">
 
                     <Breadcrumb path="about" />
+
+                    {authKey ? 
+                        <div>
+                            <Image src={UpdateIcon.src} width="50" height="50" alt="update the content icon" />
+                        </div>
+                   : "" }
 
                     <div className="about__heading-text">
                         <h1 className="about__h1">{result.heading}</h1>
@@ -99,7 +90,7 @@ export default function About(props) {
                     {service.map((s) => (
                         <div className="about__service-container" key={s.id}>
                             <div className="about__service--img">
-                               <Image src={s.icon[0].formats.medium.url} width="100" height="100" /> 
+                               <Image src={s.icon.formats.thumbnail.url} width="100" height="100" /> 
                             </div>
                             <div className="about__service--btn">
                                 <SecondaryBtn link={`/service/${s.slug}`} text={s.title} /> 
@@ -121,21 +112,48 @@ export default function About(props) {
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
-                            <>
-                                <div className="about__galler--img">
+                            <div key={g.id} className="about__galler--img">
+                                <div>
                                     <Image src={g.img[0].url} alt={g.alt_text} width="700" height="700" />
                                 </div>
-                            </>
+                            </div>
                         ))}
                     </div>
                 </section> 
             </div>
 
-            
-
-            
-
-            <Footer />
+            <Footer service={service} />
         </>
     )
+}
+
+export async function getStaticProps() {
+
+    let about = [];
+    let gallery = [];
+    let services = [];
+
+    try {
+        // const res = await axios.get(process.env.API_ABOUT);
+        const res = await axios.get("http://localhost:1337/about");
+        about = res.data;
+
+        // Gallery
+        const res1 = await axios.get("http://localhost:1337/galleries");
+        gallery = res1.data;
+
+        const res2 = await axios.get("http://localhost:1337/categories");
+        services = res2.data;
+
+    } catch(err) {
+        console.log(err);
+    } 
+
+    return {
+        props: {
+            data: about,
+            gallery: gallery,
+            services: services
+        },
+    };
 }

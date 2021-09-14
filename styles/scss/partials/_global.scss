@@ -85,3 +85,27 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+
+// Error handler
+.error-components__container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.error-components__heading {
+    color: $error;
+}
+
+// Update icon
+.update-icon {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    cursor: pointer;
+
+    div img {
+       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important; 
+    }
+}

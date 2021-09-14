@@ -48,18 +48,18 @@ export default function message({ message }) {
 
             <Nav />
 
-            {authKey ? 
+            {authKey ?  
 
-            <div className="blue-container admin-message__blue-container">
+            <div className="blue-container admin__blue-container">
                 <Breadcrumb path="admin" path2={`admin-message/${message[0].id}`} path2Name="message" />
-                <div className="admin-message">
-                    <div className="admin-message__text">
-                        <h1 className="admin-message__h1">Message</h1>
+                <div className="admin__layout-flex">
+                    <div className="admin__header--section">
+                        <h1>Message</h1>
                             <div className="admin__user">
-                                <div className="admin-message__user-icon">
+                                <div className="admin__header--user">
                                     <Image src={UserIcon.src} alt="user icon" width="50" height="50" />
                                 </div>
-                                <h3>{userId}</h3>
+                                <h3 className="admin__header--user-id">{userId}</h3>
                             </div>
 
                             <div className="admin-message__contact">

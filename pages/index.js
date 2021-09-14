@@ -2,22 +2,48 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Nav from '../components/nav/Nav'
 import axios from 'axios';
-import Link from 'next/link';
-import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 import Image from 'next/image'
-
 import PrimaryBtn from '../components/btn/PrimaryBtn';
 import SecondaryBtn from '../components/btn/SecondaryBtn';
 import SoMe from '../components/soMe/SoMe';
 import Testimonials from '../components/home-constants/Testimonials';
 import Footer from '../components/footer/Footer';
 import HomeContact from '../components/home-constants/HomeContact';
+import UpdateIcon from '../public/images/icons/update-icon.png'
+import ImageHouse from '../public/images/img-services-house.png'
+import ErrorComponent from '../components/error/ErrorComponent';
 
 export default function Home(props) {
 
-  // const [error, setError] = useState(null);
+  const [authKey, setAuthKey] = useState("");
+  const [servicesMoreThan4, setServicesMoreThan4] = useState(false);
+
+  // const store = UseLocalStorage();
+  useEffect(() => {
+      // setAuthKey(JSON.parse(window.localStorage.getItem("auth")));
+      const auth = window.localStorage.getItem("auth");
+
+      if (!auth) {
+          setAuthKey(null);
+      } else {
+          setAuthKey(auth);
+      }
+  }, [])
 
   const result = props.result;
+  const services = props.services;
+  const error = props.error;
+
+  console.log(services.length)
+
+  // if (services.length > 4) {
+  //   setServicesMoreThan4(true);
+  // };
+  // console.log(servicesMoreThan4)
+
+  if (error) {
+    return <ErrorComponent />
+  };
 
   return (
     <div >
@@ -30,14 +56,15 @@ export default function Home(props) {
 
       <Nav />
 
-      {/* {error ? 
-      <div>{error}</div>
-      : ""} */}
-
         <div className="parent__blue-container">
           <div className="blue-container">
 
-
+          {authKey ? 
+              <div className="update-icon">
+                  <Image src={UpdateIcon.src} width="50" height="50" alt="update the content icon" />
+              </div>
+          : "" }
+          
             <header className="index__content-container">
 
               <div className="index__text-container index__text--h1">
@@ -72,19 +99,21 @@ export default function Home(props) {
               <div>
                 <h2>Our services</h2>
 
-                <div className="our-services__services">
-                  {result.our_services.service.map(function(s) {
+                <div className={services.length > 4 ? "our-services__wrap" : "our-services__services"}>
+                  {services.map(function(s) {
                     return (
-                        <div key={result.our_services.service.id} className="our-services__services-container">
+                        <div key={s.id} className="our-services__services-container">
 
-                              <img src={s.house_img[0].formats.medium.url} alt={s.title} className="our_services__services--houseImg"/>
+                              <img src={ImageHouse.src} alt="house-shaped image in light blue" className="our_services__services--houseImg"/>
                           
                           <div className="our-services__services--info">
-                            <img src={s.icon[0].formats.medium.url} alt={s.title} className="our-services__services--img" />
-                              <h4>{s.title}</h4>
-                              <p>{s.description}</p>
+                            <div className="our-services__services--img" >
+                              <Image src={s.icon.formats.thumbnail.url} width="100" height="100" alt={s.title}/>
+                            </div>
+                              <h4 className="our-services__h4">{s.title}</h4>
+                              <p>{s.short_text_index}</p>
                               <div className="our-services__btn">
-                                <SecondaryBtn text="Read more" link={s.link} />
+                                <SecondaryBtn text="Read more" link={`/service/${s.slug}`} />
                               </div>
                           </div>
                         </div>
@@ -124,15 +153,12 @@ export default function Home(props) {
 
           <div className="consider-rehab__img--container">
             <div className="consider-rehab__img">
-               <img src={result.rehabilitation.img[0].formats.medium.url} alt="Rehabilitation a chimney" width="400" height="400" />
+               <Image src={result.rehabilitation.img[0].formats.medium.url} width="500" height="500" alt="Rehabilitation a chimney" width="400" height="400" />
             </div>
            
           </div>
           
         </section>
-
-
-        <Testimonials />
 
         {/* Use professionals */}
         <section className="use-pro">
@@ -152,24 +178,29 @@ export default function Home(props) {
             </div>
 
             <div className="use-pro__img-container">
-              <img src={result.use_professionals.img[0].formats.large.url} alt="advertising" className="use-pro__img"/>
+              <Image src={result.use_professionals.img[0].formats.large.url} width="1000" height="1500" alt="advertising"/>
             </div>
           </div>
             
         </section>
 
+        <Testimonials />
+
         <HomeContact
           heading={result.contact.heading}
           children={
             result.contact.contact_methods.map(contact => (
-              <div>
-                <span>{contact.contact_info.contact_icon}</span>
-                <h4>{contact.contact_info}</h4>
+              <div key={contact.id}>
+                <div className="index-contact__contact-info">
+                  <div className="index-contact__img">
+                    <Image src={contact.contact_icon[0].url} width="50" height="50" alt={contact.contact_info} />
+                  </div>
+                  <h4>{contact.contact_info}</h4>
+                </div>
               </div>
             ))
           }
         />
-        <PrimaryBtn link="/contact" text="Contact us" />
 
         <Footer />
       
@@ -178,29 +209,32 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  // const [error, setError] = useState(null);
 
   let result = [];
-  // let service = [];
-
-  // const [service, setService] = useState({});
+  let resultServices = [];
 
   try {
       const res = await axios.get(process.env.API_HOME);
       result = res.data;
 
-      // const response = await axios.get(process.env.API_SERVICES);
-      // service = response.data;
-      // setService(response.data);
+      const res2 = await axios.get(process.env.API_SERVICES);
+      resultServices = res2.data;
 
   } catch(err) {
       console.log(err)
+
+      return { props: { 
+        error: true,
+        result: null,
+        resultServices: null
+      }};
   }
 
     return {
       props: {
+          error: false,
           result: result,
-          // service: service,
+          services: resultServices,
       },
     };
 }

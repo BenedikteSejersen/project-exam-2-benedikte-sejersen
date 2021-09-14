@@ -4,24 +4,40 @@ import UseLocalStorage from '../../hooks/UseLocalStorage';
 import Image from 'next/image'
 import axios from 'axios'
 import { useRouter } from 'next/router';
+import Delete from './Delete';
 
 export default function HandleDelete({id, url}) {
 
     const [authKey, setAuthKey] = useState(null);
+    const [open, setOpen] = useState({
+        show: false,
+        id: null
+    });
 
     const store = UseLocalStorage();
     const history = useRouter();
+    const idItem = id;
+
+    function handleClick() {
+        setOpen({
+            show: true,
+            id: idItem
+        }) 
+    }
+
+    function handleCancel() {
+        setOpen({
+            show: false,
+            id: null
+        });
+    }; 
 
     useEffect(() => {
         setAuthKey(JSON.parse(window.localStorage.getItem("auth")));
     }, [store.authKey])
 
-    const idMessage = id;
-
-    async function onDelete() {
-        const confirmDelete = confirm("Are you sure you will delete?");
-
-        console.log(authKey)
+    async function handleDelete() {
+    
         const options = { 
             headers: { 
                 "Authorization" : `Bearer ${authKey}`,
@@ -29,20 +45,34 @@ export default function HandleDelete({id, url}) {
             }
         };
 
-        if (confirmDelete) {
+        const idUrl = `${url}/${idItem}`;
+
+        if (handleDelete) { 
             try {
-                await axios.delete(`${url}/${idMessage}`, options);
+                const deleted = await axios.delete(idUrl, options);
+                setOpen({
+                    show: true,
+                    id: deleted,
+                });
                 history.push("/admin");
             } catch(err) {
                 console.log(err);
             }
         }
     }
+    
 
     return (
         <div>
 
-            <div className="delete" onClick={() => onDelete()}>
+            {open.show ?
+                <Delete 
+                    HandleDelete={() => handleDelete()}
+                    HandleCancel={() => handleCancel()} 
+                    />
+            : ""   }
+
+            <div className="delete" onClick={() => handleClick()}>
                 <Image src={Trash.src} alt="trash icon" width="30" height="30" />
             </div>
             

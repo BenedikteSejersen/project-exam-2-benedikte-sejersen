@@ -4,7 +4,6 @@ import '../styles/scss/style.css'
 import '../styles/fonts/rns-sanz/stylesheet.css';
 import '../styles/fonts/gothic-a1/stylesheet.css';
 import React, { useEffect, useState } from "react";
-import axios from 'axios'
 
 import "regenerator-runtime/runtime.js";
 import {Router} from 'next/router';

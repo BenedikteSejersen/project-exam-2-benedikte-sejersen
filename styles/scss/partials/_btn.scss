@@ -80,7 +80,13 @@
 }
 
 // Nav
-.nav__link a {
+// .dropdown__option--link:hover {
+//     &::after {
+//         opacity: 0;
+//     }
+// }
+
+.nav__link--extra .nav__link--extra-a {
     position: relative;
 
     &::before, &::after {
@@ -99,7 +105,7 @@
     }
 }
 
-.nav__link a:hover {
+.nav__link--extra .nav__link--extra-a:hover {
     color: $dark-blue;
     &::after {
         bottom: 0;
@@ -111,7 +117,7 @@
     color: $dark-blue;
     position: relative;
 
-    &::before, &::after {
+    &::after {
         content: "";
         width: 100%;
     }

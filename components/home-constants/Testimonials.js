@@ -1,9 +1,7 @@
 import React from 'react'
-
 import FullStar from '../../public/images/icons/star-full.png'
 import EmptyStar from '../../public/images/icons/star.png'
 import SecondaryBtn from '../btn/SecondaryBtn'
-// import BricksTexture from '../../public/images/texture/bricks-texture.svg'
 
 export default function Testimonials() {
     return (
@@ -86,7 +84,7 @@ export default function Testimonials() {
             </div>
 
             <div className="testimonial__btn-container">
-                    < SecondaryBtn link="https://mittanbud.no/profil/787099/norsk-piperehabilitering-as/" text="Check out more" />
+                    <SecondaryBtn link="https://mittanbud.no/profil/787099/norsk-piperehabilitering-as/" text="Check out more" />
             </div> 
 
         </div>

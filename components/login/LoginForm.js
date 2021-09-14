@@ -59,6 +59,10 @@ export default function LoginForm() {
 		}
 	}
 
+    if (userId) {
+        history.push("/admin");
+    }
+
     return (
         <div> 
             

@@ -67,34 +67,30 @@
 
 .consider-rehab__img--container {
     margin: 0 auto;
-    max-width: 60%;
+    max-width: 100%;
 }
 
 .consider-rehab__img {
-    width: 80%;
-    max-width: 200px;
+    width: 100%;
+    // max-width: 200px;
     height: auto;
     position: relative;
-    left: 100px;
-    bottom: 50px;
+    // left: 100px;
+    bottom: 20px;
     z-index: 1;
     transform: scaleX(-1);
-
-    @include respond-to('small') {
-        max-width: 400px;
-        width: 90%;
-    }
 
     @include respond-to('medium') {
         position: absolute;
         max-width: 300px;
         width: 100%;
-        left: 60%;
+        left: 55%;
+        bottom: 50px;
     }
 
     @include respond-to('large') {
         max-width: 370px;
-        left: 58%;
+        left: 50%;
     }
 }
 

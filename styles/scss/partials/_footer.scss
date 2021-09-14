@@ -13,9 +13,9 @@
         margin: 0;
     }
 
-    ul {
-        margin-left: -40px;
-    }
+    // ul {
+    //     margin-left: -40px;
+    // }
 }
 
 .footer__logo-container {
@@ -43,7 +43,7 @@
 }
 
 .footer__links-container {
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
 
     @include respond-to('small') {
         margin: 0 50px;
@@ -52,6 +52,10 @@
     @include respond-to('medium') {
         margin: 0 90px;
     }
+}
+
+.footer__links {
+    margin: 5px 0;
 }
 
 .footer__some {
@@ -75,14 +79,18 @@
 }
 
 .footer__h3 {
-    color: #FFF;
-    position: relative;
-    bottom: 15px;
+    color: #FFF; 
+    // position: relative;
+    // bottom: 15px;
 }
 
 .footer__copyright {
     display: flex;
     justify-content: center;
     margin: 20px;
+}
+
+.footer__h6 {
+    margin: 20px 0;
 }
 

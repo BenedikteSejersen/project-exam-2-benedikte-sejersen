@@ -22,9 +22,12 @@ h3 {
     font-size: 18px;
 }
 
+h4 {
+    font-weight: 500;
+}
+
 h6 {
     font-size: 16px;
-    
 }
 
 p,input, textarea {
@@ -49,7 +52,20 @@ a, button {
     font-weight: 300;
 }
 
+.p__normal {
+    font-weight: 400;
+}
+
 .p__bold {
     font-weight: 700;
 }
 
+// Confirmatio dialog
+.confirmation__heading--text {
+    font-size: 35px;
+}
+
+// Search
+.search__result-container a {
+    font-size: 35px;
+}

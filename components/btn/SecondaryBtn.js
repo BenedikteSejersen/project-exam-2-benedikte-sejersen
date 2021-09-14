@@ -1,13 +1,13 @@
 import React from 'react'
-import Link from 'next/link'
 import ArrowLeft from '../../public/images/icons/arrow-left.png'
+import Image from 'next/image'
 
 export default function SecondaryBtn({link, text}) {
     return (
         <div className="secondary-btn__container">
             <a href={link} className="secondary-btn">
                 {text}
-                <img src={ArrowLeft.src} alt="arrow to the left" className="secondary-btn__img" />
+                <Image src={ArrowLeft} width="10" height="10" alt="arrow to the left" className="secondary-btn__img" />
             </a>
         </div>
         
