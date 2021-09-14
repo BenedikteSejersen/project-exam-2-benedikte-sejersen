@@ -3,18 +3,10 @@ import React, { useEffect, useState } from 'react'
 
 export default function FileUpload() {
 
-    const [image, setImage] = useState({});
-    // const [files, setFiles] = useState([]);
+    const [image, setImage] = useState(null);
     const [submitting, setSubmitting] = useState(false);
+    const [response, setResponse] = useState({});
     const [authKey, setAuthKey] = useState(null);
-
-    // function handleChange(event) {
-    //     // event.target.files;
-
-    //     console.log("FileUpload.event.target.files", event.target.files)
-    // }
-
-    console.log(image)
 
     useEffect(() => {
 
@@ -29,64 +21,39 @@ export default function FileUpload() {
 
     }, []);
 
-    // let formData = new FormData();
-    // formData.append("files", files[0]);
-
-    // console.log(formData)
-
-    const onSubmit = async () => {
+    const onSubmit = async (e) => {
         setSubmitting(true)
+
+        e.preventDefault();
 
         let formData = new FormData();
         formData.append("img", image);
-        console.log(formData)
+        // formData.append("upload_preset", "yc3hjmth");
+        // const formDataImage = formData.get("img")
+        console.log(formData.get("img"));
 
-        axios({
-        method: "post",
-        url: "http://localhost:1337/galleries",
-        data: formData,
-        headers: {
-            "Authorization" : `Bearer ${authKey}`,
-            'Content-Type': 'application/json'
-            },
-        })
-        .then(({ data }) => {
-            setImage(data);
-            console.log("Succesfully uploaded: ", JSON.stringify(data));
-        })
-        .catch((error) => {
+        const options = { 
+            headers: { 
+                "Authorization" : `Bearer ${authKey}`,
+                'Content-Type': 'application/json',
+                
+            }
+        };
+
+        try {
+            const res = await axios.post("http://localhost:1337/galleries", { img: formData }, options);
+            console.log(res.data)
+
+            // const res = await axios.post("https://res.cloudinary.com/v1_1/dmuvt9zsp/image/upload/", formData);
+            // console.log(res)
+
+        } catch(error){
             console.log(error);
-        });
+        };
 
-        // let formData = new FormData();
-        // // formData.append("img", image[0]);
-        // formData.append("img", image);
-        // console.log(formData)
-
-        // const options = { 
-        //     headers: { 
-        //         "Authorization" : `Bearer ${authKey}`,
-        //         'Content-Type': 'application/json',
-        //     }
-        // };
-
-        // try {
-        //     const res = await axios.post("http://localhost:1337/galleries", {data: formData}, options);
-
-        //     const imageId = res.data[0].id;
-
-        //     console.log(res.data + "This is data after api call");
-
-            // try {
-            //     await axios.post("http://localhost:1337/galleries", {imageID})
-            // } catch(err) {
-            //     console.log(err);
-            // }
-
-            // setImage(res.data);
-        // } catch(err) {
-        //     console.log(err);
-        // }
+        // axios.post("https://api.cloudinary.com/v1_1/dmuvt9zsp/image/upload", formData).then((res) => {
+        //     consol.log(res);
+        // })
     }
 
     return (
@@ -96,14 +63,12 @@ export default function FileUpload() {
                 <fieldset disabled={submitting}>
 
                     File upload
-
                     <input 
                         // value={image}
                         onChange={e => setImage(e.target.files[0])} 
                         type="file" 
-                        // name="img"
+                        name="img"
                         />
-
                     <button>Submit</button>
 
                 </fieldset>

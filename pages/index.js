@@ -12,6 +12,7 @@ import HomeContact from '../components/home-constants/HomeContact';
 import UpdateIcon from '../public/images/icons/update-icon.png'
 import ImageHouse from '../public/images/img-services-house.png'
 import ErrorComponent from '../components/error/ErrorComponent';
+import Update from '../components/admin/UpdateContent';
 
 export default function Home(props) {
 
@@ -34,13 +35,6 @@ export default function Home(props) {
   const services = props.services;
   const error = props.error;
 
-  console.log(services.length)
-
-  // if (services.length > 4) {
-  //   setServicesMoreThan4(true);
-  // };
-  // console.log(servicesMoreThan4)
-
   if (error) {
     return <ErrorComponent />
   };
@@ -60,9 +54,7 @@ export default function Home(props) {
           <div className="blue-container">
 
           {authKey ? 
-              <div className="update-icon">
-                  <Image src={UpdateIcon.src} width="50" height="50" alt="update the content icon" />
-              </div>
+              <Update />
           : "" }
           
             <header className="index__content-container">

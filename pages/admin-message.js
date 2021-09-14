@@ -7,9 +7,6 @@ import axios from 'axios';
 
 export default function message() {
 
-    // const [authKey, setAuth] = useState(null);
-    // const [post, setPost] = useState(null);
-    // const [fetchError, setFetchError] = useState(null);
     const history = useRouter();
 
     const { id } = useParams();

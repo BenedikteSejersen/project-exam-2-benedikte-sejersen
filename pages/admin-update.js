@@ -5,9 +5,12 @@ import { useRouter } from 'next/router';
 import UseLocalStorage from '../hooks/UseLocalStorage';
 
 
-export default function Update() {
+export default function Update(props) {
 
-    const [authKey, setAuth] = useState(null);
+    console.log(props.result)
+
+    const [authKey, setAuthKey] = useState(null);
+    const [userId, setUserId] = useState(null);
 
     const history = useRouter();
     const store = UseLocalStorage();
@@ -37,6 +40,8 @@ export default function Update() {
                     </Head>
 
                     <Nav />
+
+
                 </>
             ) : 
             
@@ -45,4 +50,44 @@ export default function Update() {
 
         </>
     )
+}
+
+// export function getStaticPaths() {
+//     try {
+//         const res = await axios.get("http://localhost:1337/homepage");
+//         const message = res.data; 
+//         console.log(message)
+
+//         const paths = message.map((m) => ({
+//             params: { id:  m.id.toString() },
+//         }));
+
+//         console.log(paths)
+        
+//         return { paths, fallback: false };
+
+//     } catch(err) {
+//         console.log(err);
+//     }
+
+// }
+
+export async function getStaticProps() {
+
+    let result = [];
+
+    try {
+        const res = await axios.get("http://localhost:1337/homepage");
+        result = res.data; 
+        console.log(result)
+
+    } catch(err) {
+        console.log(err);
+    }
+
+    return {
+        props: {
+            result: result
+        }
+    }
 }

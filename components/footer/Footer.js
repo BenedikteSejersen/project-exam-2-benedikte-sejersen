@@ -10,20 +10,20 @@ import SoMe from '../soMe/SoMe'
 
 export default function Footer() {
 
-    const [service, setService] = useState([]);
+    // const [service, setService] = useState([]);
 
-    async function getServices() {
-        try {
-            const res = await axios.get("http://localhost:1337/categories");
-            setService(res.data);
-        } catch(err) {
-            console.log(err);
-        }
-    }
+    // async function getServices() {
+    //     try {
+    //         const res = await axios.get("http://localhost:1337/categories");
+    //         setService(res.data);
+    //     } catch(err) {
+    //         console.log(err);
+    //     }
+    // }
 
-    useEffect(() => {
-        getServices();
-    }, []);
+    // useEffect(() => {
+    //     getServices();
+    // }, []);
 
     return (
         <footer className="footer">
@@ -41,13 +41,13 @@ export default function Footer() {
                 <div className="footer__links-container">
                     <h6 className="footer__h6">Navigation</h6>
                     <ul>
-                        {service.map((s) => (
+                        {/* {service.map((s) => (
                             <div key={s.title}>
                                 <li className="footer__links">
                                     <Link href={`/service/s.slug`}>{s.title}</Link>
                                 </li>  
                             </div>
-                        ))}
+                        ))} */}
                         <li className="footer__links">
                             <Link href="/about">About us</Link>
                         </li>
