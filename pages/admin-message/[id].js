@@ -125,7 +125,7 @@ export async function getStaticPaths() {
 
         console.log(paths)
         
-        return { paths, fallback: true };
+        return { paths, fallback: false };
 
     } catch(err) {
         console.log(err);
@@ -135,7 +135,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const url = `http://localhost:1337/messages?id=${params.id}`;
 
-    let message = null;
+    let message = [];
 
     try {
         const res = await axios.get(url);
