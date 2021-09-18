@@ -35,7 +35,7 @@ export default function message({ message }) {
         }
 
     }, [store.userId]);
-    
+
     return (
         <div>
 
@@ -125,7 +125,7 @@ export async function getStaticPaths() {
 
         console.log(paths)
         
-        return { paths, fallback: false };
+        return { paths, fallback: true };
 
     } catch(err) {
         console.log(err);
