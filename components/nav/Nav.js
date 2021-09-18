@@ -12,7 +12,7 @@ import SearchWhiteIcon from '../../public/images/icons/search-white-icon.png'
 import User from '../../public/images/icons/user.svg'
 import UserWhite from '../../public/images/icons/user-white.svg'
 import { Squash as Hamburger } from 'hamburger-react';
-import Dropdown from '../dropdown/Dropdown'
+import Dropdown from '../dropdown/NavDropdown'
 import Logout from '../login/Logout'
 
 export default function Navigation() {
@@ -126,7 +126,7 @@ export default function Navigation() {
 
                         {authKey ?  
                         <div className="nav__user">
-                            <a href="/admin">
+                            <a href="/admin" className="nav__user--id">
                                 {hamburgerOpen ? 
                                 <div className="nav__user--img">
                                     <Image src={UserWhite.src} alt="user icon" width="30" height="35" />

@@ -12,6 +12,8 @@ import WhiteContainer from '../components/containers/WhiteContainer';
 import axios from 'axios'
 import UserIcon from '../public/images/icons/user.svg'
 import Image from 'next/image'
+import TextareaAutosize from 'react-textarea-autosize';
+import Footer from '../components/footer/Footer';
 
 import FileUpload from '../components/upload/FileUpload';
 
@@ -20,6 +22,7 @@ const schema = yup.object().shape({
     short_description: yup.string().required("Short description is required"),
     description: yup.string().required("Description is required"),
     slug: yup.string().required("Slug is required"),
+    short_text_index: yup.string().required("Short text displayed in homepage is required").max(20)
 });
 
 export default function AdminCreateService() {
@@ -39,8 +42,6 @@ export default function AdminCreateService() {
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
-
-    // const form = useRef();
 
     useEffect(() => {
 
@@ -65,9 +66,9 @@ export default function AdminCreateService() {
         setSubmitting(true);
 		setServerError(false);
 
-        let fileUpload = new formData();
-        console.log(iconImage + " " + "This is icon pathname")
-        fileUpload.append("icon", iconImage);
+        // let fileUpload = new formData();
+        // console.log(iconImage + " " + "This is icon pathname")
+        // fileUpload.append("icon", iconImage);
 
         const options = { 
             headers: { 
@@ -79,7 +80,7 @@ export default function AdminCreateService() {
         try {
 
             // POST images
-            const resImage = await axios.post("http://localhost:1337/categories", fileUpload, options,)
+            const resImage = await axios.post("http://localhost:1337/categories", data, options,)
             console.log(resImage.data + 'this is data after api call');
             // const imageId = resImage.data.id;
 
@@ -120,7 +121,7 @@ export default function AdminCreateService() {
                         <div className="admin__layout-flex">
 
                         <div className="admin__header--section">
-                            <h1>Create new service</h1>
+                            <h1 className="admin__create--h1">Create new service</h1>
                             <div className="admin__user">
                                 <div className="admin__header--user">
                                     <Image src={UserIcon.src} alt="user icon" width="50" height="50" />
@@ -130,34 +131,50 @@ export default function AdminCreateService() {
                         </div>
                         
  
-                        <WhiteContainer classname="admin-newService__white-container">
+                        <WhiteContainer classname="services-update__white-container">
                             <div>
-                                <form onSubmit={handleSubmit(onSubmit)}>
+                                <form 
+                                    onSubmit={handleSubmit(onSubmit)}
+                                    className="form"
+                                    >
                                     <fieldset disabled={submitting}>
 
-                                    {/* <div className="create-service__input-container">
-                                        <div>Title:</div>
-                                        <input className={`input create-service__input ${errors.title ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("title")} />
-                                        {errors.title && <FormError>{errors.title.message}</FormError>}
-                                    </div>
+                                        <div className="admin__create--flex">
+                                            <div className="service__updating">
+                                                <div className="service__updating--label">Title:</div>
+                                                <input className={`input updating-input ${errors.title ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("title")} />
+                                                {errors.title && <FormError>{errors.title.message}</FormError>}
+                                                <div className="input__required">Title of the service</div>
+                                            </div>
 
-                                    <div className="create-service__input-container">
-                                        <div>Short description:</div>
-                                        <textarea className={`input create-service__input ${errors.title ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("short_description")} />
+                                            <div className="service__updating">
+                                                <div className="service__updating--label">Slug:</div>
+                                                <input className={`input updating-input ${errors.slug ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("slug")} />
+                                                {errors.slug && <FormError>{errors.slug.message}</FormError>}   
+                                                <div className="input__required">Where the service shall link to</div>
+                                            </div>
+                                        </div>
+
+                                    <div className="service__updating">
+                                        <div  className="service__updating--label">Short description:</div>
+                                        <TextareaAutosize className={`textarea__update input create-service__input ${errors.title ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("short_description")} />
                                         {errors.title && <FormError>{errors.title.message}</FormError>}  
+                                        <div className="input__required">Short important description in the blue area</div>
                                     </div>
 
-                                    <div className="create-service__input-container">
-                                        <div>Long description:</div>
-                                        <textarea className={`input create-service__input ${errors.description ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("description")} />
-                                        {errors.description && <FormError>{errors.description.message}</FormError>}   
+                                    <div className="service__updating">
+                                        <div className="service__updating--label">Long description:</div>
+                                        <TextareaAutosize className={`textarea__update input create-service__input ${errors.description ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("description")} />
+                                        {errors.description && <FormError>{errors.description.message}</FormError>} 
+                                        <div className="input__required">Long detailed description underneath the blue area</div>  
                                     </div>
 
-                                    <div className="create-service__input-container">
-                                        <div>Slug:</div>
-                                        <input className={`input create-service__input ${errors.slug ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("slug")} />
-                                        {errors.slug && <FormError>{errors.slug.message}</FormError>}   
-                                    </div> */}
+                                    <div className="service__updating">
+                                        <div className="service__updating--label">Short text displayed in homepage:</div>
+                                        <TextareaAutosize className={`textarea__update input create-service__input ${errors.short_text_index ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("short_text_index")} />
+                                        {errors.short_text_index && <FormError>{errors.short_text_index.message}</FormError>}
+                                        <div className="input__required">Text will be displayed in the homepage about the service</div>   
+                                    </div>
 
                                     <div>
                                         Images
@@ -208,6 +225,7 @@ export default function AdminCreateService() {
                         </div>
 
                     </div>
+                    <Footer />
                 </>
             ) : 
             

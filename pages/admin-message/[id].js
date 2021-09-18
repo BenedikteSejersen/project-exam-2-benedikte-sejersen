@@ -35,8 +35,7 @@ export default function message({ message }) {
         }
 
     }, [store.userId]);
-
-    console.log(message[0]);
+    
     return (
         <div>
 
@@ -118,11 +117,10 @@ export async function getStaticPaths() {
 
     try {
         const res = await axios.get("http://localhost:1337/messages");
-        const message = res.data; 
-        console.log(message) 
+        const message = res.data;  
 
         const paths = message.map((m) => ({
-            params: { id:  m.id.toString() },
+            params: { id:  m.id.toString() }, 
         }));
 
         console.log(paths)

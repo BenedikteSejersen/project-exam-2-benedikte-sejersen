@@ -44,7 +44,7 @@ p,input, textarea {
 a, button {
     font-family: 'Gothic A1';
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .nav__phone-number {
@@ -68,4 +68,12 @@ a, button {
 // Search
 .search__result-container a {
     font-size: 35px;
+}
+
+// 404
+.not-found__content {
+    h1 {
+        color: #fff;
+    }
+    color: #fff;
 }

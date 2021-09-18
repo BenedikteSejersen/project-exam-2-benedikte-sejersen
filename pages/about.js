@@ -17,10 +17,8 @@ export default function About(props) {
     const result = props.data;
     const gallery = props.gallery;
     const service = props.services;
-
-    // const store = UseLocalStorage();
+    
     useEffect(() => {
-        // setAuthKey(JSON.parse(window.localStorage.getItem("auth")));
         const auth = window.localStorage.getItem("auth");
 
         if (!auth) {
@@ -31,8 +29,6 @@ export default function About(props) {
     }, [])
 
     console.log(authKey)
-
-    // console.log(service)
 
     return (
         <>  
@@ -79,7 +75,11 @@ export default function About(props) {
                         <Image src={result.img[0].formats.medium.url} alt="an recently installed oven" width="500" height="750" />
                     </div>
 
-                    <SoMe width="20" height="20" classname="about__some" />
+                    <SoMe 
+                        width="20" 
+                        height="20" 
+                        classname="about__some"
+                         />
                 </div>
 
                 <CircleInfo 
@@ -88,7 +88,10 @@ export default function About(props) {
 
                 <section className="about__services">
                     {service.map((s) => (
-                        <div className="about__service-container" key={s.id}>
+                        <div 
+                            className="about__service-container" 
+                            key={s.id}
+                            >
                             <div className="about__service--img">
                                <Image src={s.icon.formats.thumbnail.url} width="100" height="100" /> 
                             </div>
@@ -112,7 +115,7 @@ export default function About(props) {
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
-                            <div key={g.id} className="about__galler--img">
+                            <div key={g.id} className="about__gallery--img">
                                 <div>
                                     <Image src={g.img[0].url} alt={g.alt_text} width="700" height="700" />
                                 </div>

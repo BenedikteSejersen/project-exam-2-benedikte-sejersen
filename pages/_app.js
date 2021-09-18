@@ -1,16 +1,10 @@
-
 import '../styles/globals.css'
 import '../styles/scss/style.css'
 import '../styles/fonts/rns-sanz/stylesheet.css';
 import '../styles/fonts/gothic-a1/stylesheet.css';
 import React, { useEffect, useState } from "react";
-
-import "regenerator-runtime/runtime.js";
 import {Router} from 'next/router';
 import { ClimbingBoxLoader } from 'react-spinners';
-const regeneratorRuntime = require("regenerator-runtime");
-
-
 
 function MyApp({ Component, pageProps }) {
 

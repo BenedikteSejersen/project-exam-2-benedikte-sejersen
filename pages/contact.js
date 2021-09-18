@@ -13,6 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from '../components/login/FormError';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import TextareaAutosize from 'react-textarea-autosize';
+import CircleInfo from '../components/containers/CircleInfo';
 
 import Success from '../components/dialogBox/Success';
 import ErrorConf from '../components/dialogBox/ErrorConf';
@@ -91,6 +92,13 @@ export default function Contact(props) {
 
                     <WhiteContainer classname="contact__white-container" children={(
                         <div className="contact__form-info">
+
+                            <div>
+                                <CircleInfo
+                                    text="Monday-Friday 07.00 - 15.00" 
+                                    classname="contact__circle-info" />
+                            </div>
+                            
                             <div className="contact__form-heading">
                                 <h1 className="contact__h1">Contact us</h1>
                     
@@ -109,6 +117,7 @@ export default function Contact(props) {
                                                 {/* Dropdown */}
                                             <div className="contact__input-container">
                                                     <div>Subject:</div>
+                                                    
                                                     <select
                                                     name="Subject"
                                                     className={`input contact__dropdown ${errors.Subject ? "red-border" : ""}`} 
@@ -141,7 +150,7 @@ export default function Contact(props) {
                                                 <input className={`input contact__input ${errors.Email ? "red-border" : ""}`} {...register("Email")} />
                                                 {errors.Email && <FormError>{errors.Email.message}</FormError>}
                                             </div>
-                                        </div>
+                                        </div> 
 
                                         <div className="contact__input-container">
                                             <div>Message:</div>

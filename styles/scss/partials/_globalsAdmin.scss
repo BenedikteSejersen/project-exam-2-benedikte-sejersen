@@ -26,7 +26,6 @@
     display: flex;
     margin: 0 auto; 
     position: relative;
-    // display: inline-block;
 }
 
 .admin__header--user {
@@ -34,10 +33,92 @@
     height: 50px;
 }
 
-
-
 .admin__header--user-id {
     position: absolute;
     bottom: 0;
     left: 50px;
+}
+
+// Update and create
+.services-update__white-container {
+    @include respond-to('small') {
+        width: 55%;
+    }
+}
+
+.service__updating--h1 {
+    @include respond-to('small') {
+        width: 300px;
+    }
+}
+
+.service__updating--label {
+    margin-bottom: 10px;
+}
+
+.textarea__update {
+    width: 100%;
+    height: 300px;
+
+    @include respond-to('medium') {
+        width: 90%;
+    }
+
+    @include respond-to('large') {
+        width: 70%;
+    }
+}
+
+.textarea__update:focus {
+    border: 0px;
+    border-bottom: 2px solid #000;
+}
+
+.service__updating {
+    margin: 50px 5px;
+}
+
+.updating-input {
+    width: 90%;
+}
+
+.update-submit-container {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: center;
+
+    button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    a {
+        margin: 10px;
+    }
+}
+
+// Create
+.admin__create--h1 {
+    @include respond-to('small') {
+        margin-right: 25px;
+    }
+
+    @include respond-to('large') {
+        margin-right: 50px;
+    }
+}
+
+.admin__create--flex {
+    display: flex;
+    justify-content: space-around;
+    
+    @include respond-to('medium') {
+        width: 90%;
+        justify-content: space-between;
+    }
+
+    @include respond-to('large') {
+        width: 70%;
+    }
 }

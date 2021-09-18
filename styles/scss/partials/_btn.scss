@@ -1,91 +1,93 @@
 // Primary
-.primary-btn a {
-    padding: 10px 20px;
+.primary-btn {
     border-radius: 20px;
-    min-width: 10%;
-    max-width: 150px;
-    text-align: center;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;background-color: $orange;
+    border: 2px solid $orange;
+    display: inline-block;
+    height: 45px;
+    width: 170px;
+    position: relative;
+    transition: 0.3s ease-in-out;
 
-    @include respond-to('small') {
-        width: 300px;
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+            font-size: 20px;
+        }
+    }
+
+    &:hover {
+        background-color: $dark-blue;
+        color: #FFF;
+        border: 2px solid $dark-blue;
+    }
+
+    &:active {
+        box-shadow: inset 0 0 10px #000;
+    }
+
+    &:visited {
+        border: 2px solid rgb(71, 71, 71);
     }
 }
 
-.primary-btn a {
-    background-color: $orange;
-    border: 2px solid $orange;
-    transition: 0.3s ease-in-out;
-}
-
-.primary-btn a:hover {
-    background-color: $dark-blue;
-    color: #FFF;
-    border: 2px solid $dark-blue;
-    font-size: 20px;
-    padding: 7.5px 15px;
-}
-
-
 // Secondary
-
-.secondary-btn__container {
-    display: block;
+.secondary-btn {
+    display: inline-block;
     position: relative;
 
-    padding: 0;
-
-    border: 1px solid red;
+    &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 115%;
+        height: 1px;
+        background-color: #000;
+        left: 0;
+        bottom: -5px;
+        transition: ease-in-out 0.3s;
+        opacity: 0;
+    }
 }
 
 .secondary-btn:hover {
     &::after {
+        bottom: 0;
         opacity: 1;
-        bottom: 1px;
+        width: 115%;
     }
 }
 
-.secondary-btn {
-    display: block;
+.secondary-btn__a {
+    width: 110%;
+    height: 100%;
+    display: flex;
     justify-content: center;
-    position: relative;
+    flex-wrap: nowrap;
+    padding-right: 5px;
+}
 
-    &::after, &::before {
-        content: "";
-        position: absolute;
-    }
-
-    &::after {
-        display: block;
-        bottom: -5px;
-        height: 1px;
-        left: 0;
-        background-color: #000;
-        opacity: 0;
-        transition: ease-in-out 0.3s;
-        width: 100%;
-    }
+.secondary-btn__a--text {
+    display: block;
 }
 
 .secondary-btn__img {
-    width: 10px;
-    height: 10px;
-    margin: auto auto auto 2px;
+    position: relative;
+    left: 5%;
     transition: ease-in-out 0.3s;
 }
 
 .secondary-btn:hover .secondary-btn__img {
-    position: relative;
-    transform: translate(10px, 0);
+    left: 13px;
 }
 
 // Nav
-// .dropdown__option--link:hover {
-//     &::after {
-//         opacity: 0;
-//     }
-// }
-
 .nav__link--extra .nav__link--extra-a {
     position: relative;
 
@@ -119,7 +121,7 @@
 
     &::after {
         content: "";
-        width: 100%;
+        width: 100%; 
     }
 
     &::after {
@@ -148,7 +150,7 @@
 button {
     border: 0px;
     cursor: pointer;
-    padding: 10px 20px;
+    height: 40px;
     border-radius: 20px;
     min-width: 10%;
     max-width: 150px;
@@ -173,4 +175,63 @@ button {
 
 .contact-link {
     cursor: pointer;
+}
+
+// 404
+.not-found__secondary-btn {
+    display: inline-block;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 115%;
+        height: 1px;
+        background-color: #fff;
+        left: 0;
+        bottom: -5px;
+        transition: ease-in-out 0.3s;
+        opacity: 0;
+    }
+}
+
+.not-found__secondary-btn:hover {
+    &::after {
+        bottom: 0;
+        opacity: 1;
+        width: 115%;
+    }
+}
+
+.not-found__secondary-btn__a {
+    width: 110%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    padding-right: 5px;
+}
+
+.not-found__secondary-btn__a--text {
+    display: block;
+}
+
+.not-found__secondary-btn__img {
+    position: relative;
+    left: 5%;
+    transition: ease-in-out 0.3s;
+}
+
+.not-found__secondary-btn:hover .not-found__secondary-btn__img {
+    left: 13px;
+}
+
+// Update btn
+.update-btn {
+    transition: ease-in-out 0.3s;
+
+    &:hover {
+        transform: scale(1.2);
+    }
 }

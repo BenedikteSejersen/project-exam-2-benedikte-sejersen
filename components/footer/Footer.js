@@ -10,22 +10,22 @@ import SoMe from '../soMe/SoMe'
 
 export default function Footer() {
 
-    // const [service, setService] = useState([]);
+    const [service, setService] = useState([]);
 
-    // async function getServices() {
-    //     try {
-    //         const res = await axios.get("http://localhost:1337/categories");
-    //         setService(res.data);
-    //     } catch(err) {
-    //         console.log(err);
-    //     }
-    // }
+    async function getServices() {
+        try {
+            const res = await axios.get("http://localhost:1337/categories");
+            setService(res.data);
+        } catch(err) {
+            console.log(err);
+        }
+    }
 
-    // useEffect(() => {
-    //     getServices();
-    // }, []);
+    useEffect(() => {
+        getServices();
+    }, []);
 
-    return (
+    return ( 
         <footer className="footer">
 
             <div className="footer__logo-container">
@@ -41,13 +41,13 @@ export default function Footer() {
                 <div className="footer__links-container">
                     <h6 className="footer__h6">Navigation</h6>
                     <ul>
-                        {/* {service.map((s) => (
+                        {service.map((s) => (
                             <div key={s.title}>
                                 <li className="footer__links">
                                     <Link href={`/service/s.slug`}>{s.title}</Link>
                                 </li>  
                             </div>
-                        ))} */}
+                        ))}
                         <li className="footer__links">
                             <Link href="/about">About us</Link>
                         </li>
@@ -68,12 +68,19 @@ export default function Footer() {
 
                 <div className="footer__links-container">
                     <h6 className="footer__h6">Social media</h6>
-                    <SoMe classname="footer__some" width="30" height="30" />
+                    <div className="footer__links--SoMe">
+                        <Image src={Instagram.src} width="30" height="30" />
+                    </div>
+                    <div className="footer__links--SoMe">
+                        <Image src={Facebook.src} width="30" height="30" />
+                    </div>
                 </div>
 
-                <div className="footer__links-containe">
+                <div className="footer__links-container">
                         <a href="tel:+47 921 41 312" className=" footer__contact">
-                            <img src={PhoneWhiteIcon.src} alt="phone icon" width="30" height="30" />
+                            <div className="footer__contact--img">
+                                <Image src={PhoneWhiteIcon.src} alt="phone icon" width="30" height="30" />
+                            </div>
                             <h3 className="footer__h3">+47 921 41 312</h3>  
                         </a>
                 </div>

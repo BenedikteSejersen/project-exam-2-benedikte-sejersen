@@ -42,7 +42,7 @@
 }
 
 .admin__message-container { 
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .admin__message--empty {
@@ -86,13 +86,6 @@
 }
 
 // Delete
-// .red-circle {
-//     width: 60px;
-//     height: 60px;
-//     background-color: $error;
-//     border-radius: 50%;
-// }
-
 .admin__delete-services {
     display: flex;
     margin: 10px 0;

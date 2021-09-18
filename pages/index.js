@@ -12,16 +12,18 @@ import HomeContact from '../components/home-constants/HomeContact';
 import UpdateIcon from '../public/images/icons/update-icon.png'
 import ImageHouse from '../public/images/img-services-house.png'
 import ErrorComponent from '../components/error/ErrorComponent';
-import Update from '../components/admin/UpdateContent';
+import UpdateHome from '../components/admin/UpdateHome';
 
 export default function Home(props) {
 
   const [authKey, setAuthKey] = useState("");
-  const [servicesMoreThan4, setServicesMoreThan4] = useState(false);
+  // const [clicked, setClicked] = useState(false);
 
-  // const store = UseLocalStorage();
+  // const handleClick = () => {
+  //   setClicked(true);
+  // }
+
   useEffect(() => {
-      // setAuthKey(JSON.parse(window.localStorage.getItem("auth")));
       const auth = window.localStorage.getItem("auth");
 
       if (!auth) {
@@ -53,10 +55,12 @@ export default function Home(props) {
         <div className="parent__blue-container">
           <div className="blue-container">
 
-          {authKey ? 
-              <Update />
-          : "" }
-          
+          {/* <div onClick={handleClick}>
+              {authKey ? 
+                  <UpdateHome home={result} />
+              : "" } 
+          </div> */}
+
             <header className="index__content-container">
 
               <div className="index__text-container index__text--h1">
@@ -75,7 +79,9 @@ export default function Home(props) {
               <SoMe classname="index__some" width="30" height="30" />
 
               <div className="index__images-container">
-                <div className="index__img-1 index__img">
+                <div 
+                  className="index__img-1 index__img"
+                  >
                   <Image src={result.img_2[0].formats.medium.url} alt="picture" width="300" height="400" />
                 </div>
 
@@ -94,7 +100,10 @@ export default function Home(props) {
                 <div className={services.length > 4 ? "our-services__wrap" : "our-services__services"}>
                   {services.map(function(s) {
                     return (
-                        <div key={s.id} className="our-services__services-container">
+                        <div 
+                          key={s.id} 
+                          className="our-services__services-container"
+                          >
 
                               <img src={ImageHouse.src} alt="house-shaped image in light blue" className="our_services__services--houseImg"/>
                           
@@ -132,7 +141,10 @@ export default function Home(props) {
 
           <div className="consider-rehab__all-cards">
             {result.rehabilitation.cards.map(r => (
-              <div key={r.number} className="consider-rehab__card">
+              <div 
+                key={r.number} 
+                className="consider-rehab__card"
+                >
                   <div className="consider-rehab__card--heading">
                     <div className="consider-rehab__card--number">{r.number}</div>
                     <h3>{r.title}</h3>
@@ -156,7 +168,9 @@ export default function Home(props) {
         <section className="use-pro">
 
           <div className="use-pro__center">
-            <div className="use-pro__content">
+            <div 
+              className="use-pro__content"
+              >
                 <h2 className="use-pro__content--subheading">{result.use_professionals.heading}</h2>
                 <p className="p__bold">
                   {result.use_professionals.description}

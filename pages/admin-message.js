@@ -34,21 +34,6 @@ export default function message() {
 
     return (
         <>  
-            {/* {authKey ? (
-                <>
-                    <Head>
-                        <title>Messages - Norsk piperehabilitering AS</title>
-                        <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
-                        <link rel="icon" href="/favicon.ico" />
-                    </Head>
-
-                    <Nav />
-                </>
-            ) : 
-            
-            ""
-            } */}
-
         </>
     )
 }

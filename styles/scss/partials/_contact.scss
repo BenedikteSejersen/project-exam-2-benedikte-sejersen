@@ -4,7 +4,7 @@
     @include respond-to('medium') {
         height: 30%;
         width: 600px;
-        top: 50px;
+        top: 50px; 
     }
 
     @include respond-to('large') {
@@ -28,9 +28,10 @@
 
 .contact__h1 {
     margin-left: 10px;
+    margin-top: 50px;
 
     @include respond-to('medium') {
-        margin: -20px 0 -10px 20px;
+        margin: -10px 0 0px 20px;
     }
     
 }
@@ -50,7 +51,7 @@
 
     @include respond-to('large') {
         max-width: 500px;
-        top: 30px;
+        top: 40px;
         margin: auto 0;
         width: 70%;
     }
@@ -123,10 +124,6 @@
     cursor: pointer;
 }
 
-// .contact__dropdown--options {
-//     border: 1px solid red;
-// }
-
 // Contact info
 .contact__info-container {
     @include respond-to('small') {
@@ -170,5 +167,27 @@
         width: 20px;
         height: 20px;
         min-width: 20px;
+    }
+}
+
+.contact__circle-info {
+    position: absolute;
+    width: 120px;
+    padding: 30px 0;
+    text-align: center;
+    right: 20px;
+    top: -60px;
+
+    @include respond-to('medium') {
+        top: -70px;
+        right: -50px;
+        width: 160px;
+        padding: 60px 0;
+    }
+
+    p {
+        @include respond-to('medium') {
+            font-size: 24px;
+        }
     }
 }
