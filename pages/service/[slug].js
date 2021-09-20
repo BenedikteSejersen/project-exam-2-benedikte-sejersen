@@ -139,6 +139,7 @@ export async function getStaticPaths() {
 
     } catch(err) {
         console.log(err);
+        return { paths: [], fallback: false }
     }
 }
 
