@@ -206,7 +206,7 @@ export async function getStaticProps() {
     let contact = [];
 
     try {
-        const resHome = await axios.get(process.env.API_HOME);
+        const resHome = await axios.get('http://localhost:1337/homepage');
         contact = resHome.data;
     } catch(err) {
         console.log(err);
