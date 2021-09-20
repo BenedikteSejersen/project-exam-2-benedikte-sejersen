@@ -120,7 +120,7 @@ export async function getStaticPaths() {
         const message = res.data;  
 
         const paths = message.map((m) => ({
-            params: [{ id:  m.id.toString() }], 
+            params: { id:  m.id.toString() }, 
         }));
 
         console.log(paths)
@@ -129,7 +129,7 @@ export async function getStaticPaths() {
 
     } catch(err) {
         console.log(err);
-        // return { paths: [], fallback: false }
+        return { paths: [], fallback: false }
     }
 }
 
