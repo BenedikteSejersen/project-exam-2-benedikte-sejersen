@@ -15,8 +15,6 @@ import Image from 'next/image'
 import TextareaAutosize from 'react-textarea-autosize';
 import Footer from '../components/footer/Footer';
 
-import FileUpload from '../components/upload/FileUpload';
-
 const schema = yup.object().shape({
 	title: yup.string().required("Title is required"),
     short_description: yup.string().required("Short description is required"),
@@ -218,8 +216,6 @@ export default function AdminCreateService() {
                                     </fieldset>
                                 </form>
                             </div>
-
-                            {/* <FileUpload /> */}
 
                         </WhiteContainer>
                         </div>
