@@ -46,6 +46,8 @@ export default function LoginForm() {
             setPassword(password);
             setUserId(response.data.user.username);
             setUserAuth(response.data.jwt)
+
+            console.log(response)
 			
 		} catch (error) {
 			console.log("error", error);

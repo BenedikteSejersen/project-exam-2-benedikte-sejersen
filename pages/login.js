@@ -9,25 +9,7 @@ import { useRouter } from 'next/router'
 import Footer from '../components/footer/Footer'
 
 export default function login() {
-
-    const [authKey, setAuthKey] = useState(null);
-    const history = useRouter();
-
-    useEffect(() => {
-        const auth = window.localStorage.getItem("auth");
-
-        if (auth) {
-            setAuthKey(auth);
-        } else {
-            setAuthKey(null);
-        }
-    }, [])
-
-    if (authKey) {
-        history.push("/admin");
-    }
-
-
+    
     return (
         <>
             <Head>

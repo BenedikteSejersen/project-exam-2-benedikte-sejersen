@@ -8,6 +8,15 @@ import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import WhiteContainer from '../components/containers/WhiteContainer';
 import UserIcon from '../public/images/icons/user.svg';
 import Image from 'next/image'
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import FormError from '../components/login/FormError';
+import SecondaryBtn from '../components/btn/SecondaryBtn'
+
+const schema = yup.object().shape({
+	img_url: yup.string().required("Url is required")
+});
 
 export default function AdminUploadImage() {
 
@@ -16,6 +25,11 @@ export default function AdminUploadImage() {
 
     const history = useRouter();
     const store = UseLocalStorage();
+
+    // Form yup resolver
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema),
+    });
 
     useEffect(() => {
 
@@ -30,6 +44,23 @@ export default function AdminUploadImage() {
         }
 
     }, [store.userId]);
+
+    async function onSubmit(data) {
+
+        const options = { 
+            headers: { 
+                "Authorization" : `Bearer ${authKey}`,
+                'Content-Type': 'application/json',
+            }
+        };
+
+        try {
+            const resImage = await axios.post(process.env.NEXT_PUBLIC_API_GALLERY, data, options,)
+            console.log(resImage.data + 'this is data after api call');
+        } catch(err) {
+            console.log(err);
+        }
+    }
 
     return (
         <>  
@@ -66,11 +97,23 @@ export default function AdminUploadImage() {
                                     </div>
 
                                     <div>
-                                        <div>Upload images to the gallery:</div>
+                                        <div>Upload image:</div>
                                         <input 
                                             type="text"
-                                            className="upload-image_input"
+                                            className="upload-image_input input"
                                             />
+                                    </div>
+
+                                    <div>
+                                        <div>Alt text:</div>
+                                        <input 
+                                            type="text"
+                                            className="input"
+                                            />
+                                    </div>
+
+                                    <div>
+                                        <SecondaryBtn link="https://cloudinary.com/" text="Go to Cloudinary"/>
                                     </div>
                                 </div>
                             </WhiteContainer>

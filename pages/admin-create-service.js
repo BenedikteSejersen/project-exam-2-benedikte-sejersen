@@ -30,9 +30,6 @@ export default function AdminCreateService() {
     const [submitting, setSubmitting] = useState(false);
     const [serverError, setServerError] = useState(false);
 
-    // const [iconImage, setIconImage] = useState({value: ""}); 
-    const [iconImage, setIconImage] = useState([]); 
-
     const history = useRouter();
     const store = UseLocalStorage();
 
@@ -68,6 +65,8 @@ export default function AdminCreateService() {
         // console.log(iconImage + " " + "This is icon pathname")
         // fileUpload.append("icon", iconImage);
 
+        data.status = "publish";
+
         const options = { 
             headers: { 
                 "Authorization" : `Bearer ${authKey}`,
@@ -75,24 +74,10 @@ export default function AdminCreateService() {
             }
         };
 
+        console.log(data)
+
         try {
-
-            // POST images
-            const resImage = await axios.post(process.env.NEXT_PUBLIC_API_SERVICES, data, options,)
-            console.log(resImage.data + 'this is data after api call');
-            // const imageId = resImage.data.id;
-
-            // axios.post("http://localhost:1337/categories",{image:imageId}).then((response)=>{
-            //     console.log(response)
-
-            // }).catch((error)=>{
-            //     console.log(error);
-            // })
-
-            // POST text
-            const res = await axios.post(process.env.NEXT_PUBLIC_API_SERVICES, data, options,)
-            // setShowConfirm(true);
-            console.log(data)
+            const resImage = await axios.post(process.env.NEXT_PUBLIC_API_SERVICES, data, options);
 
         } catch(err) {
             console.log(err);
@@ -174,40 +159,6 @@ export default function AdminCreateService() {
                                         <div className="input__required">Text will be displayed in the homepage about the service</div>   
                                     </div>
 
-                                    <div>
-                                        Images
-                                        <div className="create-service__input-container">
-                                            <div>Icon:</div>
-                                            {/* <input type="file"  className={`input create-service__input ${errors.icon ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("icon")} /> */}
-                                            <input 
-                                                type="file" 
-                                                name="icon"
-                                                value={iconImage}
-                                                onChange={(e)=>setIconImage(e.target.value)} 
-                                                // {...register("icon")} 
-                                                />
-                                            {/* {errors.slug && <FormError>{errors.icon.message}</FormError>}    */}
-                                        </div>
-
-                                        <div className="create-service__input-container">
-                                            <div>Image 1:</div>
-                                            <input type="file" className={`input create-service__input ${errors.icon ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("icon")} />
-                                            {/* {errors.slug && <FormError>{errors.icon.message}</FormError>}    */}
-                                        </div>
-
-                                        <div className="create-service__input-container">
-                                            <div>Image 2:</div>
-                                            <input type="file" className={`input create-service__input ${errors.icon ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("icon")} />
-                                            {/* {errors.slug && <FormError>{errors.icon.message}</FormError>}    */}
-                                        </div>
-
-                                        <div className="create-service__input-container">
-                                            <div>Image 3:</div>
-                                            <input type="file" className={`input create-service__input ${errors.icon ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("icon")} />
-                                            {/* {errors.slug && <FormError>{errors.icon.message}</FormError>}    */}
-                                        </div>
-                                    </div>
-
                                     <div className="create-service__btn">
                                         <button className="submit">Submit</button>
                                         <div className="input__required create-service__btn--required">All fields are required</div>
@@ -216,6 +167,8 @@ export default function AdminCreateService() {
                                     </fieldset>
                                 </form>
                             </div>
+
+                            {/* <FileUpload /> */}
 
                         </WhiteContainer>
                         </div>
