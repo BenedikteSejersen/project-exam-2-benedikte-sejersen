@@ -3130,6 +3130,10 @@ textarea:focus, input:focus {
   }
 }
 
+.upload-image_input {
+  width: 100%;
+}
+
 .not-found {
   overflow: hidden;
   height: 100vh;

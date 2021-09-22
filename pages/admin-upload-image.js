@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import Footer from '../components/footer/Footer';
 import UseLocalStorage from '../hooks/UseLocalStorage';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
-import FileUpload from '../components/upload/FileUpload';
 import WhiteContainer from '../components/containers/WhiteContainer';
 import UserIcon from '../public/images/icons/user.svg';
 import Image from 'next/image'
@@ -59,7 +58,21 @@ export default function AdminUploadImage() {
                             </div>
 
                             <WhiteContainer classname="services-update__white-container">
-                                <FileUpload />
+
+                                <div>
+
+                                    <div>
+                                        <h3>Upload your images from cloudinary here. These images will be uploaded to your gallery</h3>
+                                    </div>
+
+                                    <div>
+                                        <div>Upload images to the gallery:</div>
+                                        <input 
+                                            type="text"
+                                            className="upload-image_input"
+                                            />
+                                    </div>
+                                </div>
                             </WhiteContainer>
 
                         </div>
