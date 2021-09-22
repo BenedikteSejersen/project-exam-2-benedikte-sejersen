@@ -66,9 +66,16 @@
 .footer__links--SoMe {
     width: 30px;
     height: 30px;
+    margin: 10px auto;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.footer__links {
     cursor: pointer;
     transition: ease-in-out 0.3s;
-    margin: 10px auto;
 
     &:hover {
         transform: scale(1.2);

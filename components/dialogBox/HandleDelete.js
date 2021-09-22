@@ -24,7 +24,7 @@ export default function HandleDelete({id, url}) {
             id: idItem
         }) 
     }
-
+    
     function handleCancel() {
         setOpen({
             show: false,
@@ -62,7 +62,7 @@ export default function HandleDelete({id, url}) {
     }
     
 
-    return (
+    return ( 
         <div>
 
             {open.show ?
@@ -83,7 +83,7 @@ export default function HandleDelete({id, url}) {
 export async function getStaticPaths() {
 
     try {
-        const res = await axios.get("http://localhost:1337/messages");
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES);
         const message = res.data; 
         console.log(message)
 
@@ -101,7 +101,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const url = `http://localhost:1337/messages?id=${params.id}`;
+
+    const url = process.env.NEXT_PUBLIC_API_MESSAGES + `?id=${params.id}`;
 
     let message = null;
 

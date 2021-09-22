@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import UseLocalStorage from '../hooks/UseLocalStorage';
 import WhiteContainer from '../components/containers/WhiteContainer';
 import SecondaryBtn from '../components/btn/SecondaryBtn';
+import ErrorComponent from '../components/error/ErrorComponent';
 
 // Icons
 import UserIcon from '../public/images/icons/user.svg';
@@ -17,6 +18,7 @@ import HandleDelete from '../components/dialogBox/HandleDelete';
 export default function Admin(props) {
 
     const messages = props.message;
+    const error = props.error;
 
     const [userId, setUserId] = useState("");
     const [authKey, setAuthKey] = useState("");
@@ -37,7 +39,9 @@ export default function Admin(props) {
 
     }, [store.userId]);
 
-    console.log(props.service)
+    if (error) {
+        return <ErrorComponent />
+    }
 
     return (
         <>  
@@ -85,9 +89,9 @@ export default function Admin(props) {
                                     <h2>Delete service</h2>
                                     <ul>
                                         {props.service.map((s) => (
-                                            <li className="admin__delete-services">
+                                            <li className="admin__delete-services" key={s.id}>
                                                 <span className="red-circle">
-                                                    <HandleDelete url="http://localhost:1337/categories" id={s.id} /> 
+                                                    <HandleDelete url={process.env.NEXT_PUBLIC_API_SERVICES} id={s.id} /> 
                                                 </span>
                                                 <p>{s.title}</p>
                                             </li>
@@ -111,7 +115,7 @@ export default function Admin(props) {
                                     <>
                                     <div className="admin__message--id" key={m.id}>
                                         <div className="admin__message--delete">
-                                           <HandleDelete url="http://localhost:1337/messages" id={m.id} /> 
+                                           <HandleDelete url={process.env.NEXT_PUBLIC_API_MESSAGES} id={m.id} /> 
                                         </div>
                                        <a href={`/admin-message/${m.id}`} key={m.id}>
                                             <div className="admin__messages">
@@ -140,17 +144,23 @@ export async function getStaticProps() {
     let service = [];
 
     try {
-        const response = await axios.get("http://localhost:1337/messages");
+        const response = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES);
         message = response.data;
 
-        const response2 = await axios.get("http://localhost:1337/categories");
+        const response2 = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
         service = response2.data;
     } catch(err) {
         console.log(err);
+        return { props: { 
+            error: true,
+            message: message,
+            service: service,
+          }};
     } 
 
     return {
         props: {
+            error: false,
             message: message,
             service: service,
         },

@@ -23,6 +23,16 @@ export default function Navigation() {
     const [authKey, setAuthKey] = useState("");
     const [userId, setUserId] = useState("");
     const [open, setOpen] = useState(false);
+    const [openLogout, setOpenLogout] = useState(false);
+
+    // Log out
+    function handleClickLogout() {
+        setOpenLogout(true);
+    }
+
+    function handleCancel() {
+        setOpenLogout(false);
+    }
 
     function handleClick() {
         setOpen(!open);
@@ -139,7 +149,7 @@ export default function Navigation() {
                             </a>
                         
                             <div className="nav__user--log-out">
-                                <Logout />
+                                <p className="logout" onClick={() => handleClickLogout()}>Logout</p>
                             </div>
                         </div>
                         : "" }
@@ -152,6 +162,12 @@ export default function Navigation() {
 
         <span className="nav__search-option">
             {open && (<Filter click={() => handleClick()} />)}
+        </span>
+
+        <span>
+            {openLogout ?
+                <Logout HandleCancel={() => handleCancel()} />
+            : "" }
         </span>
         </>
     )

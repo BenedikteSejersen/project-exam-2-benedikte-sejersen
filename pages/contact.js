@@ -17,6 +17,7 @@ import CircleInfo from '../components/containers/CircleInfo';
 
 import Success from '../components/dialogBox/Success';
 import ErrorConf from '../components/dialogBox/ErrorConf';
+import ErrorComponent from '../components/error/ErrorComponent';
 
 
 const schema = yup.object().shape({
@@ -33,14 +34,14 @@ export default function Contact(props) {
     const [serverError, setServerError] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
 
+    const error = props.error;
+
     const form = useRef();
 
     // Form yup resolver
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
-
-    console.log(errors)
 
     // Confirmation dialog form successfully sent
     const handleConfirm = () => {
@@ -60,7 +61,7 @@ export default function Contact(props) {
 		setServerError(false);
 
         try {
-            const resMes = await axios.post("http://localhost:1337/messages", data)
+            const resMes = await axios.post(process.env.NEXT_PUBLIC_API_MESSAGES, data)
             setShowConfirm(true);
 
         } catch(err) {
@@ -68,6 +69,10 @@ export default function Contact(props) {
             setServerError(true);
             setShowConfirm(false);
         } 
+    }
+
+    if (error) {
+        return <ErrorComponent />
     }
 
     return (
@@ -174,7 +179,7 @@ export default function Contact(props) {
                                 {props.contact.contact.contact_methods.map(c => (
                                     <div className="contact__info" key={c.id}>
                                         <div  className="contact__info--img">
-                                            <Image src={c.contact_icon[0].url} alt="contact icon" width="30" height="30" />
+                                            <Image src={c.contact_icon} alt="contact icon" width="30" height="30" />
                                         </div>
                                         <h4 className="p__normal">{c.contact_info}</h4>
                                     </div>
@@ -206,14 +211,19 @@ export async function getStaticProps() {
     let contact = [];
 
     try {
-        const resHome = await axios.get('http://localhost:1337/homepage');
+        const resHome = await axios.get(process.env.NEXT_PUBLIC_API_HOME);
         contact = resHome.data;
     } catch(err) {
         console.log(err);
+        return { props: { 
+            error: true,
+            contact: null
+          }};
     }
 
     return {
         props: {
+            error: false,
             contact: contact,
         },
     };

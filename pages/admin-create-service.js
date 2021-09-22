@@ -80,7 +80,7 @@ export default function AdminCreateService() {
         try {
 
             // POST images
-            const resImage = await axios.post("http://localhost:1337/categories", data, options,)
+            const resImage = await axios.post(process.env.NEXT_PUBLIC_API_SERVICES, data, options,)
             console.log(resImage.data + 'this is data after api call');
             // const imageId = resImage.data.id;
 
@@ -92,7 +92,7 @@ export default function AdminCreateService() {
             // })
 
             // POST text
-            const res = await axios.post("http://localhost:1337/categories", data, options,)
+            const res = await axios.post(process.env.NEXT_PUBLIC_API_SERVICES, data, options,)
             // setShowConfirm(true);
             console.log(data)
 

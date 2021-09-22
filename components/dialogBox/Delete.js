@@ -19,7 +19,7 @@ export default function Delete({HandleDelete, HandleCancel}) {
                             <h4 className="confirmation__heading--text">Do you want to delete this?</h4>
                         </div>
 
-                        <div className="confirmation__p">
+                        <div className="confirmation__p"> 
                             <p>
                                 Once you delete, that item is long gone. Forever ever. 
                             </p>

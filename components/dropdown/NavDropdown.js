@@ -19,7 +19,7 @@ export default function Dropdown() {
 
     async function getServices() {
         try {
-            const res = await axios.get("http://localhost:1337/categories");
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
             setService(res.data);
         } catch(err) {
             console.log(err);
@@ -80,7 +80,7 @@ export default function Dropdown() {
                     {service.map((s) => (
                         <a key={s.id} href={`/service/${s.slug}`} className="dropdown__option--link">
                             <div as="option" className="dropdown__option">
-                                <img src={s.icon.formats.thumbnail.url} alt={`service icon ${s.title}`} className="dropdown__option--img" />
+                                <img src={s.icon} alt={`service icon ${s.title}`} className="dropdown__option--img" />
                                 <span className="dropdown__option--a">{s.title}</span> 
                             </div>
                         </a> 

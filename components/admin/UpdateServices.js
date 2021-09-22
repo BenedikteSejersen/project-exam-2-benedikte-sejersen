@@ -5,7 +5,7 @@ import Link from 'next/link'
 import axios from 'axios';
 import UserIcon from '../../public/images/icons/user.svg';
 import UseLocalStorage from '../../hooks/UseLocalStorage';
-
+import ErrorConf from '../dialogBox/ErrorConf';
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import FormError from '../login/FormError';
@@ -41,6 +41,10 @@ export default function UpdateServices({ service }) {
         setClicked(true);
     }
 
+    function handleConfirm() {
+        setUpdateError(false);
+    }
+
     useEffect(() => {
         setUserId(JSON.parse(window.localStorage.getItem("user")));
         const auth = JSON.parse(window.localStorage.getItem("auth"));
@@ -59,8 +63,10 @@ export default function UpdateServices({ service }) {
             }
         };
 
+        const urlServices = process.env.NEXT_PUBLIC_API_SERVICES;
+
         try {
-            const res = await axios.put(`http://localhost:1337/categories/${service.id}`, data, options);
+            const res = await axios.put(`${urlServices}/${service.id}`, data, options);
             console.log("response:", res.data);
             setUpdated(true);
             history.push(`/service/${service.slug}`)
@@ -169,6 +175,10 @@ export default function UpdateServices({ service }) {
                 </form>
                 </WhiteContainer>
                 </div>
+            )}
+
+            {updateError && (
+                <ErrorConf confirm={() => handleConfirm()} />
             )}
             
         </div>

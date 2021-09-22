@@ -1843,12 +1843,19 @@ textarea:focus, input:focus {
 .footer__links--SoMe {
   width: 30px;
   height: 30px;
-  cursor: pointer;
-  -webkit-transition: ease-in-out 0.3s;
-  transition: ease-in-out 0.3s;
   margin: 10px auto;
 }
 .footer__links--SoMe:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.footer__links {
+  cursor: pointer;
+  -webkit-transition: ease-in-out 0.3s;
+  transition: ease-in-out 0.3s;
+}
+.footer__links:hover {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }
@@ -2116,7 +2123,7 @@ textarea:focus, input:focus {
 @media (min-width: 1200px) {
   .contact__img {
     max-width: 500px;
-    top: 40px;
+    top: 50px;
     margin: auto 0;
     width: 70%;
   }
@@ -2743,7 +2750,7 @@ textarea:focus, input:focus {
 }
 @media (min-width: 1200px) {
   .service__img-2 {
-    max-width: 300px;
+    max-width: 350px;
     right: -150px;
     top: -300px;
   }

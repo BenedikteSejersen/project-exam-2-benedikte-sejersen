@@ -4,16 +4,13 @@ import axios from 'axios'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from './FormError'
-import { ClimbingBoxLoader } from 'react-spinners';
 import { useRouter } from 'next/router';
 import UseLocalStorage from '../../hooks/UseLocalStorage';
-import Link from 'next/link';
 
 const schema = yup.object().shape({
     username: yup.string().required("Please enter you're username here"),
     password: yup.string().required("Please enter you password here")
 });
-
 
 export default function LoginForm() {
 
@@ -43,7 +40,7 @@ export default function LoginForm() {
 
 		try {
             setIsLoading(true);
-            const response = await axios.post("http://localhost:1337/auth/local", authUser);
+            const response = await axios.post(process.env.NEXT_PUBLIC_AUTH_KEY, authUser);
             history.push("/admin");
             setUsername(username);
             setPassword(password);
@@ -58,10 +55,6 @@ export default function LoginForm() {
             setIsLoading(false);
 		}
 	}
-
-    if (userId) {
-        history.push("/admin");
-    }
 
     return (
         <div> 

@@ -7,6 +7,7 @@ import WhiteContainer from '../../components/containers/WhiteContainer'
 import Breadcrumb from '../../components/breadcrumb/Breadcrumb'
 import UseLocalStorage from '../../hooks/UseLocalStorage'
 import { useRouter } from 'next/router'
+import ErrorComponent from '../../components/error/ErrorComponent'
 
 // Image
 import Image from 'next/image'
@@ -14,13 +15,16 @@ import UserIcon from '../../public/images/icons/user.svg'
 import Phone from '../../public/images/icons/phone-icon.png'
 import Email from '../../public/images/icons/contact-email.png'
 
-export default function message({ message }) {
+export default function message(props) {
 
     const [userId, setUserId] = useState(null);
     const [authKey, setAuthKey] = useState(null);
     
     const store = UseLocalStorage();
     const history = useRouter();
+
+    const message = props.message[0]; 
+    const error = props.error;
 
     useEffect(() => {
 
@@ -36,6 +40,10 @@ export default function message({ message }) {
 
     }, [store.userId]);
 
+    if (error) {
+        return < ErrorComponent />
+    }
+
     return (
         <div>
 
@@ -50,7 +58,7 @@ export default function message({ message }) {
             {authKey ?  
 
             <div className="blue-container admin__blue-container">
-                <Breadcrumb path="admin" path2={`admin-message/${message[0].id}`} path2Name="message" />
+                <Breadcrumb path="admin" path2={`admin-message/${message.id}`} path2Name="message" />
                 <div className="admin__layout-flex">
                     <div className="admin__header--section">
                         <h1>Message</h1>
@@ -66,13 +74,13 @@ export default function message({ message }) {
                                     <div className="admin-message__icon">
                                         <Image src={Phone.src} alt="phone icon" width="50" height="50" />
                                     </div>
-                                    <Link href={`tel:${message[0].Number}`}><h3>{message[0].Number}</h3></Link>
+                                    <Link href={`tel:${message.Number}`}><h3>{message.Number}</h3></Link>
                                 </div>
                                 <div className="admin-message__contact-info">
                                     <div className="admin-message__icon">
                                         <Image src={Email.src} alt="email icon" width="50" height="50" />
                                     </div>
-                                    <Link href={`mailto:${message[0].Email}`}><h4>{message[0].Email}</h4></Link>
+                                    <Link href={`mailto:${message.Email}`}><h4>{message.Email}</h4></Link>
                                 </div>
                             </div>
                     </div>
@@ -80,25 +88,25 @@ export default function message({ message }) {
                         <WhiteContainer classname="admin-message__white-container" children={(
                             <>
                                 <div className="admin-message__message--text">
-                                    <h4 className="admin-message__message--name">{message[0].Name}</h4>
-                                    <h4 className="admin-message__message--subject">{message[0].Subject}</h4>
+                                    <h4 className="admin-message__message--name">{message.Name}</h4>
+                                    <h4 className="admin-message__message--subject">{message.Subject}</h4>
 
                                     <div className="admin-message__message--message">
                                         <h3>
                                             Message:
                                         </h3>
-                                        <p className="admin-message__message--p">{message[0].Message}</p>
+                                        <p className="admin-message__message--p">{message.Message}</p>
                                     </div> 
 
                                 </div>
                                 <div className="admin-message__message--contact">
                                     <div className="admin-message__message--call">
                                         <h3 className="admin-message__message--h3">Call:</h3>
-                                        <Link href={`tel:${message[0].Number}`}><h4 className="admin-message__message--a contact-link">{message[0].Number}</h4></Link> 
+                                        <Link href={`tel:${message.Number}`}><h4 className="admin-message__message--a contact-link">{message.Number}</h4></Link> 
                                     </div>
                                     <div className="admin-message__message--email">
                                         <h3 className="admin-message__message--h3">Send a mail:</h3>
-                                        <Link href={`mailto:${message[0].Email}`}><h4 className="admin-message__message--a contact-link">{message[0].Email}</h4></Link>
+                                        <Link href={`mailto:${message.Email}`}><h4 className="admin-message__message--a contact-link">{message.Email}</h4></Link>
                                     </div>
                                 </div>
                             </>
@@ -116,14 +124,12 @@ export default function message({ message }) {
 export async function getStaticPaths() {
 
     try {
-        const res = await axios.get("http://localhost:1337/messages");
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES);
         const message = res.data;  
 
         const paths = message.map((m) => ({
             params: { id:  m.id.toString() }, 
         }));
-
-        console.log(paths)
         
         return { paths, fallback: false };
 
@@ -134,7 +140,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-    const url = `http://localhost:1337/messages?id=${params.id}`;
+
+    const url = process.env.NEXT_PUBLIC_API_MESSAGES + `?id=${params.id}`;
 
     let message = [];
 
@@ -143,10 +150,17 @@ export async function getStaticProps({ params }) {
         message = res.data;
     } catch(err) {
         console.log(err);
+        return {
+            props: {
+                error: true,
+                message: message,
+            },
+        };
     }
 
     return {
         props: {
+            error: false,
             message: message,
         },
     };

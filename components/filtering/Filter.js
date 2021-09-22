@@ -14,7 +14,7 @@ export default function Filter({click}) {
 
     useEffect(async () => {
             try {
-                const res = await axios.get("http://localhost:1337/categories");
+                const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
                 setServices(res.data);
 
             } catch(err) {

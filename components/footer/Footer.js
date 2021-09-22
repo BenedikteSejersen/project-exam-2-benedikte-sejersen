@@ -6,7 +6,6 @@ import Facebook from '../../public/images/icons/facebook-white.svg'
 import PhoneWhiteIcon from '../../public/images/icons/phone-white-icon.png'
 import Image from 'next/image'
 import axios from 'axios'
-import SoMe from '../soMe/SoMe'
 
 export default function Footer() {
 
@@ -14,7 +13,7 @@ export default function Footer() {
 
     async function getServices() {
         try {
-            const res = await axios.get("http://localhost:1337/categories");
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
             setService(res.data);
         } catch(err) {
             console.log(err);
@@ -44,7 +43,7 @@ export default function Footer() {
                         {service.map((s) => (
                             <div key={s.title}>
                                 <li className="footer__links">
-                                    <Link href={`/service/s.slug`}>{s.title}</Link>
+                                    <Link href={`/service/${s.slug}`}>{s.title}</Link>
                                 </li>  
                             </div>
                         ))}
@@ -68,10 +67,10 @@ export default function Footer() {
 
                 <div className="footer__links-container">
                     <h6 className="footer__h6">Social media</h6>
-                    <div className="footer__links--SoMe">
+                    <div className="footer__links--SoMe footer__links">
                         <Image src={Instagram.src} width="30" height="30" />
                     </div>
-                    <div className="footer__links--SoMe">
+                    <div className="footer__links--SoMe footer__links">
                         <Image src={Facebook.src} width="30" height="30" />
                     </div>
                 </div>

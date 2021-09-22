@@ -1,6 +1,7 @@
 .service__img-1 {
     width: 100%;
     max-width: 130px;
+
     position: relative;
     left: -20px;
     margin-top: 80px;
@@ -34,7 +35,7 @@
     }
 
     @include respond-to('large') {
-        max-width: 300px;
+        max-width: 350px;
         right: -150px;
         top: -300px;
     }

@@ -9,6 +9,9 @@ import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import CircleInfo from '../components/containers/CircleInfo';
 import SoMe from '../components/soMe/SoMe';
 import UpdateIcon from '../public/images/icons/update-icon.png'
+import ErrorComponent from '../components/error/ErrorComponent';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function About(props) {
 
@@ -17,6 +20,13 @@ export default function About(props) {
     const result = props.data;
     const gallery = props.gallery;
     const service = props.services;
+    const error = props.error;
+
+    console.log(gallery[0])
+
+    useEffect(() => {
+        AOS.init();
+      }, [])
     
     useEffect(() => {
         const auth = window.localStorage.getItem("auth");
@@ -29,6 +39,10 @@ export default function About(props) {
     }, [])
 
     console.log(authKey)
+
+    if (error) {
+        return <ErrorComponent />
+    }
 
     return (
         <>  
@@ -72,7 +86,7 @@ export default function About(props) {
                 
                 <div className="about__img-some">
                     <div className="about__img">
-                        <Image src={result.img[0].formats.medium.url} alt="an recently installed oven" width="500" height="750" />
+                        <Image src={result.img} alt="an recently installed oven" width="500" height="750" />
                     </div>
 
                     <SoMe 
@@ -91,9 +105,13 @@ export default function About(props) {
                         <div 
                             className="about__service-container" 
                             key={s.id}
+                            data-aos="fade-up"
+                            data-aos-delay="50"
+                            data-aos-duration="1000"
+                            data-aos-easing="ease-in-out"
                             >
                             <div className="about__service--img">
-                               <Image src={s.icon.formats.thumbnail.url} width="100" height="100" /> 
+                               <Image src={s.icon} width="100" height="100" /> 
                             </div>
                             <div className="about__service--btn">
                                 <SecondaryBtn link={`/service/${s.slug}`} text={s.title} /> 
@@ -104,7 +122,13 @@ export default function About(props) {
                 </section>
                 
 
-                <div className="about__good-to-know-container">
+                <div 
+                    className="about__good-to-know-container"
+                    data-aos="fade-left"
+                    data-aos-delay="50"
+                    data-aos-duration="1000"
+                    data-aos-easing="ease-in-out"
+                    >
                     <h2>{result.good_to_know}</h2>
                 </div>
 
@@ -115,9 +139,15 @@ export default function About(props) {
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
-                            <div key={g.id} className="about__gallery--img">
+                            <div key={g.id} 
+                                className="about__gallery--img"
+                                data-aos="fade-up"
+                                data-aos-delay="50"
+                                data-aos-duration="1000"
+                                data-aos-easing="ease-in-out"
+                                >
                                 <div>
-                                    <Image src={g.img[0].url} alt={g.alt_text} width="700" height="700" />
+                                    <Image src={g.img_url} alt={g.alt_text} width="700" height="700" />
                                 </div>
                             </div>
                         ))}
@@ -137,23 +167,31 @@ export async function getStaticProps() {
     let services = [];
 
     try {
-        // const res = await axios.get(process.env.API_ABOUT);
-        const res = await axios.get("http://localhost:1337/about");
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_ABOUT);
         about = res.data;
 
         // Gallery
-        const res1 = await axios.get("http://localhost:1337/galleries");
+        const res1 = await axios.get(process.env.NEXT_PUBLIC_API_GALLERY);
         gallery = res1.data;
 
-        const res2 = await axios.get("http://localhost:1337/categories");
+        const res2 = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
         services = res2.data;
 
     } catch(err) {
         console.log(err);
+        return {
+            props: {
+                error: true,
+                data: about,
+                gallery: gallery,
+                services: services
+            },
+        };
     } 
 
     return {
         props: {
+            error: false,
             data: about,
             gallery: gallery,
             services: services

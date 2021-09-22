@@ -6,7 +6,9 @@ import Footer from '../components/footer/Footer';
 import UseLocalStorage from '../hooks/UseLocalStorage';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import FileUpload from '../components/upload/FileUpload';
-
+import WhiteContainer from '../components/containers/WhiteContainer';
+import UserIcon from '../public/images/icons/user.svg';
+import Image from 'next/image'
 
 export default function AdminUploadImage() {
 
@@ -46,10 +48,22 @@ export default function AdminUploadImage() {
 
                         <Breadcrumb path="/admin-upload-image" />
 
-                        <h1>Upload new images to the gallery</h1>
+                        <div className="admin__layout-flex">
 
-                        <FileUpload />
+                            <div className="admin__header--section">
+                            <h1 className="admin__h1">Upload new images to the gallery</h1>
+                                <div className="admin__user admin-panel__user">
+                                    <div><Image src={UserIcon.src} alt="user icon" width="50" height="50" /></div>
+                                    <h3>{userId}</h3>
+                                </div> 
+                            </div>
 
+                            <WhiteContainer classname="services-update__white-container">
+                                <FileUpload />
+                            </WhiteContainer>
+
+                        </div>
+                        
                     </div>
 
                     <Footer />

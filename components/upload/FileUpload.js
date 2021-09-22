@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { post } from 'jquery';
 import React, { useEffect, useState } from 'react'
 
 export default function FileUpload() {
@@ -7,6 +8,8 @@ export default function FileUpload() {
     const [submitting, setSubmitting] = useState(false);
     const [response, setResponse] = useState({});
     const [authKey, setAuthKey] = useState(null);
+
+    // console.log(image)
 
     useEffect(() => {
 
@@ -18,7 +21,6 @@ export default function FileUpload() {
         } else {
             setAuthKey(auth);
         }
-
     }, []);
 
     const onSubmit = async (e) => {
@@ -28,32 +30,26 @@ export default function FileUpload() {
 
         let formData = new FormData();
         formData.append("img", image);
-        // formData.append("upload_preset", "yc3hjmth");
-        // const formDataImage = formData.get("img")
+        // formData.append("ref", "img");
         console.log(formData.get("img"));
+
+        formData = { img: JSON.stringify(image) }
 
         const options = { 
             headers: { 
                 "Authorization" : `Bearer ${authKey}`,
-                'Content-Type': 'application/json',
-                
+                // 'Content-Type': 'application/json',
             }
         };
 
         try {
-            const res = await axios.post("http://localhost:1337/galleries", { img: formData }, options);
+            const res = await axios.post(process.env.NEXT_PUBLIC_API_GALLERY, formData , options);
+            // const res = await axios.post(process.env.NEXT_PUBLIC_API_GALLERY, { alt_text: alt } , options);
             console.log(res.data)
-
-            // const res = await axios.post("https://res.cloudinary.com/v1_1/dmuvt9zsp/image/upload/", formData);
-            // console.log(res)
 
         } catch(error){
             console.log(error);
         };
-
-        // axios.post("https://api.cloudinary.com/v1_1/dmuvt9zsp/image/upload", formData).then((res) => {
-        //     consol.log(res);
-        // })
     }
 
     return (
@@ -63,14 +59,20 @@ export default function FileUpload() {
                 <fieldset disabled={submitting}>
 
                     File upload
-                    <input 
+                    {/* <input 
                         // value={image}
                         onChange={e => setImage(e.target.files[0])} 
                         type="file" 
                         name="img"
+                        /> */}
+                    <input
+                        type="text"
                         />
-                    <button>Submit</button>
 
+                    <div className="create-service__btn">
+                        <button className="submit">Submit</button>
+                    </div>
+                    
                 </fieldset>
             </form>
             

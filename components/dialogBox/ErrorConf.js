@@ -19,7 +19,7 @@ export default function ErrorConf({confirm}) {
 
                     <div className="confirmation__p">
                         <p>
-                            Unfortunately, your message did not arrive.
+                            Unfortunately, it didn't went.
                         </p>
                     </div>
 

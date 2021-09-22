@@ -6,7 +6,7 @@ import BlueContainer from '../components/containers/BlueContainer'
 import Breadcrumb from '../components/breadcrumb/Breadcrumb'
 import WhiteContainer from '../components/containers/WhiteContainer'
 import { useRouter } from 'next/router'
-// import Footer from '../components/footer/Footer'
+import Footer from '../components/footer/Footer'
 
 export default function login() {
 
@@ -57,7 +57,7 @@ export default function login() {
                <LoginForm /> 
             </WhiteContainer>
 
-            {/* <Footer /> */}
+            <Footer />
             
             
         </>

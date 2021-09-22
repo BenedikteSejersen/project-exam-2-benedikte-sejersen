@@ -4,11 +4,6 @@ import Link from 'next/link'
 
 export default function Breadcrumb({path, path2, path2Name}) {
 
-    // const router = useRouter()
-    // const pathName = router.pathname;
-    // const path = pathName.slice(1);
-
-
     return (
         <div className="breadcrumb">
 

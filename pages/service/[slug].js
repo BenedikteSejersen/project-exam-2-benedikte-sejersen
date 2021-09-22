@@ -7,13 +7,21 @@ import Breadcrumb from '../../components/breadcrumb/Breadcrumb';
 import Footer from '../../components/footer/Footer';
 import Update from '../../components/admin/UpdateServices';
 import SecondaryBtn from '../../components/btn/SecondaryBtn';
+import ErrorComponent from '../../components/error/ErrorComponent';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
-export default function service({service}) {
+export default function service(props) {
 
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
 
-    const slugService = service[0];
+    const slugService = props.service[0];
+    const error = props.error;
+
+    useEffect(() => {
+        AOS.init();
+      }, [])
 
   useEffect(() => {
       const auth = window.localStorage.getItem("auth");
@@ -27,6 +35,10 @@ export default function service({service}) {
 
   const handleClick = () => {
     setClicked(true);
+  }
+
+  if (error) {
+      return <ErrorComponent />
   }
 
     return (
@@ -53,24 +65,33 @@ export default function service({service}) {
                 {clicked ? "" :
                     <>
 
-                        {slugService.img_1[0] ?
+                        {slugService.img_1 === null ?
+                        "" :
                             <div className="service__img-1">
-                                {slugService.img_1[0].formats.medium == undefined ?
-                                <Image src={slugService.img_1[0].formats.small.url} alt="image" width={slugService.img_1[0].formats.small.width} height={slugService.img_1[0].formats.small.height} />
-                                :
-                                <Image src={slugService.img_1[0].formats.medium.url} alt="image" width={slugService.img_1[0].formats.medium.width} height={slugService.img_1[0].formats.medium.height} />
-                                }
+                                <Image src={slugService.img_1} alt={slugService.title} width="1000" height="1400" />
                             </div>
-                        : "" }
-                        
-                        <div className="service__h1">
+                        }
+
+                        <div 
+                            className="service__h1"
+                            data-aos="fade-up"
+                            data-aos-delay="50"
+                            data-aos-duration="1000"
+                            data-aos-easing="ease-in-out"
+                            >
                             <h1>{slugService.title}</h1>
                         </div>
 
                         {slugService.short_description == "" ?
                         ""
                         :
-                        <div className="service__short-p">
+                        <div 
+                            className="service__short-p"
+                            data-aos="fade-up"
+                            data-aos-delay="50"
+                            data-aos-duration="1000"
+                            data-aos-easing="ease-in-out"
+                            >
                             <p className="p__bold">{slugService.short_description}</p>
                         </div>
                         }
@@ -84,7 +105,13 @@ export default function service({service}) {
                         {slugService.description == "" ?
                         ""
                         :
-                        <div className="service__p">
+                        <div 
+                            className="service__p"
+                            data-aos="fade-up"
+                            data-aos-delay="50"
+                            data-aos-duration="1000"
+                            data-aos-easing="ease-in-out"
+                            >
                             <p>{slugService.description}</p>
                         </div>
                         }
@@ -94,25 +121,21 @@ export default function service({service}) {
                         </div>
 
                         <div className="service__imgs-2-3">   
-                            {slugService.img_2[0] ?
-                                <div className="service__img-2">
-                                    {slugService.img_2[0].formats.medium == undefined ?
-                                    <Image src={slugService.img_2[0].formats.small.url} alt="image" width={slugService.img_2[0].formats.small.width} height={slugService.img_2[0].formats.small.height} />
-                                    :
-                                    <Image src={slugService.img_2[0].formats.medium.url} alt="image" width={slugService.img_2[0].formats.medium.width} height={slugService.img_2[0].formats.medium.height} />
-                                    }
-                                </div> 
-                            : "" }
 
-                            {slugService.img_3[0] ? (
-                            <div className="service__img-3">
-                                    {slugService.img_3[0].formats.medium == undefined ?
-                                    <Image src={slugService.img_3[0].formats.small.url} alt="image" width={slugService.img_3[0].formats.small.width} height={slugService.img_3[0].formats.small.height} />
-                                    :
-                                    <Image src={slugService.img_3[0].formats.medium.url} alt="image" width={slugService.img_3[0].formats.medium.width} height={slugService.img_3[0].formats.medium.height} />
-                                    }
-                                </div>) 
-                            : ""}
+                            {slugService.img_2 === null ?
+                            "" :
+                                <div className="service__img-2">
+                                    <Image src={slugService.img_2} alt={slugService.title} width="2000" height="2000" />
+                                </div>
+                            }
+
+                            {slugService.img_3 === null ?
+                            "" :
+                                <div className="service__img-3">
+                                    <Image src={slugService.img_3} alt={slugService.title} width="1000" height="1000" />
+                                </div>
+                            }
+
                         </div>
 
                     </div>
@@ -126,7 +149,7 @@ export default function service({service}) {
 export async function getStaticPaths() {
 
     try {
-        const res = await axios.get("http://localhost:1337/categories");
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
         const service = res.data; 
 
         const paths = service.map((s) => ({
@@ -145,7 +168,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
-    const url = `http://localhost:1337/categories?slug=${params.slug}`;
+    const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
 
     let service = [];
 
@@ -154,10 +177,17 @@ export async function getStaticProps({ params }) {
         service = res.data;
     } catch(err) {
         console.log(err);
+        return {
+            props: {
+                error: true,
+                service: service,
+            },
+        };
     }
 
     return {
         props: {
+            errpr: false,
             service: service,
         },
     };
