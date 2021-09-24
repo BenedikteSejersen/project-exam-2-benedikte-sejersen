@@ -15,10 +15,10 @@ import Image from 'next/image';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import HandleDelete from '../components/dialogBox/HandleDelete';
 
-export default function Admin(props) {
+export default function Admin({message, error, service}) {
 
-    const messages = props.message;
-    const error = props.error;
+    const messages = message;
+    const serverError = error;
 
     const [userId, setUserId] = useState("");
     const [authKey, setAuthKey] = useState("");
@@ -39,7 +39,7 @@ export default function Admin(props) {
 
     }, [store.userId]);
 
-    if (error) {
+    if (serverError) {
         return <ErrorComponent />
     }
 
@@ -90,7 +90,7 @@ export default function Admin(props) {
                                 <div className="admin__crud">
                                     <h2>Delete service</h2>
                                     <ul>
-                                        {props.service.map((s) => (
+                                        {service.map((s) => (
                                             <li className="admin__delete-services" key={s.id}>
                                                 <span className="red-circle">
                                                     <HandleDelete url={process.env.NEXT_PUBLIC_API_SERVICES} id={s.id} /> 
