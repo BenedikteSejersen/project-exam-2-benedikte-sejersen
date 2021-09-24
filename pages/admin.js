@@ -149,7 +149,8 @@ export async function getStaticProps() {
         const response = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES);
         message = response.data;
 
-        const response2 = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+        // const response2 = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+        const response2 = await axios.get("https://warm-caverns-96700.herokuapp.com/services");
         service = response2.data;
     } catch(err) {
         console.log(err);
