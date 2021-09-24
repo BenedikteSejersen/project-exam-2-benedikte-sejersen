@@ -25,26 +25,24 @@ export default function Admin({message, error}) {
     const history = useRouter();
     const store = UseLocalStorage();
 
-    // const [service, setService] = useState("");
+                        const [service, setService] = useState([]);
 
-    const [service, setService] = useState([]);
+                        async function getServices() {
+                            try {
+                                const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+                                // setService(res.data);
+                                setService(res.data);
+                                // console.log(service)
+                            } catch(err) {
+                                console.log(err);
+                            }
+                        }
 
-    async function getServices() {
-        try {
-            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-            // setService(res.data);
-            setService(res.data);
-            // console.log(service)
-        } catch(err) {
-            console.log(err);
-        }
-    }
+                        console.log(service)
 
-    console.log(service)
-
-    useEffect(() => {
-        getServices();
-    }, [service]);
+                        useEffect(() => {
+                            getServices();
+                        }, [service]);
 
     useEffect(() => {
 
