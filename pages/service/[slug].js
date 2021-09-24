@@ -171,7 +171,7 @@ export async function getStaticPaths() {
     }
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
 
     const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
 
