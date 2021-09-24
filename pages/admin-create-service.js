@@ -152,12 +152,12 @@ export default function AdminCreateService() {
 
                                     <div className="service__updating">
                                         <div  className="service__updating--label">Short description:</div>
+                                        <TextareaAutosize className={`textarea__update input create-service__input ${errors.title ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("short_description")} />
                                         {errors.short_description ?
                                             <FormError>{errors.short_description.message}</FormError>
                                         :
                                             <div className="input__required">Short important description in the blue area</div>
                                         }
-                                        <TextareaAutosize className={`textarea__update input create-service__input ${errors.title ? "red-border" : ""} ${errors.success ? "green-border" : ""}`} {...register("short_description")} />
                                     </div>
 
                                     <div className="service__updating">

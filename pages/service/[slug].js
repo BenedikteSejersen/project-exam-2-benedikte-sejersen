@@ -171,27 +171,24 @@ export async function getStaticPaths() {
     }
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
 
     const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
 
     let service = [];
 
-    const res = await axios.get(url);
+    try {
+        const res = await axios.get(url);
         service = res.data;
-
-    // try {
-    //     const res = await axios.get(url);
-    //     service = res.data;
-    // } catch(err) {
-    //     console.log(err);
-    //     return {
-    //         props: {
-    //             error: true,
-    //             service: service,
-    //         },
-    //     };
-    // }
+    } catch(err) {
+        console.log(err);
+        return {
+            props: {
+                error: true,
+                service: service,
+            },
+        };
+    }
 
     return {
         props: {
