@@ -862,7 +862,7 @@ body .some__img:hover, body .delete:hover {
 }
 @media (min-width: 1200px) {
   .our-services-container .our-services__services-container {
-    margin: 0 50px 50px 50px;
+    margin: 50px 50px;
   }
 }
 @media (min-width: 767px) {

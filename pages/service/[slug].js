@@ -177,18 +177,21 @@ export async function getStaticProps({ params }) {
 
     let service = [];
 
-    try {
-        const res = await axios.get(url);
+    const res = await axios.get(url);
         service = res.data;
-    } catch(err) {
-        console.log(err);
-        return {
-            props: {
-                error: true,
-                service: service,
-            },
-        };
-    }
+
+    // try {
+    //     const res = await axios.get(url);
+    //     service = res.data;
+    // } catch(err) {
+    //     console.log(err);
+    //     return {
+    //         props: {
+    //             error: true,
+    //             service: service,
+    //         },
+    //     };
+    // }
 
     return {
         props: {
