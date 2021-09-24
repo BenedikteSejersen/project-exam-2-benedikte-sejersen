@@ -8,7 +8,6 @@ import UseLocalStorage from '../hooks/UseLocalStorage';
 import WhiteContainer from '../components/containers/WhiteContainer';
 import SecondaryBtn from '../components/btn/SecondaryBtn';
 import ErrorComponent from '../components/error/ErrorComponent';
-import { getStaticProps } from 'next'
 
 // Icons
 import UserIcon from '../public/images/icons/user.svg';
