@@ -131,13 +131,14 @@ export default function About(props) {
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
-                            <div key={g.id} className="about__img-container">
-                            <div key={g.id} 
+                            <div 
+                                key={g.id} 
+                                className="about__img-container"
                                 data-aos="fade-up"
                                 data-aos-delay="50"
                                 data-aos-duration="1000"
-                                data-aos-easing="ease-in-out"
-                                >
+                                data-aos-easing="ease-in-out">
+                            <div>
 
                                 <div>
                                     <Image src={g.img_url} alt={g.alt_text} width="700" height="700" />

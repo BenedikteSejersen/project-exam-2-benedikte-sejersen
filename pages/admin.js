@@ -15,7 +15,7 @@ import Image from 'next/image';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import HandleDelete from '../components/dialogBox/HandleDelete';
 
-export default function Admin({message, error, service}) {
+export default function Admin({message, error}) {
 
     const messages = message;
     const serverError = error;
@@ -24,6 +24,27 @@ export default function Admin({message, error, service}) {
     const [authKey, setAuthKey] = useState("");
     const history = useRouter();
     const store = UseLocalStorage();
+
+    // const [service, setService] = useState("");
+
+    const [service, setService] = useState([]);
+
+    async function getServices() {
+        try {
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+            // setService(res.data);
+            setService(res.data);
+            // console.log(service)
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    console.log(service)
+
+    useEffect(() => {
+        getServices();
+    }, [service]);
 
     useEffect(() => {
 
