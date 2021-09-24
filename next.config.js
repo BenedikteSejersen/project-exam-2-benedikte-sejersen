@@ -4,7 +4,7 @@ module.exports = {
   reactStrictMode: true,
   externalsPresets: { web: false, webAsync: true },
   eslint: {
-    ignoreDuringBuilds: false,
+    ignoreDuringBuilds: true,
   },
 }
 
