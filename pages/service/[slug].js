@@ -194,7 +194,7 @@ export async function getStaticProps({ params }) {
 
     return {
         props: {
-            errpr: false,
+            error: false,
             service: service,
         },
     };
