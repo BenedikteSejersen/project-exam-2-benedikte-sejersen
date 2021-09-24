@@ -154,8 +154,7 @@ export default function service({service, error}) {
 export async function getStaticPaths() {
 
     try {
-        // const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-        const res = await axios.get("https://warm-caverns-96700.herokuapp.com/services");
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
         const service = res.data; 
 
         const paths = service.map((s) => ({
@@ -174,8 +173,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
 
-    // const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
-    const url = "https://warm-caverns-96700.herokuapp.com/services" + `?slug=${params.slug}`;
+    const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
 
     let service = [];
 
