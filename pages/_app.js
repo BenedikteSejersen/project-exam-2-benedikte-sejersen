@@ -36,6 +36,7 @@ function MyApp({ Component, pageProps }) {
       <>
       {loading ? (
         <div className="loader-container">
+          <h4 className="loader-text">Loading page</h4>
           <ClimbingBoxLoader />
         </div>
       ) : (

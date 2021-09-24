@@ -17,6 +17,8 @@ export default function login() {
                 <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
                 <link rel="icon" href="/favicon.ico" />
                 <link rel="stylesheet" href="https://use.typekit.net/cou5qgt.css"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
             </Head>
 
             <Navigation />

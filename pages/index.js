@@ -17,11 +17,6 @@ import 'aos/dist/aos.css';
 export default function Home(props) {
 
   const [authKey, setAuthKey] = useState("");
-  // const [clicked, setClicked] = useState(false);
-
-  // const handleClick = () => {
-  //   setClicked(true);
-  // }
 
   useEffect(() => {
     AOS.init();
@@ -52,18 +47,14 @@ export default function Home(props) {
         <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://use.typekit.net/cou5qgt.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
       </Head>
 
       <Nav />
 
         <div className="parent__blue-container">
           <div className="blue-container">
-
-          {/* <div onClick={handleClick}>
-              {authKey ? 
-                  <UpdateHome home={result} />
-              : "" } 
-          </div> */}
 
             <header className="index__content-container">
 

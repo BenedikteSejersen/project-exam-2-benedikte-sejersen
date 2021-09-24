@@ -129,18 +129,6 @@ export default function UpdateServices({ service }) {
                     </div>
 
                     <div>
-                        {/* {slugService.img.map((img) => (
-                            <div key={img.id} className="service__img">
-                                {img.img_url[0].formats.medium == undefined ?
-                                <Image src={img.img_url[0].formats.small.url} alt="image" width={img.img_url[0].formats.small.width} height={img.img_url[0].formats.small.height} />
-                                :
-                                <Image src={img.img_url[0].formats.medium.url} alt="image" width={img.img_url[0].formats.medium.width} height={img.img_url[0].formats.medium.height} />
-                                }
-                            </div>    
-                        ))} */}
-                    </div>
-
-                    <div>
                         <div className="service__updating">
                             <div className="service__updating--label">Description: </div>
                             <textarea 

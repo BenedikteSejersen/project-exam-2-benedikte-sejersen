@@ -51,6 +51,8 @@ export default function Admin(props) {
                         <title>Admin - Norsk piperehabilitering AS</title>
                         <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
                         <link rel="icon" href="/favicon.ico" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
                     </Head>
 
                     <Nav />
@@ -69,9 +71,9 @@ export default function Admin(props) {
 
                     </div>
 
-                    <div className="admin__flex">
+                    <main className="admin__flex">
                         <WhiteContainer classname="admin__white-container" children={(
-                            <>
+                            <aside>
                                 <div className="admin__crud">
                                     <h2>Update</h2>
                                     <p className="admin__p">To update content, you have to go to the page you want to update.</p>
@@ -100,7 +102,7 @@ export default function Admin(props) {
                                 </div>
                                 
 
-                            </> 
+                            </aside> 
                         )} />
 
                         <WhiteContainer classname="admin__white-container admin__message-container" children={(
@@ -112,7 +114,7 @@ export default function Admin(props) {
                                 )}
 
                                 {messages.map((m) => (
-                                    <>
+                                    
                                     <div className="admin__message--id" key={m.id}>
                                         <div className="admin__message--delete">
                                            <HandleDelete url={process.env.NEXT_PUBLIC_API_MESSAGES} id={m.id} /> 
@@ -124,11 +126,11 @@ export default function Admin(props) {
                                             </div>
                                         </a> 
                                     </div>
-                                    </> 
+                                    
                                 ))}
                             </>
                         )} />
-                    </div>
+                    </main>
                 </>
             ) : 
             ""

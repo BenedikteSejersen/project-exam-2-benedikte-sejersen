@@ -111,6 +111,11 @@
     @include respond-to('small') {
         flex-direction: row;
         margin: 100px auto;
+        flex-wrap: wrap;
+    }
+
+    @include respond-to('medium') {
+        flex-wrap: nowrap;
     }
     
 }
@@ -165,12 +170,22 @@
     }
 }
 
-.about__gallery--img {
+.about__img-container {
+    position: relative;
     max-width: 40%;
     margin: 10px;
 
     @include respond-to('medium') {
         max-width: 30%;
     }
-    
+}
+
+.about__delete {
+    border: 1px solid $error;
+    background-color: $error;
+    border-radius: 50%;
+    display: inline-block;
+    height: 30px;
+    position: absolute;
+    bottom: 5px;
 }

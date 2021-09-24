@@ -32,7 +32,7 @@ export default function Delete({HandleDelete, HandleCancel}) {
                         </div>  
                     </div>
                 </div>
-            </>
+            </> 
         </div>
     )
 }

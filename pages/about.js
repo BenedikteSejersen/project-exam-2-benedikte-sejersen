@@ -8,10 +8,10 @@ import Footer from '../components/footer/Footer';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import CircleInfo from '../components/containers/CircleInfo';
 import SoMe from '../components/soMe/SoMe';
-import UpdateIcon from '../public/images/icons/update-icon.png'
 import ErrorComponent from '../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import HandleDelete from '../components/dialogBox/HandleDelete';
 
 export default function About(props) {
 
@@ -22,14 +22,12 @@ export default function About(props) {
     const service = props.services;
     const error = props.error;
 
-    console.log(gallery[0])
-
     useEffect(() => {
         AOS.init();
       }, [])
     
     useEffect(() => {
-        const auth = window.localStorage.getItem("auth");
+        const auth = JSON.parse(window.localStorage.getItem("auth"));
 
         if (!auth) {
             setAuthKey(null);
@@ -37,8 +35,6 @@ export default function About(props) {
             setAuthKey(auth);
         }
     }, [])
-
-    console.log(authKey)
 
     if (error) {
         return <ErrorComponent />
@@ -50,6 +46,8 @@ export default function About(props) {
                 <title>About us - Norsk piperehabilitering AS</title>
                 <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
                 <link rel="icon" href="/favicon.ico" />
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
             </Head>
 
             <Nav />
@@ -58,13 +56,7 @@ export default function About(props) {
                <div className="blue-container about__blue-container">
 
                     <Breadcrumb path="about" />
-
-                    {authKey ? 
-                        <div>
-                            <Image src={UpdateIcon.src} width="50" height="50" alt="update the content icon" />
-                        </div>
-                   : "" }
-
+                    
                     <div className="about__heading-text">
                         <h1 className="about__h1">{result.heading}</h1>
 
@@ -139,16 +131,24 @@ export default function About(props) {
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
+                            <div key={g.id} className="about__img-container">
                             <div key={g.id} 
-                                className="about__gallery--img"
                                 data-aos="fade-up"
                                 data-aos-delay="50"
                                 data-aos-duration="1000"
                                 data-aos-easing="ease-in-out"
                                 >
+
                                 <div>
                                     <Image src={g.img_url} alt={g.alt_text} width="700" height="700" />
                                 </div>
+
+                            </div>
+                            {authKey && (
+                                <div className="about__delete">
+                                    <HandleDelete url={process.env.NEXT_PUBLIC_API_GALLERY} id={g.id} />
+                                </div>
+                            )}
                             </div>
                         ))}
                     </div>

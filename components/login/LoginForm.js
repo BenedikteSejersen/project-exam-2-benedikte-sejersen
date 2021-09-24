@@ -16,11 +16,11 @@ export default function LoginForm() {
 
     const [submitting, setSubmitting] = useState(false);
     const [loginError, setLoginError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
     const [userAuth, setUserAuth] = UseLocalStorage("auth", "");
     const [username, setUsername] = useState(undefined);
     const [password, setPassword] = useState(undefined);
     const [userId, setUserId] = UseLocalStorage("user", "");
+    const [isLoading, setIsLoading] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),

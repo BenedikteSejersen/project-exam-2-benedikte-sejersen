@@ -46,11 +46,15 @@ export default function service(props) {
 
             <Head>
                 <title>{slugService.title} - Norsk piperehabilitering AS</title>
-                <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
+                <meta name="description" content={slugService.short_text_index + " " + slugService.title} />
                 <link rel="icon" href="/favicon.ico" />
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
             </Head>
 
             <Navigation />
+
+            <main>
 
             <div className="blue-container">
 
@@ -65,7 +69,7 @@ export default function service(props) {
                 {clicked ? "" :
                     <>
 
-                        {slugService.img_1 === null ?
+                        {slugService.img_1 === null && "null" ?
                         "" :
                             <div className="service__img-1">
                                 <Image src={slugService.img_1} alt={slugService.title} width="1000" height="1400" />
@@ -122,14 +126,14 @@ export default function service(props) {
 
                         <div className="service__imgs-2-3">   
 
-                            {slugService.img_2 === null ?
+                            {slugService.img_2 === null && "null" ?
                             "" :
                                 <div className="service__img-2">
                                     <Image src={slugService.img_2} alt={slugService.title} width="2000" height="2000" />
                                 </div>
                             }
 
-                            {slugService.img_3 === null ?
+                            {slugService.img_3 === null && "null" ?
                             "" :
                                 <div className="service__img-3">
                                     <Image src={slugService.img_3} alt={slugService.title} width="1000" height="1000" />
@@ -140,6 +144,7 @@ export default function service(props) {
 
                     </div>
                 }
+                </main>
 
            <Footer /> 
         </div>

@@ -127,3 +127,27 @@
 .upload-image_input {
     width: 100%;
 }
+
+// Create
+.create__white-container {
+    @include respond-to('small') {
+        width: 80%;
+        margin-right: 50px;
+    }
+}
+
+.create__heading {
+    margin: 30px 20px;
+}
+
+.create__btn {
+    text-align: center;
+
+    @include respond-to('small') {
+        width: 70%;
+    }
+}
+
+.create-input {
+    width: 50%;
+}

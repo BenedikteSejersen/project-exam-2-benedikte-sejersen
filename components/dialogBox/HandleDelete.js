@@ -27,7 +27,7 @@ export default function HandleDelete({id, url}) {
     
     function handleCancel() {
         setOpen({
-            show: false,
+            show: false, 
             id: null
         });
     }; 
@@ -66,7 +66,7 @@ export default function HandleDelete({id, url}) {
         <div>
 
             {open.show ?
-                <Delete 
+                <Delete  
                     HandleDelete={() => handleDelete()}
                     HandleCancel={() => handleCancel()} 
                     />

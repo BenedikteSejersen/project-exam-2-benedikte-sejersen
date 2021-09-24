@@ -53,3 +53,70 @@ textarea:focus, input:focus {
     margin: 20px 0 20px 15px;
 }
 
+// Form dropdown
+.form-dropdown {
+    position: relative;
+    width: 90%;
+
+    @include respond-to('medium') {
+        width: 100%;
+    }
+}
+
+.form-dropdown__selected-input {
+    border-bottom: 1px solid #000;
+    padding: 3px;
+    position: relative;
+    margin-top: 10px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $light-blue;
+        border-bottom: 2px solid #000;
+    }
+}
+
+.form-dropdown__hover {
+    border-bottom: 2px solid #000;
+}
+
+.form-dropdown__invisible-value {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    // visibility: hidden;
+}
+
+.form-dropdown__options {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    top: 35px;
+    z-index: 10;
+
+    border: 1px solid #000;
+
+    @include respond-to('medium') {
+        width: 120%;
+
+    }
+
+    ul option {
+        cursor: pointer;
+        padding: 5px 20px;
+        display: block;
+
+        @include respond-to('medium') {
+            padding: 5px;
+        }
+
+        &:hover {
+            background-color: $light-blue;
+        }
+    }
+}
+
+.form-dropdown__arrow-img {
+    position: absolute;
+    right: 5px;
+}

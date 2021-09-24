@@ -18,7 +18,8 @@ import CircleInfo from '../components/containers/CircleInfo';
 import Success from '../components/dialogBox/Success';
 import ErrorConf from '../components/dialogBox/ErrorConf';
 import ErrorComponent from '../components/error/ErrorComponent';
-
+import ArrowUp from '../public/images/icons/arrow-up.png';
+import ArrowDown from '../public/images/icons/arrow-down.png';
 
 const schema = yup.object().shape({
 	Name: yup.string().min(3).required("Name is required"),
@@ -34,7 +35,19 @@ export default function Contact(props) {
     const [serverError, setServerError] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
 
+    const [subjects, setSubjects] = useState("");
+    const [show, setShow] = useState(false);
+    const [selectedSubject, setSelectedSubject] = useState("");
+
+    const handleDropdown = () => setShow(!show);
+
+    function handleChange(e) {
+        setSelectedSubject(e)
+        setShow(false);
+    }
+
     const error = props.error;
+    const service = props.services;
 
     const form = useRef();
 
@@ -81,6 +94,8 @@ export default function Contact(props) {
                 <title>Contact us - Norsk piperehabilitering AS</title>
                 <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
                 <link rel="icon" href="/favicon.ico" />
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
             </Head>
 
             <Nav />
@@ -96,7 +111,7 @@ export default function Contact(props) {
                     </div>
 
                     <WhiteContainer classname="contact__white-container" children={(
-                        <div className="contact__form-info">
+                        <main className="contact__form-info">
 
                             <div>
                                 <CircleInfo
@@ -122,21 +137,48 @@ export default function Contact(props) {
                                                 {/* Dropdown */}
                                             <div className="contact__input-container">
                                                     <div>Subject:</div>
+                                                    <div className="form-dropdown">
+                                                        <div 
+                                                            onClick={handleDropdown}
+                                                            className={`form-dropdown__selected-input 
+                                                                ${show ? "form-dropdown__hover" : ""} 
+                                                                ${errors.Subject ? "red-border" : ""} ${errors.success ? "green-border" : ""}`}>
+                                                            <div>
+                                                                <input className="form-dropdown__invisible-value"  {...register("Subject")} value={selectedSubject} />{selectedSubject === "" ? "--Select subject--" : selectedSubject} 
+                                                                <span className="form-dropdown__arrow-img">{show ? <Image src={ArrowUp.src} width="10" height="10"/> : <Image src={ArrowDown.src} width="10" height="10" /> }</span>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        {show ? 
+                                                        <div className="form-dropdown__options" >
+                                                            <ul>
+                                                                {service.map((s) => (
+                                                                    <option 
+                                                                        key={s.id} 
+                                                                        value={s.title} 
+                                                                        onClick={() => handleChange(s.title)}
+                                                                        >{s.title}</option>
+                                                                ))}
+                                                                <option 
+                                                                    value="Questions" 
+                                                                    onClick={() => handleChange("Questions")}
+                                                                    value="Questions"
+                                                                    >
+                                                                    Questions
+                                                                </option>
+                                                                <option 
+                                                                    value="Other" 
+                                                                    onClick={() => handleChange("Other")}
+                                                                    value="Other"
+                                                                    >
+                                                                    Other
+                                                                </option>
+                                                            </ul> 
+                                                        </div> 
+                                                        : ""}
                                                     
-                                                    <select
-                                                    name="Subject"
-                                                    className={`input contact__dropdown ${errors.Subject ? "red-border" : ""}`} 
-                                                    {...register("Subject")}
-                                                    >
-                                                        <option value="">-- Select subject --</option>
-                                                        <option value="Inspection">Inspection</option>
-                                                        <option value="Rehabilitation">Rehabilitation</option>
-                                                        <option value="Steel pipe">Steel pipe</option>
-                                                        <option value="Oven mounting">Oven mounting</option>
-                                                        <option value="Pipe fitting">Pipe fitting</option>
-                                                        <option value="Questions">Questions</option>
-                                                        <option value="Other">Other</option>
-                                                    </select>
+                                                </div>
+
                                                     {errors.Subject && <FormError>{errors.Subject.message}</FormError>}
                                             </div>  
                                         </div>
@@ -187,7 +229,7 @@ export default function Contact(props) {
 
                                 <SoMe classname="contact__some" width="20" height="20" />
                             </div>
-                        </div>  
+                        </main>  
                         )} />
 
                     </div>
@@ -209,15 +251,21 @@ export default function Contact(props) {
 export async function getStaticProps() { 
 
     let contact = [];
+    let services = [];
 
     try {
         const resHome = await axios.get(process.env.NEXT_PUBLIC_API_HOME);
         contact = resHome.data;
+
+        const resService = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+        services = resService.data;
+
     } catch(err) {
         console.log(err);
         return { props: { 
             error: true,
-            contact: null
+            contact: null,
+            services: services
           }};
     }
 
@@ -225,6 +273,7 @@ export async function getStaticProps() {
         props: {
             error: false,
             contact: contact,
+            services: services
         },
     };
 }
