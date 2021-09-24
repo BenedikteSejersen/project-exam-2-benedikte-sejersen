@@ -11,13 +11,13 @@ import ErrorComponent from '../../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-export default function service(props) {
+export default function service({service, error}) {
 
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
 
-    const slugService = props.service[0];
-    const error = props.error;
+    const slugService = service[0];
+    const serverError = error;
 
     useEffect(() => {
         AOS.init();
@@ -37,7 +37,7 @@ export default function service(props) {
     setClicked(true);
   }
 
-  if (error) {
+  if (serverError) {
       return <ErrorComponent />
   }
 
