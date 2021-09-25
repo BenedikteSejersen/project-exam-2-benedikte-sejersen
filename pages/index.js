@@ -257,7 +257,7 @@ export async function getStaticProps() {
       return { props: { 
         error: true,
         result: null,
-        resultServices: null
+        services: null
       }};
   }
 
