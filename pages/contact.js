@@ -18,8 +18,8 @@ import CircleInfo from '../components/containers/CircleInfo';
 import Success from '../components/dialogBox/Success';
 import ErrorConf from '../components/dialogBox/ErrorConf';
 import ErrorComponent from '../components/error/ErrorComponent';
-import ArrowUp from '../public/images/icons/arrow-up.png';
-import ArrowDown from '../public/images/icons/arrow-down.png';
+import ArrowUp from '../public/images/icons/arrow-up.png'
+import ArrowDown from '../public/images/icons/arrow-down.png'
 
 const schema = yup.object().shape({
 	Name: yup.string().min(3).required("Name is required"),
@@ -34,8 +34,6 @@ export default function Contact(props) {
     const [submitting, setSubmitting] = useState(false);
     const [serverError, setServerError] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
-
-    const [subjects, setSubjects] = useState("");
     const [show, setShow] = useState(false);
     const [selectedSubject, setSelectedSubject] = useState("");
 
@@ -146,10 +144,10 @@ export default function Contact(props) {
                                                             <div>
                                                                 <input
                                                                     className="form-dropdown__invisible-value"  
-                                                                    {...register("Subject")} 
                                                                     value={selectedSubject} 
                                                                     onChange={(e) => setSelectedSubject(e.target.value)}
                                                                     readOnly
+                                                                    {...register("Subject")} 
                                                                     />
                                                                     {selectedSubject === "" ? "--Select subject--" : selectedSubject} 
                                                                 <span className="form-dropdown__arrow-img">{show ? <Image src={ArrowUp.src} width="10" height="10"/> : <Image src={ArrowDown.src} width="10" height="10" /> }</span>

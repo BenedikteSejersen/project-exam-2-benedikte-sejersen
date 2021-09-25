@@ -10,14 +10,30 @@ import SecondaryBtn from '../../components/btn/SecondaryBtn';
 import ErrorComponent from '../../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useRouter } from 'next/router';
 
-export default function service({service, error}) {
+export default function service() {
 
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
 
-    const slugService = service[0];
-    const serverError = error;
+    const [slugService, setSlugService] = useState([]);
+    const [fetchError, setFetchError] = useState(false);
+
+    const history = useRouter()
+    const { slug } = history.query;
+    console.log(slug)
+
+    useEffect(async() =>  {
+        try {
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${slug}`);
+            setSlugService(res.data[0]);
+            console.log(slugService[0])
+        } catch(err) {
+            setFetchError(true);
+            console.log(err);
+        }
+    }, [slugService]);
 
     useEffect(() => {
         AOS.init();
@@ -37,7 +53,7 @@ export default function service({service, error}) {
     setClicked(true);
   }
 
-  if (serverError) {
+  if (fetchError) {
       return <ErrorComponent />
   }
 
@@ -72,7 +88,7 @@ export default function service({service, error}) {
                         {slugService.img_1 === null && "null" ?
                         "" :
                             <div className="service__img-1">
-                                <Image src={slugService.img_1} alt={slugService.title} width="1000" height="1400" />
+                                {/* <Image src={slugService.img_1} alt={slugService.title} width="1000" height="1400" /> */}
                             </div>
                         }
 
@@ -129,14 +145,14 @@ export default function service({service, error}) {
                             {slugService.img_2 === null && "null" ?
                             "" :
                                 <div className="service__img-2">
-                                    <Image src={slugService.img_2} alt={slugService.title} width="2000" height="2000" />
+                                    {/* <Image src={slugService.img_2} alt={slugService.title} width="2000" height="2000" /> */}
                                 </div>
                             }
 
                             {slugService.img_3 === null && "null" ?
                             "" :
                                 <div className="service__img-3">
-                                    <Image src={slugService.img_3} alt={slugService.title} width="1000" height="1000" />
+                                    {/* <Image src={slugService.img_3} alt={slugService.title} width="1000" height="1000" /> */}
                                 </div>
                             }
 
@@ -151,49 +167,49 @@ export default function service({service, error}) {
     )
 }
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
 
-    try {
-        const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-        const service = res.data; 
+//     try {
+//         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+//         const service = res.data; 
 
-        const paths = service.map((s) => ({
-            params: { slug: s.slug.toString() },
-        }));
+//         const paths = service.map((s) => ({
+//             params: { slug: s.slug.toString() },
+//         }));
 
-        console.log(paths)
+//         console.log(paths)
         
-        return { paths, fallback: false };
+//         return { paths, fallback: false };
 
-    } catch(err) {
-        console.log(err);
-        return { paths: [], fallback: false }
-    }
-}
+//     } catch(err) {
+//         console.log(err);
+//         return { paths: [], fallback: false }
+//     }
+// }
 
-export async function getStaticProps({ params }) {
+// export async function getStaticProps({ params }) {
 
-    const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
+//     const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
 
-    let service = [];
+//     let service = [];
 
-    try {
-        const res = await axios.get(url);
-        service = res.data;
-    } catch(err) {
-        console.log(err);
-        return {
-            props: {
-                error: true,
-                service: service,
-            },
-        };
-    }
+//     try {
+//         const res = await axios.get(url);
+//         service = res.data;
+//     } catch(err) {
+//         console.log(err);
+//         return {
+//             props: {
+//                 error: true,
+//                 service: service,
+//             },
+//         };
+//     }
 
-    return {
-        props: {
-            error: false,
-            service: service,
-        },
-    };
-}
+//     return {
+//         props: {
+//             error: false,
+//             service: service,
+//         },
+//     };
+// }

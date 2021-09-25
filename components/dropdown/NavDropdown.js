@@ -78,7 +78,8 @@ export default function Dropdown() {
                 <div className="dropdown__select">
 
                     {service.map((s) => (
-                        <a key={s.id} href={`/service/${s.slug}`} className="dropdown__option--link">
+                        // <a key={s.id} href={`/service/${s.slug}`} className="dropdown__option--link">
+                         <a key={s.id} href={`/service/${s.slug}`} className="dropdown__option--link">
                             <div as="option" className="dropdown__option">
                                 <img src={s.icon} alt={`service icon ${s.title}`} className="dropdown__option--img" />
                                 <span className="dropdown__option--a">{s.title}</span> 

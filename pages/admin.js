@@ -15,34 +15,36 @@ import Image from 'next/image';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import HandleDelete from '../components/dialogBox/HandleDelete';
 
-export default function Admin({message, error}) {
+export default function Admin() {
 
-    const messages = message;
-    const serverError = error;
+    // const messages = message;
+    // const serverError = error;
 
     const [userId, setUserId] = useState("");
     const [authKey, setAuthKey] = useState("");
     const history = useRouter();
     const store = UseLocalStorage();
 
-                        const [service, setService] = useState([]);
+    const [service, setService] = useState([]);
+    const [fetchError, setFetchError] = useState(false);
+    const [messages, setMessages] = useState([]);
 
-                        async function getServices() {
-                            try {
-                                const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-                                // setService(res.data);
-                                setService(res.data);
-                                // console.log(service)
-                            } catch(err) {
-                                console.log(err);
-                            }
-                        }
+    async function getData() {
+        try {
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+            setService(res.data);
 
-                        console.log(service)
+            const res2 = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES);
+            setMessages(res2.data);
+        } catch(err) {
+            setFetchError(true);
+            console.log(err);
+        }
+    }
 
-                        useEffect(() => {
-                            getServices();
-                        }, [service]);
+    useEffect(() => {
+        getData();
+    }, [service]);
 
     useEffect(() => {
 
@@ -58,7 +60,7 @@ export default function Admin({message, error}) {
 
     }, [store.userId]);
 
-    if (serverError) {
+    if (fetchError) {
         return <ErrorComponent />
     }
 
