@@ -12,6 +12,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/router';
 
+// Lage en ny med annen router uten [slug].js. Se om det fungerer for å hente opp riktig data da. 
+// Kopiere dette inn i en ny.
+
 export default function service(props) {
 
     const [authKey, setAuthKey] = useState("");
