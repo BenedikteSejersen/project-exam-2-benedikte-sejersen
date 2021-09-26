@@ -22,7 +22,6 @@ export default function service({service, error}) {
     // const slugService = props.service[0];
 
     const slugService = service;
-    const error = error;
 
     // useEffect(async() => {
     //     const abortController = new AbortController();
