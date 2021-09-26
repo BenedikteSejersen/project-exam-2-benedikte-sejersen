@@ -12,7 +12,13 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/router';
 
-export default function service({service, error}) {
+export default function service({
+                                    serviceTitle, 
+                                    error,
+                                    serviceShortDescription,
+                                    serviceDescription,
+                                    serviceImg
+                                }) {
 
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
@@ -20,6 +26,8 @@ export default function service({service, error}) {
 
     // const error = props.error
     // const slugService = props.service[0];
+
+    console.log(serviceTitle)
 
     const slugService = service;
 
@@ -72,24 +80,24 @@ export default function service({service, error}) {
     return (
         <div>
 
-            <Head>
-                <title>{slugService.title} - Norsk piperehabilitering AS</title>
-                <meta name="description" content={slugService.short_text_index + " " + slugService.title} />
-                <link rel="icon" href="/favicon.ico" />
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-            </Head>
+             <Head>
+                 <title>{slugService.title} - Norsk piperehabilitering AS</title>
+                 <meta name="description" content={slugService.short_text_index + " " + slugService.title} />
+                 <link rel="icon" href="/favicon.ico" />
+                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+             </Head>
 
-            <Navigation />
+                <Navigation />
 
-            <main>
+             <main>
 
-            <div className="blue-container">
+             <div className="blue-container">
 
-                <Breadcrumb path={`service/${slugService.slug}`} />
+                 <Breadcrumb path={`service/${serviceTitle}`} />
 
-                <div onClick={handleClick}>
-                   {authKey ? 
+                 <div onClick={handleClick}>
+                    {authKey ? 
                         <Update service={slugService}/>
                     : "" } 
                 </div>
@@ -97,12 +105,12 @@ export default function service({service, error}) {
                 {clicked ? "" :
                     <>
 
-                        {image1 &&
+                        {serviceImg &&
                             <> 
-                                {slugService.img_1 === null && "null" ?
+                                {serviceImg === null && "null" ?
                                 "" :
                                     <div className="service__img-1">
-                                        <Image src={image1} alt={slugService.title} width="1000" height="1400" />
+                                        <Image src={serviceImg} alt={serviceTitle} width="1000" height="1400" />
                                     </div>
                                 }
                             </>
@@ -117,10 +125,10 @@ export default function service({service, error}) {
                             data-aos-duration="1000"
                             data-aos-easing="ease-in-out"
                             >
-                            <h1>{slugService.title}</h1>
+                            <h1>{serviceTitle}</h1>
                         </div>
 
-                        {slugService.short_description == "" ?
+                        {serviceShortDescription == "" ?
                         ""
                         :
                         <div 
@@ -130,14 +138,14 @@ export default function service({service, error}) {
                             data-aos-duration="1000"
                             data-aos-easing="ease-in-out"
                             >
-                            <p className="p__bold">{slugService.short_description}</p>
+                            <p className="p__bold">{serviceShortDescription}</p>
                         </div>
                         }
                     </>
                 }
             </div>
 
-            {clicked ? "" :
+            {/* {clicked ? "" :
                     <div className="service__under-text">
 
                         {slugService.description == "" ?
@@ -185,7 +193,7 @@ export default function service({service, error}) {
                         </div>
 
                     </div>
-                }
+                }*/}
                 </main>
 
            <Footer /> 
@@ -193,7 +201,7 @@ export default function service({service, error}) {
     )
 }
 
-// export async function getStaticPaths() {
+{/* // export async function getStaticPaths() {
 
 //     try {
 //         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
@@ -211,23 +219,29 @@ export default function service({service, error}) {
 //         console.log(err);
 //         return { paths: [], fallback: false }
 //     }
-// }
+// } */}
 
 export async function getServerSideProps(content) {
 
     const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${content.params.slug}`;
 
-    let service = [];
+    let serviceTitle = [];
+    let serviceShortDescription = [];
+    let serviceDescription = [];
+    let serviceImg = [];
 
     try {
         const res = await axios.get(url);
-        service = res.data;
+        serviceTitle = res.data[0].title;
+        serviceShortDescription = res.data[0].short_description;
+        serviceDescription = res.data[0].description;
+        serviceImg = res.data[0].img_1
     } catch(err) {
         console.log(err);
         return {
             props: {
                 error: true,
-                service: service,
+                // service: service,
             },
         };
     }
@@ -235,7 +249,11 @@ export async function getServerSideProps(content) {
     return {
         props: {
             error: false,
-            service: service,
+            // service: service,
+            serviceTitle: serviceTitle,
+            serviceShortDescription: serviceShortDescription,
+            serviceDescription: serviceDescription,
+            serviceImg: serviceImg
         },
     };
 }
