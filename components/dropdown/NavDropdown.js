@@ -19,21 +19,6 @@ export default function Dropdown() {
         setDropdownOpen(!dropdownOpen);
     }
 
-    // useEffect(() => {
-    //     const abortController = new AbortController();
-    //     const signal = abortController.signal;
-
-    //     fetch(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal })
-    //       .then((response) => response.json())
-    //       .then((data) => setService(data))
-    //       .catch((error) => console.log(error.message));
-
-    //       return function cleanUp() {
-    //         abortController.abort();
-    //     }
-
-    //   }, []);
-
       useEffect(async() => {
         const abortController = new AbortController();
         const signal = abortController.signal;

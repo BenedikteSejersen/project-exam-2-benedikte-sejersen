@@ -43,8 +43,7 @@ export default function About(props) {
 
       }, []);
 
-      const images = gallery.img_url;
-    console.log(images)
+      console.log(gallery)
 
     useEffect(() => {
         AOS.init();
@@ -155,11 +154,10 @@ export default function About(props) {
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
-                            <div key={g.id} >
-                                {images && 
+                            <div key={g.id} className="about__img-container">
+                                {gallery.alt_text && 
                                     <>
                                         <div 
-                                            className="about__img-container"
                                             data-aos="fade-up"
                                             data-aos-delay="50"
                                             data-aos-duration="1000"
@@ -167,7 +165,7 @@ export default function About(props) {
                                         <div>
 
                                             <div>
-                                                <Image src={g.images} alt={g.alt_text} width="700" height="700" />
+                                                <Image src={g.img_url} alt={g.alt_text} width="700" height="700" />
                                             </div>
 
                                             </div>
