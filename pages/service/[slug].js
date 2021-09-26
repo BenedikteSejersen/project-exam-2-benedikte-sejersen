@@ -12,8 +12,6 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/router';
 
-// const history = useRouter()
-
 export default function service(props) {
 
     const [authKey, setAuthKey] = useState("");
@@ -228,7 +226,6 @@ export async function getServerSideProps(content) {
     console.log(content.params.slug)
 
     const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${content.params.slug}`;
-    // const url = process.env.NEXT_PUBLIC_API_SERVICES;
 
     let service = [];
 
