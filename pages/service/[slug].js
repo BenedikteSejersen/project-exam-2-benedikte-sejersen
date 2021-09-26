@@ -17,7 +17,7 @@ export default function service(props) {
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
     const [slugService, setSlugService] = useState([]);
-    const [fetchError, setFetchError] = useState(false);
+    const [fetchError, setFetchError] = useState(false); 
 
     const history = useRouter()
     const { slug } = history.query;

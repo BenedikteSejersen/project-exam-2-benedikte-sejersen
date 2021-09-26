@@ -146,7 +146,7 @@ export default function Admin() {
                                            <HandleDelete url={process.env.NEXT_PUBLIC_API_MESSAGES} id={m.id} /> 
                                         </div>
                                         <div className="link__container">
-                                            <Link href={`/admin-message/${m.id}`} key={m.id}>
+                                            <Link href={`/admin-message/${m.id}`}>
                                                 <div className="admin__messages">
                                                     <h5 className="admin__messages--name">{m.Name}</h5>
                                                     <h3 className="admin__messages--subject">{m.Subject}</h3>

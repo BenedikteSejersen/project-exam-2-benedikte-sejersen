@@ -12,20 +12,41 @@ export default function Dropdown() {
 
     const [service, setService] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [fetchError, setFetchError] = useState(false); 
     const isDesktop = useMediaQuery("(min-width: 992px)");
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
     }
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     const abortController = new AbortController();
+    //     const signal = abortController.signal;
+
+    //     fetch(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal })
+    //       .then((response) => response.json())
+    //       .then((data) => setService(data))
+    //       .catch((error) => console.log(error.message));
+
+    //       return function cleanUp() {
+    //         abortController.abort();
+    //     }
+
+    //   }, []);
+
+      useEffect(async() => {
         const abortController = new AbortController();
         const signal = abortController.signal;
+        setFetchError(false);
 
-        fetch(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal })
-          .then((response) => response.json())
-          .then((data) => setService(data))
-          .catch((error) => console.log(error.message));
+        try {
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal });
+            setService(res.data);
+            setFetchError(false);
+        } catch(err) {
+            setFetchError(true);
+            console.log(err);
+        }
 
           return function cleanUp() {
             abortController.abort();
@@ -77,7 +98,7 @@ export default function Dropdown() {
                 onMouseEnter={() => setDropdownOpen(true)} 
                 onMouseLeave={() => setDropdownOpen(false)}
                 >
-                <div className="dropdown__select">
+                <div className="dropdown__select"> 
 
                     {service.map((s) => (
                         <div key={s.id} className="link__container dropdown__container-link">
