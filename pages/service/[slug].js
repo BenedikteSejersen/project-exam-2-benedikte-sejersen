@@ -12,14 +12,17 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/router';
 
-export default function service(props) {
+export default function service({service, error}) {
 
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
     const [fetchError, setFetchError] = useState(false); 
 
-    const error = props.error
-    const slugService = props.service[0];
+    // const error = props.error
+    // const slugService = props.service[0];
+
+    const slugService = service;
+    const error = error;
 
     // useEffect(async() => {
     //     const abortController = new AbortController();
@@ -222,12 +225,12 @@ export async function getServerSideProps(content) {
         service = res.data;
     } catch(err) {
         console.log(err);
-        // return {
-        //     props: {
-        //         error: true,
-        //         service: service,
-        //     },
-        // };
+        return {
+            props: {
+                error: true,
+                service: service,
+            },
+        };
     }
 
     return {
