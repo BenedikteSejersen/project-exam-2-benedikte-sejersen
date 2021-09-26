@@ -15,7 +15,7 @@ import UserIcon from '../../public/images/icons/user.svg'
 import Phone from '../../public/images/icons/phone-icon.png'
 import Email from '../../public/images/icons/contact-email.png'
 
-export default function message() {
+export default function message({error}) {
 
     const [userId, setUserId] = useState(null);
     const [authKey, setAuthKey] = useState(null);
@@ -25,8 +25,6 @@ export default function message() {
     const store = UseLocalStorage();
     const history = useRouter();
     const { id } = history.query;
-
-    // const error = props.error;
 
     useEffect(async() => {
         const abortController = new AbortController();
@@ -63,9 +61,9 @@ export default function message() {
 
     }, [store.userId]);
 
-    // if (error) {
-    //     return < ErrorComponent />
-    // }
+    if (error) {
+        return < ErrorComponent />
+    }
 
     return (
         <div>
@@ -190,3 +188,30 @@ export async function getStaticProps({ params }) {
         },
     };
 }
+
+// export async function getServerSideProps(content) {
+
+//     const url = process.env.NEXT_PUBLIC_API_MESSAGES + `?id=${content.params.id}`;
+
+//     let message = [];
+
+//     try {
+//         const res = await axios.get(url);
+//         message = res.data;
+//     } catch(err) {
+//         console.log(err);
+//         return {
+//             props: {
+//                 error: true,
+//                 message: message,
+//             },
+//         };
+//     }
+
+//     return {
+//         props: {
+//             error: false,
+//             message: message,
+//         },
+//     };
+// }

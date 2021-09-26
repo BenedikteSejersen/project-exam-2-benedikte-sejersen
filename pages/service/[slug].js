@@ -17,8 +17,31 @@ export default function service({service, error}) {
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
     const [fetchError, setFetchError] = useState(false); 
-    
+
+    // const error = props.error
+    // const slugService = props.service[0];
+
     const slugService = service[0];
+
+    // useEffect(async() => {
+    //     const abortController = new AbortController();
+    //     const signal = abortController.signal;
+    //     setFetchError(false);
+
+    //     try {
+    //         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${slug}`, { signal : signal });
+    //         setSlugService(res.data[0]);
+    //         setFetchError(false);
+    //     } catch(err) {
+    //         setFetchError(true);
+    //         console.log(err);
+    //     }
+
+    //       return function cleanUp() {
+    //         abortController.abort();
+    //     }
+
+    //   }, []);
 
       const image1 = slugService.img_1;
       const image2 = slugService.img_2;
@@ -170,29 +193,29 @@ export default function service({service, error}) {
     )
 }
 
-export async function getStaticPaths() {
+// export async function getStaticPaths() {
 
-    try {
-        const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-        const service = res.data; 
+//     try {
+//         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+//         const service = res.data; 
 
-        const paths = service.map((s) => ({
-            params: { slug: s.slug.toString() },
-        }));
+//         const paths = service.map((s) => ({
+//             params: { slug: s.slug.toString() },
+//         }));
 
-        console.log(paths)
+//         console.log(paths)
         
-        return { paths, fallback: false };
+//         return { paths, fallback: false };
 
-    } catch(err) {
-        console.log(err);
-        return { paths: [], fallback: false }
-    }
-}
+//     } catch(err) {
+//         console.log(err);
+//         return { paths: [], fallback: false }
+//     }
+// }
 
-export async function getStaticProps({params}) {
+export async function getServerSideProps(content) {
 
-    const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
+    const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${content.params.slug}`;
 
     let service = [];
 

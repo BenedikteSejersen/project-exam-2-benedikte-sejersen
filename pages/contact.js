@@ -140,6 +140,7 @@ export default function Contact(props) {
                                                     <input
                                                         className="form-dropdown__invisible-value"  
                                                         value={selectedSubject} 
+                                                        onChange={handleSubmit(selectedSubject)}
                                                         // readOnly
                                                         {...register("Subject")} 
                                                         />

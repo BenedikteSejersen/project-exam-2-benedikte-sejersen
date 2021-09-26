@@ -169,12 +169,12 @@ export default function About(props) {
                                             </div>
 
                                             </div>
-                                            {authKey && (
-                                                <div className="about__delete">
-                                                    <HandleDelete url={process.env.NEXT_PUBLIC_API_GALLERY} id={g.id} />
-                                                </div>
-                                            )}
                                         </div>
+                                        {authKey && (
+                                            <div className="about__delete">
+                                                <HandleDelete url={process.env.NEXT_PUBLIC_API_GALLERY} id={g.id} />
+                                            </div>
+                                        )}
                                     </>
                                 }   
                             </div>

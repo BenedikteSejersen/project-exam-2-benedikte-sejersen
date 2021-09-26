@@ -39,9 +39,9 @@ function MyApp({ Component, pageProps }) {
           <h4 className="loader-text">Loading page</h4>
           <ClimbingBoxLoader />
         </div>
-      ) : (
-        <Component {...pageProps} />
-      )}
+        ) : (
+          <Component {...pageProps} />
+        )}
     </>
   )
 }
