@@ -79,16 +79,18 @@ export default function Home(props) {
 
             <header className="index__content-container">
 
-              <div className="index__text-container index__text--h1">
-                <h1>{result.heading_header}</h1>
-              </div>
-              <div className="index__text-container index__text--h3">
-                <h3>{result.description_header}</h3>
-              </div>
+              <div className="index__header--text">
+                <div className="index__text-container index__text--h1">
+                  <h1>{result.heading_header}</h1>
+                </div>
+                <div className="index__text-container index__text--h3">
+                  <h3>{result.description_header}</h3>
+                </div>
 
-              <div className="index__btn-container">
-                <div className="index__btn--primary-container">
-                  <PrimaryBtn link="/contact" text="Contact us" />
+                <div className="index__btn-container">
+                  <div className="index__btn--primary-container">
+                    <PrimaryBtn link="/contact" text="Contact us" />
+                  </div>
                 </div>
               </div>
 

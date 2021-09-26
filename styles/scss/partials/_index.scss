@@ -77,6 +77,13 @@
     }
 
     // Text
+    .index__header--text {
+        @include respond-to('large') {
+            padding-top: 50px;
+            padding-left: 50px;
+        }
+    }
+
     .index__text--h1 {
         width: 500px;
         max-width: 85%;

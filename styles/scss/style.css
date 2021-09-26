@@ -726,6 +726,12 @@ body .some__img:hover, body .delete:hover {
     top: 80px;
   }
 }
+@media (min-width: 1200px) {
+  .index__content-container .index__header--text {
+    padding-top: 50px;
+    padding-left: 50px;
+  }
+}
 .index__content-container .index__text--h1 {
   width: 500px;
   max-width: 85%;
