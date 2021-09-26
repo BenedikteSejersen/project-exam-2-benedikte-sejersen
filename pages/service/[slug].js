@@ -12,44 +12,13 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/router';
 
-export default function service({
-                                    serviceTitle, 
-                                    error,
-                                    serviceShortDescription,
-                                    serviceDescription,
-                                    serviceImg
-                                }) {
+export default function service({service, error}) {
 
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
     const [fetchError, setFetchError] = useState(false); 
-
-    // const error = props.error
-    // const slugService = props.service[0];
-
-    console.log(serviceTitle)
-
-    const slugService = service;
-
-    // useEffect(async() => {
-    //     const abortController = new AbortController();
-    //     const signal = abortController.signal;
-    //     setFetchError(false);
-
-    //     try {
-    //         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${slug}`, { signal : signal });
-    //         setSlugService(res.data[0]);
-    //         setFetchError(false);
-    //     } catch(err) {
-    //         setFetchError(true);
-    //         console.log(err);
-    //     }
-
-    //       return function cleanUp() {
-    //         abortController.abort();
-    //     }
-
-    //   }, []);
+    
+    const slugService = service[0];
 
       const image1 = slugService.img_1;
       const image2 = slugService.img_2;
@@ -80,24 +49,24 @@ export default function service({
     return (
         <div>
 
-             <Head>
-                 <title>{slugService.title} - Norsk piperehabilitering AS</title>
-                 <meta name="description" content={slugService.short_text_index + " " + slugService.title} />
-                 <link rel="icon" href="/favicon.ico" />
-                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-             </Head>
+            <Head>
+                <title>{slugService.title} - Norsk piperehabilitering AS</title>
+                <meta name="description" content={slugService.short_text_index + " " + slugService.title} />
+                <link rel="icon" href="/favicon.ico" />
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+            </Head>
 
-                <Navigation />
+            <Navigation />
 
-             <main>
+            <main>
 
-             <div className="blue-container">
+            <div className="blue-container">
 
-                 <Breadcrumb path={`service/${serviceTitle}`} />
+                <Breadcrumb path={`service/${slugService.slug}`} />
 
-                 <div onClick={handleClick}>
-                    {authKey ? 
+                <div onClick={handleClick}>
+                   {authKey ? 
                         <Update service={slugService}/>
                     : "" } 
                 </div>
@@ -105,12 +74,12 @@ export default function service({
                 {clicked ? "" :
                     <>
 
-                        {serviceImg &&
+                        {image1 &&
                             <> 
-                                {serviceImg === null && "null" ?
+                                {slugService.img_1 === null && "null" ?
                                 "" :
                                     <div className="service__img-1">
-                                        <Image src={serviceImg} alt={serviceTitle} width="1000" height="1400" />
+                                        <Image src={image1} alt={slugService.title} width="1000" height="1400" />
                                     </div>
                                 }
                             </>
@@ -125,10 +94,10 @@ export default function service({
                             data-aos-duration="1000"
                             data-aos-easing="ease-in-out"
                             >
-                            <h1>{serviceTitle}</h1>
+                            <h1>{slugService.title}</h1>
                         </div>
 
-                        {serviceShortDescription == "" ?
+                        {slugService.short_description == "" ?
                         ""
                         :
                         <div 
@@ -138,14 +107,14 @@ export default function service({
                             data-aos-duration="1000"
                             data-aos-easing="ease-in-out"
                             >
-                            <p className="p__bold">{serviceShortDescription}</p>
+                            <p className="p__bold">{slugService.short_description}</p>
                         </div>
                         }
                     </>
                 }
             </div>
 
-            {/* {clicked ? "" :
+            {clicked ? "" :
                     <div className="service__under-text">
 
                         {slugService.description == "" ?
@@ -193,7 +162,7 @@ export default function service({
                         </div>
 
                     </div>
-                }*/}
+                }
                 </main>
 
            <Footer /> 
@@ -201,47 +170,41 @@ export default function service({
     )
 }
 
-{/* // export async function getStaticPaths() {
+export async function getStaticPaths() {
 
-//     try {
-//         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-//         const service = res.data; 
+    try {
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+        const service = res.data; 
 
-//         const paths = service.map((s) => ({
-//             params: { slug: s.slug.toString() },
-//         }));
+        const paths = service.map((s) => ({
+            params: { slug: s.slug.toString() },
+        }));
 
-//         console.log(paths)
+        console.log(paths)
         
-//         return { paths, fallback: false };
+        return { paths, fallback: false };
 
-//     } catch(err) {
-//         console.log(err);
-//         return { paths: [], fallback: false }
-//     }
-// } */}
+    } catch(err) {
+        console.log(err);
+        return { paths: [], fallback: false }
+    }
+}
 
-export async function getServerSideProps(content) {
+export async function getStaticProps({params}) {
 
-    const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${content.params.slug}`;
+    const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
 
-    let serviceTitle = [];
-    let serviceShortDescription = [];
-    let serviceDescription = [];
-    let serviceImg = [];
+    let service = [];
 
     try {
         const res = await axios.get(url);
-        serviceTitle = res.data[0].title;
-        serviceShortDescription = res.data[0].short_description;
-        serviceDescription = res.data[0].description;
-        serviceImg = res.data[0].img_1
+        service = res.data;
     } catch(err) {
         console.log(err);
         return {
             props: {
                 error: true,
-                // service: service,
+                service: service,
             },
         };
     }
@@ -249,11 +212,7 @@ export async function getServerSideProps(content) {
     return {
         props: {
             error: false,
-            // service: service,
-            serviceTitle: serviceTitle,
-            serviceShortDescription: serviceShortDescription,
-            serviceDescription: serviceDescription,
-            serviceImg: serviceImg
+            service: service,
         },
     };
 }

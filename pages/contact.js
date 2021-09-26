@@ -137,6 +137,12 @@ export default function Contact(props) {
                                                 {/* Dropdown */}
                                             <div className="contact__input-container">
                                                     <div>Subject:</div>
+                                                    <input
+                                                        className="form-dropdown__invisible-value"  
+                                                        value={selectedSubject} 
+                                                        // readOnly
+                                                        {...register("Subject")} 
+                                                        />
                                                     <div className="form-dropdown">
                                                         <div 
                                                             onClick={handleDropdown}
@@ -144,13 +150,6 @@ export default function Contact(props) {
                                                                 ${show ? "form-dropdown__hover" : ""} 
                                                                 ${errors.Subject ? "red-border" : ""} ${errors.success ? "green-border" : ""}`}>
                                                             <div>
-                                                                <input
-                                                                    className="form-dropdown__invisible-value"  
-                                                                    value={selectedSubject} 
-                                                                    onChange={(e) => setSelectedSubject(e.target.value)}
-                                                                    readOnly
-                                                                    {...register("Subject")} 
-                                                                    />
                                                                     {selectedSubject === "" ? "--Select subject--" : selectedSubject} 
                                                                 <span className="form-dropdown__arrow-img">{show ? <Image src={ArrowUp.src} width="10" height="10"/> : <Image src={ArrowDown.src} width="10" height="10" /> }</span>
                                                             </div>

@@ -15,8 +15,6 @@ import UserIcon from '../../public/images/icons/user.svg'
 import Phone from '../../public/images/icons/phone-icon.png'
 import Email from '../../public/images/icons/contact-email.png'
 
-// https://medium.com/fantageek/how-to-use-dynamic-route-in-react-router-5-92d0b66488ff
-
 export default function message() {
 
     const [userId, setUserId] = useState(null);
