@@ -91,17 +91,16 @@
 
         @include respond-to('large') {
             width: 550px;
-            margin-bottom: 50px;
         }
     }
 
     .index__text--h3 {
-        margin: 40px 0 0 5px;
+        margin: 20px 0 0 5px;
         width: 350px;
         max-width: 80%;
 
         @include respond-to('small') {
-            margin-bottom: 40px;
+            // margin-bottom: 40px;
         }
     }
 

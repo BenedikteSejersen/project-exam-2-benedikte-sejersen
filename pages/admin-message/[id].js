@@ -144,51 +144,6 @@ export default function message({error}) {
     )
 }
 
-// export async function getStaticPaths() {
-
-//     try {
-//         const res = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES);
-//         const message = res.data;  
-
-//         const paths = message.map((m) => ({
-//             params: { id:  m.id.toString() }, 
-//         }));
-        
-//         return { paths, fallback: false };
-
-//     } catch(err) {
-//         console.log(err);
-//         return { paths: [], fallback: false }
-//     }
-// }
-
-// export async function getStaticProps({ params }) {
-
-//     const url = process.env.NEXT_PUBLIC_API_MESSAGES + `?id=${params.id}`;
-
-//     let message = [];
-
-//     try {
-//         const res = await axios.get(url);
-//         message = res.data;
-//     } catch(err) {
-//         console.log(err);
-//         return {
-//             props: {
-//                 error: true,
-//                 message: message,
-//             },
-//         };
-//     }
-
-//     return {
-//         props: {
-//             error: false,
-//             message: message,
-//         },
-//     };
-// }
-
 export async function getServerSideProps(content) {
 
     const url = process.env.NEXT_PUBLIC_API_MESSAGES + `?id=${content.params.id}`;

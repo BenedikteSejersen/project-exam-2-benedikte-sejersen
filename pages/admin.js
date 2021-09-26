@@ -16,7 +16,7 @@ import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import HandleDelete from '../components/dialogBox/HandleDelete';
 import Link from 'next/link';
 
-export default function Admin() {
+export default function Admin({error, messages, service}) {
 
     // const messages = message;
     // const serverError = error;
@@ -26,33 +26,33 @@ export default function Admin() {
     const history = useRouter();
     const store = UseLocalStorage();
 
-    const [service, setService] = useState([]);
+    // const [service, setService] = useState([]);
     const [fetchError, setFetchError] = useState(false);
-    const [messages, setMessages] = useState([]);
+    // const [messages, setMessages] = useState([]);
 
-    useEffect(async() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-        setFetchError(false);
+    // useEffect(async() => {
+    //     const abortController = new AbortController();
+    //     const signal = abortController.signal;
+    //     setFetchError(false);
 
-        try {
-            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal });
-            setService(res.data);
+    //     try {
+    //         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal });
+    //         setService(res.data);
 
-            const res2 = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES, { signal : signal });
-            setMessages(res2.data);
+    //         const res2 = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES, { signal : signal });
+    //         setMessages(res2.data);
 
-            setFetchError(false);
-        } catch(err) {
-            setFetchError(true);
-            console.log(err);
-        }
+    //         setFetchError(false);
+    //     } catch(err) {
+    //         setFetchError(true);
+    //         console.log(err);
+    //     }
 
-          return function cleanUp() {
-            abortController.abort();
-        }
+    //       return function cleanUp() {
+    //         abortController.abort();
+    //     }
 
-      }, []);
+    //   }, []);
 
     useEffect(() => {
 
@@ -171,14 +171,14 @@ export default function Admin() {
     )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     
-    let message = [];
+    let messages = [];
     let service = [];
 
     try {
         const response = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES);
-        message = response.data;
+        messages = response.data;
 
         const response2 = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
         service = response2.data;
@@ -186,7 +186,7 @@ export async function getStaticProps() {
         console.log(err);
         return { props: { 
             error: true,
-            message: message,
+            messages: messages,
             service: service,
           }};
     } 
@@ -194,7 +194,7 @@ export async function getStaticProps() {
     return {
         props: {
             error: false,
-            message: message,
+            messages: messages,
             service: service,
         },
     };
