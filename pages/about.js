@@ -59,7 +59,7 @@ export default function About(props) {
         }
     }, [])
 
-    if (error && fetchError) {
+    if (error) {
         return <ErrorComponent />
     }
 
@@ -191,16 +191,11 @@ export default function About(props) {
 export async function getStaticProps() {
 
     let about = [];
-    let gallery = [];
     let services = [];
 
     try {
         const res = await axios.get(process.env.NEXT_PUBLIC_API_ABOUT);
         about = res.data;
-
-        // Gallery
-        const res1 = await axios.get(process.env.NEXT_PUBLIC_API_GALLERY);
-        gallery = res1.data;
 
         const res2 = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
         services = res2.data;
@@ -211,7 +206,6 @@ export async function getStaticProps() {
             props: {
                 error: true,
                 data: about,
-                gallery: gallery,
                 services: services
             },
         };
@@ -221,7 +215,6 @@ export async function getStaticProps() {
         props: {
             error: false,
             data: about,
-            gallery: gallery,
             services: services
         },
     };

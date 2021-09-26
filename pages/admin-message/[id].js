@@ -15,38 +15,13 @@ import UserIcon from '../../public/images/icons/user.svg'
 import Phone from '../../public/images/icons/phone-icon.png'
 import Email from '../../public/images/icons/contact-email.png'
 
-export default function message({error}) {
+export default function message({error, message}) {
 
     const [userId, setUserId] = useState(null);
     const [authKey, setAuthKey] = useState(null);
-    const [message, setMessage] = useState([]);
-    const [fetchError, setFetchError] = useState(false);
     
     const store = UseLocalStorage();
     const history = useRouter();
-    const { id } = history.query;
-
-    useEffect(async() => {
-        const abortController = new AbortController();
-        const signal = abortController.signal;
-        setFetchError(false);
-
-        try {
-            const res = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES + `?id=${id}`, { signal : signal });
-            setMessage(res.data[0]);
-            console.log(message)
-            setFetchError(false);
-        } catch(err) {
-            setFetchError(true);
-            console.log(err);
-        }
-
-          return function cleanUp() {
-            abortController.abort();
-        }
-
-      }, []);
-
     useEffect(() => {
 
         setUserId(JSON.parse(window.localStorage.getItem("user")));
@@ -152,7 +127,7 @@ export async function getServerSideProps(content) {
 
     try {
         const res = await axios.get(url);
-        message = res.data;
+        message = res.data[0];
     } catch(err) {
         console.log(err);
         return {

@@ -29,8 +29,6 @@ const schema = yup.object().shape({
     Message: yup.string().min(10).required("Message is required")
 });
 
-// https://codesandbox.io/embed/keen-hopper-t1gnk
-
 export default function Contact(props) {
 
     const [submitting, setSubmitting] = useState(false);
@@ -52,7 +50,7 @@ export default function Contact(props) {
     const form = useRef();
 
     // Form yup resolver
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { handleC, register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
@@ -137,54 +135,24 @@ export default function Contact(props) {
                                                 {/* Dropdown */}
                                             <div className="contact__input-container">
                                                     <div>Subject:</div>
-                                                    <input
-                                                        className="form-dropdown__invisible-value"  
-                                                        value={selectedSubject} 
-                                                        onChange={handleSubmit(selectedSubject)}
-                                                        // readOnly
+                                                    <div className="form-dropdown__custom contact__dropdown">
+                                                        <select
                                                         {...register("Subject")} 
-                                                        />
-                                                    <div className="form-dropdown">
-                                                        <div 
-                                                            onClick={handleDropdown}
-                                                            className={`form-dropdown__selected-input 
-                                                                ${show ? "form-dropdown__hover" : ""} 
-                                                                ${errors.Subject ? "red-border" : ""} ${errors.success ? "green-border" : ""}`}>
-                                                            <div>
-                                                                    {selectedSubject === "" ? "--Select subject--" : selectedSubject} 
-                                                                <span className="form-dropdown__arrow-img">{show ? <Image src={ArrowUp.src} width="10" height="10"/> : <Image src={ArrowDown.src} width="10" height="10" /> }</span>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        {show ? 
-                                                        <div className="form-dropdown__options" >
-                                                            <ul>
-                                                                {service.map((s) => (
-                                                                    <option 
-                                                                        key={s.id} 
-                                                                        value={s.title} 
-                                                                        onClick={() => handleChange(s.title)}
-                                                                        >{s.title}</option>
-                                                                ))}
+                                                        className="input form-dropdown__input"
+                                                        >
+                                                            {service.map((s) => (
                                                                 <option 
-                                                                    value="Questions" 
-                                                                    onClick={() => handleChange("Questions")}
-                                                                    value="Questions"
-                                                                    >
-                                                                    Questions
-                                                                </option>
-                                                                <option 
-                                                                    value="Other" 
-                                                                    onClick={() => handleChange("Other")}
-                                                                    value="Other"
-                                                                    >
-                                                                    Other
-                                                                </option>
-                                                            </ul> 
-                                                        </div> 
-                                                        : ""}
-                                                    
+                                                                    key={s.id} 
+                                                                    value={s.title} 
+                                                                    className="option"
+                                                                    >{s.title}</option>
+                                                            ))}
+                                                        <option className="option" value="Questions" >Questions</option>
+                                                        <option className="option" value="Other" >Other</option>
+                                                    </select>
                                                 </div>
+
+                                                
 
                                                     {errors.Subject && <FormError>{errors.Subject.message}</FormError>}
                                             </div>  
@@ -271,7 +239,7 @@ export async function getStaticProps() {
         console.log(err);
         return { props: { 
             error: true,
-            contact: null,
+            contact: contact,
             services: services
           }};
     }

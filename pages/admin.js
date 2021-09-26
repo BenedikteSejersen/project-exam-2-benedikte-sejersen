@@ -18,41 +18,10 @@ import Link from 'next/link';
 
 export default function Admin({error, messages, service}) {
 
-    // const messages = message;
-    // const serverError = error;
-
     const [userId, setUserId] = useState("");
     const [authKey, setAuthKey] = useState("");
     const history = useRouter();
     const store = UseLocalStorage();
-
-    // const [service, setService] = useState([]);
-    const [fetchError, setFetchError] = useState(false);
-    // const [messages, setMessages] = useState([]);
-
-    // useEffect(async() => {
-    //     const abortController = new AbortController();
-    //     const signal = abortController.signal;
-    //     setFetchError(false);
-
-    //     try {
-    //         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal });
-    //         setService(res.data);
-
-    //         const res2 = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES, { signal : signal });
-    //         setMessages(res2.data);
-
-    //         setFetchError(false);
-    //     } catch(err) {
-    //         setFetchError(true);
-    //         console.log(err);
-    //     }
-
-    //       return function cleanUp() {
-    //         abortController.abort();
-    //     }
-
-    //   }, []);
 
     useEffect(() => {
 
@@ -68,7 +37,7 @@ export default function Admin({error, messages, service}) {
 
     }, [store.userId]);
 
-    if (fetchError) {
+    if (error) {
         return <ErrorComponent />
     }
 

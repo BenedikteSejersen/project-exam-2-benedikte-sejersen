@@ -57,7 +57,7 @@ export default function Home(props) {
   const result = props.result;
   const error = props.error;
 
-  if (error && fetchError) {
+  if (error) {
     return <ErrorComponent />
   };
 
