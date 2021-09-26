@@ -481,34 +481,6 @@ body .some__img:hover, body .delete:hover {
     overflow: hidden;
   }
 }
-.dropdown .dropdown__down .dropdown__option--link {
-  max-width: 80%;
-  display: block;
-  margin: 10px auto;
-  -webkit-transition: ease-in-out 0.3s all;
-  transition: ease-in-out 0.3s all;
-}
-.dropdown .dropdown__down .dropdown__option--link:hover {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
-}
-@media (min-width: 992px) {
-  .dropdown .dropdown__down .dropdown__option--link {
-    margin: 15px auto;
-  }
-}
-.dropdown .dropdown__down .dropdown__option--link a {
-  cursor: pointer;
-  font-size: 24px;
-}
-.dropdown .dropdown__down .dropdown__option--link a:hover {
-  color: #000;
-}
-@media (min-width: 992px) {
-  .dropdown .dropdown__down .dropdown__option--link a {
-    font-size: 18px;
-  }
-}
 .dropdown .dropdown__down .dropdown__option {
   background-color: #FFF;
   color: #000000;
@@ -516,6 +488,7 @@ body .some__img:hover, body .delete:hover {
   height: 100px;
   margin: 0 auto;
   position: relative;
+  padding: 20px;
 }
 @media (min-width: 992px) {
   .dropdown .dropdown__down .dropdown__option {
@@ -526,7 +499,7 @@ body .some__img:hover, body .delete:hover {
 .dropdown .dropdown__down .dropdown__option--img {
   width: 40px;
   height: 40px;
-  left: 5px;
+  left: 30px;
   top: 30px;
   position: absolute;
 }
@@ -545,7 +518,7 @@ body .some__img:hover, body .delete:hover {
 }
 .dropdown .dropdown__down .dropdown__option--a {
   position: absolute;
-  left: 50px;
+  left: 90px;
   bottom: 30px;
   display: block;
   width: 100%;
@@ -563,6 +536,34 @@ body .some__img:hover, body .delete:hover {
     left: 75px;
     max-width: 165px;
     height: auto;
+  }
+}
+.dropdown .dropdown__down .dropdown__option--link a {
+  cursor: pointer;
+  font-size: 24px;
+}
+.dropdown .dropdown__down .dropdown__option--link a:hover {
+  color: #000;
+}
+@media (min-width: 992px) {
+  .dropdown .dropdown__down .dropdown__option--link a {
+    font-size: 18px;
+  }
+}
+.dropdown .dropdown__down .dropdown__container-link {
+  max-width: 80%;
+  margin: 30px auto;
+  -webkit-transition: ease-in-out 0.3s all;
+  transition: ease-in-out 0.3s all;
+  display: block;
+}
+.dropdown .dropdown__down .dropdown__container-link:hover {
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+}
+@media (min-width: 992px) {
+  .dropdown .dropdown__down .dropdown__container-link {
+    margin: 15px auto;
   }
 }
 .dropdown img {
@@ -1222,6 +1223,10 @@ section {
   bottom: 20px;
   left: 0;
   width: 100%;
+}
+
+.link__container {
+  cursor: pointer;
 }
 
 .submit {

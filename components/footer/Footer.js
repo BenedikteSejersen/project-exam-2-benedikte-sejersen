@@ -11,18 +11,20 @@ export default function Footer() {
 
     const [service, setService] = useState([]);
 
-    async function getServices() {
-        try {
-            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-            setService(res.data);
-        } catch(err) {
-            console.log(err);
-        }
-    }
-
     useEffect(() => {
-        getServices();
-    }, []);
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        fetch(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal })
+          .then((response) => response.json())
+          .then((data) => setService(data))
+          .catch((error) => console.log(error.message));
+
+          return function cleanUp() {
+            abortController.abort();
+        }
+
+      }, []);
 
     return ( 
         <footer className="footer">

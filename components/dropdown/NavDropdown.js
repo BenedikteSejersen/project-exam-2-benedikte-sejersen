@@ -6,6 +6,7 @@ import ArrowUp from '../../public/images/icons/arrow-up.png'
 import ArrowUpWhite from '../../public/images/icons/arrow-up-white.png'
 import useMediaQuery from '../hooks/mediaQuery/MediaQuery';
 import axios from 'axios'
+import Link from 'next/link'
 
 export default function Dropdown() {
 
@@ -17,18 +18,20 @@ export default function Dropdown() {
         setDropdownOpen(!dropdownOpen);
     }
 
-    async function getServices() {
-        try {
-            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-            setService(res.data);
-        } catch(err) {
-            console.log(err);
-        }
-    }
-
     useEffect(() => {
-        getServices();
-    }, []);
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+
+        fetch(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal })
+          .then((response) => response.json())
+          .then((data) => setService(data))
+          .catch((error) => console.log(error.message));
+
+          return function cleanUp() {
+            abortController.abort();
+        }
+
+      }, []);
 
     return (
         <div className="dropdown">
@@ -74,17 +77,17 @@ export default function Dropdown() {
                 onMouseEnter={() => setDropdownOpen(true)} 
                 onMouseLeave={() => setDropdownOpen(false)}
                 >
-            
                 <div className="dropdown__select">
 
                     {service.map((s) => (
-                        // <a key={s.id} href={`/service/${s.slug}`} className="dropdown__option--link">
-                         <a key={s.id} href={`/service/${s.slug}`} className="dropdown__option--link">
-                            <div as="option" className="dropdown__option">
-                                <img src={s.icon} alt={`service icon ${s.title}`} className="dropdown__option--img" />
-                                <span className="dropdown__option--a">{s.title}</span> 
-                            </div>
-                        </a> 
+                        <div key={s.id} className="link__container dropdown__container-link">
+                            <Link href={`/service/${s.slug}`} className="dropdown__option--link">
+                                <div as="option" className="dropdown__option">
+                                    <img src={s.icon} alt={`service icon ${s.title}`} className="dropdown__option--img" />
+                                    <span className="dropdown__option--a">{s.title}</span> 
+                                </div>
+                            </Link> 
+                        </div>
                     ))}
 
                 </div>

@@ -17,6 +17,28 @@ import 'aos/dist/aos.css';
 export default function Home(props) {
 
   const [authKey, setAuthKey] = useState("");
+  const [services, setServices] = useState([]);
+  const [fetchError, setFetchError] = useState(false);
+
+  useEffect(async() => {
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    setFetchError(false);
+
+    try {
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal });
+        setServices(res.data);
+        setFetchError(false);
+    } catch(err) {
+        setFetchError(true);
+        console.log(err);
+    }
+
+      return function cleanUp() {
+        abortController.abort();
+    }
+
+  }, []);
 
   useEffect(() => {
     AOS.init();
@@ -33,10 +55,9 @@ export default function Home(props) {
   }, [])
 
   const result = props.result;
-  const services = props.services;
   const error = props.error;
 
-  if (error) {
+  if (error && fetchError) {
     return <ErrorComponent />
   };
 

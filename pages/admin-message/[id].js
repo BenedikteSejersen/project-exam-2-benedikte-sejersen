@@ -19,12 +19,35 @@ export default function message(props) {
 
     const [userId, setUserId] = useState(null);
     const [authKey, setAuthKey] = useState(null);
+    const [message, setMessage] = useState([]);
+    const [fetchError, setFetchError] = useState(false);
     
     const store = UseLocalStorage();
     const history = useRouter();
+    const { id } = history.query;
 
-    const message = props.message[0]; 
     const error = props.error;
+
+    useEffect(async() => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+        setFetchError(false);
+
+        try {
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES + `?id=${id}`, { signal : signal });
+            setMessage(res.data[0]);
+            console.log(message)
+            setFetchError(false);
+        } catch(err) {
+            setFetchError(true);
+            console.log(err);
+        }
+
+          return function cleanUp() {
+            abortController.abort();
+        }
+
+      }, []);
 
     useEffect(() => {
 

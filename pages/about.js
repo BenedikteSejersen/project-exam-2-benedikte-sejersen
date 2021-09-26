@@ -16,11 +16,35 @@ import HandleDelete from '../components/dialogBox/HandleDelete';
 export default function About(props) {
 
     const [authKey, setAuthKey] = useState("");
+    const [gallery, setGallery] = useState([]);
+    const [fetchError, setFetchError] = useState(false);
 
     const result = props.data;
-    const gallery = props.gallery;
     const service = props.services;
     const error = props.error;
+
+    useEffect(async() => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+        setFetchError(false);
+
+        try {
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_GALLERY, { signal : signal });
+            setGallery(res.data);
+            setFetchError(false);
+        } catch(err) {
+            setFetchError(true);
+            console.log(err);
+        }
+
+          return function cleanUp() {
+            abortController.abort();
+        }
+
+      }, []);
+
+      const images = gallery.img_url;
+    console.log(images)
 
     useEffect(() => {
         AOS.init();
@@ -36,7 +60,7 @@ export default function About(props) {
         }
     }, [])
 
-    if (error) {
+    if (error && fetchError) {
         return <ErrorComponent />
     }
 
@@ -131,25 +155,30 @@ export default function About(props) {
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
-                            <div 
-                                key={g.id} 
-                                className="about__img-container"
-                                data-aos="fade-up"
-                                data-aos-delay="50"
-                                data-aos-duration="1000"
-                                data-aos-easing="ease-in-out">
-                            <div>
+                            <div key={g.id} >
+                                {images && 
+                                    <>
+                                        <div 
+                                            className="about__img-container"
+                                            data-aos="fade-up"
+                                            data-aos-delay="50"
+                                            data-aos-duration="1000"
+                                            data-aos-easing="ease-in-out">
+                                        <div>
 
-                                <div>
-                                    <Image src={g.img_url} alt={g.alt_text} width="700" height="700" />
-                                </div>
+                                            <div>
+                                                <Image src={g.images} alt={g.alt_text} width="700" height="700" />
+                                            </div>
 
-                            </div>
-                            {authKey && (
-                                <div className="about__delete">
-                                    <HandleDelete url={process.env.NEXT_PUBLIC_API_GALLERY} id={g.id} />
-                                </div>
-                            )}
+                                            </div>
+                                            {authKey && (
+                                                <div className="about__delete">
+                                                    <HandleDelete url={process.env.NEXT_PUBLIC_API_GALLERY} id={g.id} />
+                                                </div>
+                                            )}
+                                        </div>
+                                    </>
+                                }   
                             </div>
                         ))}
                     </div>

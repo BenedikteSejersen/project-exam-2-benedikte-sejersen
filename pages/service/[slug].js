@@ -12,28 +12,41 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useRouter } from 'next/router';
 
-export default function service() {
+export default function service(props) {
 
     const [authKey, setAuthKey] = useState("");
     const [clicked, setClicked] = useState(false);
-
     const [slugService, setSlugService] = useState([]);
     const [fetchError, setFetchError] = useState(false);
 
     const history = useRouter()
     const { slug } = history.query;
-    console.log(slug)
 
-    useEffect(async() =>  {
+    const error = props.error
+
+    useEffect(async() => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+        setFetchError(false);
+
         try {
-            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${slug}`);
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${slug}`, { signal : signal });
             setSlugService(res.data[0]);
-            console.log(slugService[0])
+            setFetchError(false);
         } catch(err) {
             setFetchError(true);
             console.log(err);
         }
-    }, [slugService]);
+
+          return function cleanUp() {
+            abortController.abort();
+        }
+
+      }, []);
+
+      const image1 = slugService.img_1;
+      const image2 = slugService.img_2;
+      const image3 = slugService.img_3;
 
     useEffect(() => {
         AOS.init();
@@ -53,7 +66,7 @@ export default function service() {
     setClicked(true);
   }
 
-  if (fetchError) {
+  if (error) {
       return <ErrorComponent />
   }
 
@@ -85,12 +98,18 @@ export default function service() {
                 {clicked ? "" :
                     <>
 
-                        {slugService.img_1 === null && "null" ?
-                        "" :
-                            <div className="service__img-1">
-                                {/* <Image src={slugService.img_1} alt={slugService.title} width="1000" height="1400" /> */}
-                            </div>
+                        {image1 &&
+                            <> 
+                                {slugService.img_1 === null && "null" ?
+                                "" :
+                                    <div className="service__img-1">
+                                        <Image src={image1} alt={slugService.title} width="1000" height="1400" />
+                                    </div>
+                                }
+                            </>
                         }
+
+                            
 
                         <div 
                             className="service__h1"
@@ -140,14 +159,29 @@ export default function service() {
                             <SecondaryBtn link="/contact" text="Contact us" />
                         </div>
 
-                        <div className="service__imgs-2-3">   
+                        <div className="service__imgs-2-3">  
 
-                            {slugService.img_2 === null && "null" ?
-                            "" :
-                                <div className="service__img-2">
-                                    {/* <Image src={slugService.img_2} alt={slugService.title} width="2000" height="2000" /> */}
-                                </div>
-                            }
+                        {image2 &&
+                            <> 
+                                {slugService.img_2 === null && "null" ?
+                                "" :
+                                    <div className="service__img-2">
+                                        <Image src={image2} alt={slugService.title} width="2000" height="2000" />
+                                    </div>
+                                }
+                            </>
+                        }
+
+                        {image3 &&
+                            <> 
+                                {slugService.img_3 === null && "null" ?
+                                "" :
+                                    <div className="service__img-3">
+                                        <Image src={image3} alt={slugService.title} width="2000" height="2000" />
+                                    </div>
+                                }
+                            </>
+                        }
 
                             {slugService.img_3 === null && "null" ?
                             "" :
@@ -167,49 +201,49 @@ export default function service() {
     )
 }
 
-// export async function getStaticPaths() {
+export async function getStaticPaths() {
 
-//     try {
-//         const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
-//         const service = res.data; 
+    try {
+        const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+        const service = res.data; 
 
-//         const paths = service.map((s) => ({
-//             params: { slug: s.slug.toString() },
-//         }));
+        const paths = service.map((s) => ({
+            params: { slug: s.slug.toString() },
+        }));
 
-//         console.log(paths)
+        console.log(paths)
         
-//         return { paths, fallback: false };
+        return { paths, fallback: false };
 
-//     } catch(err) {
-//         console.log(err);
-//         return { paths: [], fallback: false }
-//     }
-// }
+    } catch(err) {
+        console.log(err);
+        return { paths: [], fallback: false }
+    }
+}
 
-// export async function getStaticProps({ params }) {
+export async function getStaticProps({ params }) {
 
-//     const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
+    const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${params.slug}`;
 
-//     let service = [];
+    let service = [];
 
-//     try {
-//         const res = await axios.get(url);
-//         service = res.data;
-//     } catch(err) {
-//         console.log(err);
-//         return {
-//             props: {
-//                 error: true,
-//                 service: service,
-//             },
-//         };
-//     }
+    try {
+        const res = await axios.get(url);
+        service = res.data;
+    } catch(err) {
+        console.log(err);
+        return {
+            props: {
+                error: true,
+                service: service,
+            },
+        };
+    }
 
-//     return {
-//         props: {
-//             error: false,
-//             service: service,
-//         },
-//     };
-// }
+    return {
+        props: {
+            error: false,
+            service: service,
+        },
+    };
+}

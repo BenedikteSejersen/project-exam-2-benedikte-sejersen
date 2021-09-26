@@ -14,11 +14,9 @@ import UserIcon from '../public/images/icons/user.svg';
 import Image from 'next/image';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import HandleDelete from '../components/dialogBox/HandleDelete';
+import Link from 'next/link';
 
 export default function Admin() {
-
-    // const messages = message;
-    // const serverError = error;
 
     const [userId, setUserId] = useState("");
     const [authKey, setAuthKey] = useState("");
@@ -29,22 +27,29 @@ export default function Admin() {
     const [fetchError, setFetchError] = useState(false);
     const [messages, setMessages] = useState([]);
 
-    async function getData() {
+    useEffect(async() => {
+        const abortController = new AbortController();
+        const signal = abortController.signal;
+        setFetchError(false);
+
         try {
-            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES);
+            const res = await axios.get(process.env.NEXT_PUBLIC_API_SERVICES, { signal : signal });
             setService(res.data);
 
-            const res2 = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES);
+            const res2 = await axios.get(process.env.NEXT_PUBLIC_API_MESSAGES, { signal : signal });
             setMessages(res2.data);
+
+            setFetchError(false);
         } catch(err) {
             setFetchError(true);
             console.log(err);
         }
-    }
 
-    useEffect(() => {
-        getData();
-    }, [service]);
+          return function cleanUp() {
+            abortController.abort();
+        }
+
+      }, []);
 
     useEffect(() => {
 
@@ -140,12 +145,14 @@ export default function Admin() {
                                         <div className="admin__message--delete">
                                            <HandleDelete url={process.env.NEXT_PUBLIC_API_MESSAGES} id={m.id} /> 
                                         </div>
-                                       <a href={`/admin-message/${m.id}`} key={m.id}>
-                                            <div className="admin__messages">
-                                                <h5 className="admin__messages--name">{m.Name}</h5>
-                                                <h3 className="admin__messages--subject">{m.Subject}</h3>
-                                            </div>
-                                        </a> 
+                                        <div className="link__container">
+                                            <Link href={`/admin-message/${m.id}`} key={m.id}>
+                                                <div className="admin__messages">
+                                                    <h5 className="admin__messages--name">{m.Name}</h5>
+                                                    <h3 className="admin__messages--subject">{m.Subject}</h3>
+                                                </div>
+                                            </Link>
+                                        </div> 
                                     </div>
                                     
                                 ))}

@@ -273,34 +273,6 @@
             }  
         }
 
-        .dropdown__option--link {
-            max-width: 80%;
-            display: block;
-            margin: 10px auto;
-            transition: ease-in-out 0.3s all;
-
-            &:hover {
-                transform: scale(1.1);
-            } 
-
-            @include respond-to('medium') {
-                 margin: 15px auto;
-            }
-        }
-
-        .dropdown__option--link a {
-            cursor: pointer;
-            font-size: 24px;
-
-            &:hover {
-                color: #000;
-            }
-
-            @include respond-to('medium') {
-                font-size: 18px;
-            }
-        }
-
         .dropdown__option {
             background-color: #FFF;
             color: $black;
@@ -308,6 +280,7 @@
             height: 100px;
             margin: 0 auto;
             position: relative;
+            padding: 20px;
 
             @include respond-to('medium') {
                 width: 210px;
@@ -318,7 +291,7 @@
         .dropdown__option--img {
             width: 40px;
             height: 40px;
-            left: 5px;
+            left: 30px;
             top: 30px;
             position: absolute;
 
@@ -336,7 +309,7 @@
 
         .dropdown__option--a {
             position: absolute;
-            left: 50px;
+            left: 90px;
             bottom: 30px;
             display: block;
             width: 100%;
@@ -353,6 +326,34 @@
                 max-width: 165px;
                 height: auto;
             }
+        }
+
+        .dropdown__option--link a {
+            cursor: pointer;
+            font-size: 24px;
+
+            &:hover {
+                color: #000;
+            }
+
+            @include respond-to('medium') {
+                font-size: 18px;
+            }
+        }
+
+        .dropdown__container-link {
+            max-width: 80%;
+            margin: 30px auto;
+            transition: ease-in-out 0.3s all;
+            display: block;
+
+            &:hover {
+                transform: scale(1.1);
+            } 
+
+            @include respond-to('medium') {
+                margin: 15px auto;
+           }
         }
 
     }
