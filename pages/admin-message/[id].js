@@ -63,9 +63,9 @@ export default function message() {
 
     }, [store.userId]);
 
-    if (error) {
-        return < ErrorComponent />
-    }
+    // if (error) {
+    //     return < ErrorComponent />
+    // }
 
     return (
         <div>
