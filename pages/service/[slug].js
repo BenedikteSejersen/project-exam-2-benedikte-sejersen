@@ -180,13 +180,6 @@ export default function service(props) {
                             </>
                         }
 
-                            {slugService.img_3 === null && "null" ?
-                            "" :
-                                <div className="service__img-3">
-                                    {/* <Image src={slugService.img_3} alt={slugService.title} width="1000" height="1000" /> */}
-                                </div>
-                            }
-
                         </div>
 
                     </div>
@@ -219,11 +212,6 @@ export default function service(props) {
 // }
 
 export async function getServerSideProps(content) {
-    // const { slug } = history.query;
-
-    // const history = useRouter();
-
-    console.log(content.params.slug)
 
     const url = process.env.NEXT_PUBLIC_API_SERVICES + `?slug=${content.params.slug}`;
 
@@ -234,12 +222,12 @@ export async function getServerSideProps(content) {
         service = res.data;
     } catch(err) {
         console.log(err);
-        return {
-            props: {
-                error: true,
-                service: service,
-            },
-        };
+        // return {
+        //     props: {
+        //         error: true,
+        //         service: service,
+        //     },
+        // };
     }
 
     return {
