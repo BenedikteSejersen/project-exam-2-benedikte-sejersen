@@ -1,0 +1,49 @@
+.parent__blue-container {
+    position: relative;
+}
+
+.blue-container {
+    background-color: $grey;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    @include respond-to('small') {
+        margin: 0;
+        left: 0;
+        right: 0;
+        position: relative;
+        left: 50%;
+        transform: translate(-50%, 0);
+        width: 105%;
+        padding-bottom: 40px;
+        margin-bottom: 50px;
+    }
+
+
+    @include respond-to('medium') {
+        width: 110%;
+        margin-bottom: 100px;
+        padding-bottom: 100px;
+    }
+
+    @include respond-to('large') {
+        width: 115%;
+    }
+}
+
+.blue-container__margin {
+    width: 90%;
+    margin: 0 auto;
+    // border: 1px solid red;
+    padding-top: 20px;
+}
+
+.container__padding {
+    @include respond-to('medium') {
+        margin-top: 50px;
+    }
+}

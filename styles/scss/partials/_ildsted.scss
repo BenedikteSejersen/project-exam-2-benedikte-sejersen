@@ -1,0 +1,185 @@
+.ildsted__heading-container {
+    margin: 10px 0;
+    max-width: 1300px;
+
+    @include respond-to('large') {
+        margin: 50px auto 30px auto;
+    }
+}
+
+.ildsted__product {
+    max-width: 1300px;
+    @include respond-to('small') {
+        display: flex;
+        margin-top: 50px;
+        justify-content: space-between;
+    }
+
+    @include respond-to('large') {
+        margin: 50px auto 0 auto;
+    }
+}
+
+.ildsted__img1 {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    @include respond-to('small') {
+        width: 100%;
+        left: 0;
+        right: 0;
+        margin-left: 0;
+        margin-right: 0;
+        flex: 50%;
+        margin-right: 20px;
+    }
+
+    @include respond-to('large') {
+        margin-right: 100px;
+        margin-bottom: 40px;
+        flex: 30%;
+        max-width: 500px;
+    }
+
+    @include respond-to('x-large') {
+        flex: 20%;
+    }
+}
+
+.white-box-container {
+    background-color: $darker-white;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 20px;
+
+    @include respond-to('small') {
+        width: 100%;
+        left: 0;
+        right: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+// Specification
+.specification-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 1300px;
+
+    @include respond-to('small') {
+        flex: 50%;
+        margin-top: 0;
+    }
+
+    @include respond-to('large') {
+        margin-bottom: 40px;
+        height: 100%;
+        flex: 20%;
+        max-width: 600px;
+    }
+}
+
+.specification__h3 {
+    margin-bottom: 10px;
+
+    @include respond-to('small') {
+        margin-bottom: 15px;
+    }
+}
+
+.specification__text-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 5px 0;
+
+    &::after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        background-color: $dark-grey;
+        bottom: 0;
+    }
+
+    .specification__description {
+        flex: 50%;
+    }
+
+    .specification__text {
+        flex: 50%;
+        padding-left: 15px;
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+// Handbook
+.ildsted__handbook-container {
+    margin-bottom: 20px;
+    max-width: 1300px;
+
+    @include respond-to('small') { 
+        display: flex;
+    }
+
+    @include respond-to('large') {
+        margin: 0 auto 40px auto;
+    }
+
+    .ildsted__handbook--h3 {
+        @include respond-to('small') { 
+            flex: 40%;
+        }
+    }
+
+    .ildsted__handbook--btn {
+        @include respond-to('small') { 
+            flex: 60%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    }
+}
+
+// Contact
+.ildsted__contact-container {
+    max-width: 1300px;
+
+    @include respond-to('small') {
+        margin-bottom: 50px;   
+        display: flex;
+    }
+
+    @include respond-to('large') {
+        margin: 0 auto 50px auto;
+    }
+
+    .ildsted__contact--text {
+        @include respond-to('small') {
+            flex: 60%;
+        }
+    }
+
+    .ildsted__contact--btn {
+        margin: 20px 0;
+        @include respond-to('small') {
+            margin: 0;
+            flex: 40%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    }
+}
+

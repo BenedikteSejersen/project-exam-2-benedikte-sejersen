@@ -5,6 +5,7 @@ import '../styles/fonts/gothic-a1/stylesheet.css';
 import React, { useEffect, useState } from "react";
 import {Router} from 'next/router';
 import { ClimbingBoxLoader } from 'react-spinners';
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
 
@@ -34,11 +35,16 @@ function MyApp({ Component, pageProps }) {
 
   return (
       <>
+      <Head>
+        <link rel="stylesheet" href="https://use.typekit.net/cou5qgt.css"/>
+      </Head>
       {loading ? (
-        <div className="loader-container">
-          <h4 className="loader-text">Loading page</h4>
-          <ClimbingBoxLoader />
-        </div>
+        <>
+          <div className="loader-container">
+            <h4 className="loader-text">Loading page</h4>
+            <ClimbingBoxLoader />
+          </div>
+        </>
         ) : (
           <Component {...pageProps} />
         )}

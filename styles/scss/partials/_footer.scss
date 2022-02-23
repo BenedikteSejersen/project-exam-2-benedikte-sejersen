@@ -1,111 +1,136 @@
 .footer {
-    background-color: $footer;
-    width: 125%;
-    margin-left: -10%;
-    margin-bottom: -10%;
-    color: #FFF;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    color: $white;
 
-    @include respond-to('medium') {
-        margin-left: -12.5%;
+    background-image: url(../../public/images/Image-1-photoshopped.jpg);
+    background-repeat: no-repeat;    
+    background-size: cover;
+
+    .footer__logo-container {
+        @include respond-to('medium') {
+            display: flex;
+            max-width: 80%;
+            margin: 0 auto;
+            margin-bottom: 100px;
+            justify-content: space-between;
+        }
     }
 
-    .dropdown__link-container {
-        margin: 0;
-    }
-}
+    .footer__img {
+        width: 40%;
+        padding: 75px 0 50px 0;
+        margin: 0 auto;
 
-.footer__logo-container {
-    max-width: 150px;
-    margin: 50px auto;
-    padding-top: 25px;
-
-    @include respond-to('medium') {
-        max-width: 250px;
-        padding-top: 50px;
-    }
-}
-
-.footer__flex {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    max-width: 50%;
-    margin: 0 auto;
-
-    @include respond-to('small') {
-        flex-direction: row;
-        max-width: 80%; 
-    }
-}
-
-.footer__links-container {
-    margin: 0 auto 40px auto;
-    text-align: center;
-
-    @include respond-to('small') {
-        margin: 0 30px;
+        @include respond-to('medium') {
+            width: 275px;
+            height: 50px;
+            padding-top: 100px;
+        }
     }
 
-    @include respond-to('medium') {
-        margin: 0 40px;
+    .footer__text {
+        max-width: 400px;
+        margin: 10px auto;
+
+        @include respond-to('medium') {
+            padding-top: 145px;
+            margin: 0;
+        }
     }
 
-    @include respond-to('large') {
-        margin: 0 60px;
+    .footer__contain {
+        max-width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        @include respond-to('medium') {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            margin-bottom: 100px;
+        }
     }
-}
 
-.footer__links { 
-    margin: 15px 0;
-}
-
-.footer__some {
-    display: flex;
-}
-
-.footer__links--SoMe {
-    width: 30px;
-    height: 30px;
-    margin: 10px auto;
-
-    &:hover {
-        transform: scale(1.2);
+    .footer__phone-container {
+        display: flex;
     }
-}
 
-.footer__links {
-    cursor: pointer;
-    transition: ease-in-out 0.3s;
+    .footer__contact--img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
 
-    &:hover {
-        transform: scale(1.2);
+        @include respond-to('medium') {
+            width: 30px;
+            height: 30px;
+        }
+
+        @include respond-to('large') {
+            margin-right: 20px;
+        }
     }
-}
 
-.footer__contact {
-    display: flex;
-    justify-content: center;
+    .footer__link-container {
+        margin: 20px;
+        flex: 40%;
 
-    @include respond-to('small') {
-        padding-top: 20px;
+        @include respond-to('medium') {
+            margin: 20px 5px;
+            flex: 25%;
+        }
+
+        @include respond-to('large') {
+            margin: 30px 20px;
+        }
     }
-}
 
-.footer__contact--img {
-    margin-right: 10px;
-}
+    .footer__links {
+        margin: 15px 0;
+    }
 
-.footer__h3 {
-    color: #FFF; 
+    .footer__links--SoMe {
+        display: flex;
+        cursor: pointer;
+        margin: 10px 0 10px -7px;
+    }
+
+    .footer__SoMe--p {
+        position: relative;
+        top: 5px;
+
+        @include respond-to('medium') {
+            margin-left: 5px;
+        }
+    }
+
 }
 
 .footer__copyright {
     display: flex;
     justify-content: center;
-    margin: 20px;
+    padding-bottom: 5px;
 }
 
-.footer__h6 {
-    margin: 20px 0;
+.footer__links--SoMe {
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+
+    &:hover {
+        color: $link;
+    }
 }
 
+.footer__links {
+    cursor: pointer;
+    transition: ease-in-out 0.2s;
+
+    &:hover {
+        color: $link;
+    }
+}

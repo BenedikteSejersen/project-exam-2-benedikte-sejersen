@@ -12,6 +12,8 @@ import ErrorComponent from '../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import HandleDelete from '../components/dialogBox/HandleDelete';
+import PrimaryBtn from '../components/btn/PrimaryBtn';
+import useMediaQuery from '../components/hooks/mediaQuery/MediaQuery';
 
 export default function About(props) {
 
@@ -22,6 +24,9 @@ export default function About(props) {
     const result = props.data;
     const service = props.services;
     const error = props.error;
+
+    const isTablet = useMediaQuery("(min-width: 992px)");
+    const isDesktop = useMediaQuery("(min-width: 1200px)");
 
     useEffect(async() => {
         const abortController = new AbortController();
@@ -76,46 +81,72 @@ export default function About(props) {
             <Nav />
             
             <div className="about">
-               <div className="blue-container about__blue-container">
+               <div className="blue-container">
+               <div className='blue-container__margin'>
+               <div className='container__padding'>
+                <main>
 
-                    <Breadcrumb path="about" />
+                    {/* <Breadcrumb path="about" /> */}
                     
                     <div className="about__heading-text">
                         <h1 className="about__h1">{result.heading}</h1>
+                    </div>
+                
 
-                        <p className="p__bold about__p--bold">
+                <div className='about__text-img-container'>
+                    <div className="about__text-btn">
+                        <p className="about__p--1">
                             {result.description_1}
                         </p>
+                    <p className="about__p--2">
+                            {result.description_2}
+                        </p>
+                        <div className="about__btn">
+                        <PrimaryBtn link="/kontakt-oss" text="Kontakt oss"/>  
+                        </div>
                     </div>
                     
-                </div>
+                    <div className="about__img-some">
 
-                <div className="about__text-btn">
-                  <p className="about__p--normal">
-                        {result.description_2}
-                    </p>
-                    <div className="about__btn">
-                       <SecondaryBtn link="/contact" text="Contact us"/>  
+                        {isDesktop ? <CircleInfo 
+                                    classname="about__circle" 
+                                    text={result.info} /> : ""
+                        }
+                        
+                        <div className="about__img full-width__imgs">
+                            <Image src={isTablet ? result.img : result.img_description} alt="an recently installed oven" width={'1000'} height={isTablet ? '1400' : '550'} />
+                        </div>
+
+                        <SoMe 
+                            width={isTablet ? '25' : '30'}
+                            height={isTablet ? '25' : '30'}
+                            classname="about__some"
+                            />
                     </div>
                 </div>
-                
-                <div className="about__img-some">
-                    <div className="about__img">
-                        <Image src={result.img} alt="an recently installed oven" width="500" height="750" />
+
+                {isDesktop ? "" : <CircleInfo 
+                                    classname="about__circle" 
+                                    text={result.info} /> 
+                }
+
+                </main>
+
+                    <div 
+                        className="about__good-to-know-container"
+                        data-aos="fade-left"
+                        data-aos-delay="50"
+                        data-aos-duration="1000"
+                        data-aos-easing="ease-in-out"
+                        >
+                        <h3>{result.good_to_know}</h3>
                     </div>
 
-                    <SoMe 
-                        width="20" 
-                        height="20" 
-                        classname="about__some"
-                         />
+                </div> 
+                </div> 
                 </div>
 
-                <CircleInfo 
-                classname="about__circle" 
-                text="Free inspection and price quote" />  
-
-                <section className="about__services">
+                {/* <section className="about__services">
                     {service.map((s) => (
                         <div 
                             className="about__service-container" 
@@ -134,49 +165,17 @@ export default function About(props) {
                             
                         </div>
                     ))}
-                </section>
-                
-
-                <div 
-                    className="about__good-to-know-container"
-                    data-aos="fade-left"
-                    data-aos-delay="50"
-                    data-aos-duration="1000"
-                    data-aos-easing="ease-in-out"
-                    >
-                    <h2>{result.good_to_know}</h2>
-                </div>
+                </section> */}
 
                 {/* Gallery */}
                 <section>
 
-                    <h2>Gallery</h2>
+                    <h2 className='about__gallery--h2'>Galleri</h2>
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
                             <div key={g.id} className="about__img-container">
-                                {g && 
-                                    <>
-                                        <div 
-                                            data-aos="fade-up"
-                                            data-aos-delay="50"
-                                            data-aos-duration="1000"
-                                            data-aos-easing="ease-in-out">
-                                        <div>
-
-                                            <div>
-                                                <Image src={g.img_url} alt={g.alt_text} width="700" height="700" />
-                                            </div>
-
-                                            </div>
-                                        </div>
-                                        {authKey && (
-                                            <div className="about__delete">
-                                                <HandleDelete url={process.env.NEXT_PUBLIC_API_GALLERY} id={g.id} />
-                                            </div>
-                                        )}
-                                    </>
-                                }   
+                                <Image src={g.img_url} alt={g.alt_text} width="1000" height="1000" />
                             </div>
                         ))}
                     </div>

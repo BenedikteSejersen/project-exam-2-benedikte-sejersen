@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import ArrowDown from '../../public/images/icons/arrow-down.png'
-import ArrowDownWhite from '../../public/images/icons/arrow-down-white.png'
-import ArrowUp from '../../public/images/icons/arrow-up.png'
-import ArrowUpWhite from '../../public/images/icons/arrow-up-white.png'
 import useMediaQuery from '../hooks/mediaQuery/MediaQuery';
 import axios from 'axios'
 import Link from 'next/link'
+import ArrowUp from '../../public/icons/noun-arrow-blue-up.png';
+import ArrowDown from '../../public/icons/noun-arrow-blue.png';
+import ArrowDownWhite from '../../public/icons/noun-arrow-white.png';
+import ArrowUpWhite from '../../public/icons/noun-arrow-white-up.png';
+import ArrowUpRed from '../../public/icons/noun-arrow-red-up.png';
 
 export default function Dropdown() {
 
@@ -50,13 +51,20 @@ export default function Dropdown() {
                     onMouseEnter={() => setDropdownOpen(true)}
                     onMouseLeave={() => setDropdownOpen(false)} 
                     >
-                        <a>Our services</a>
+                        <div className="nav__link--extra-a">Tjenester</div>
                         <span className="dropdown__select--img">
-                           <Image
-                                src={dropdownOpen ? ArrowUp.src : ArrowDown.src}
-                                width="10"
-                                height="10"
+                            {dropdownOpen ? 
+                                <Image
+                                src={ArrowUpRed.src}
+                                width="100"
+                                height="100"
                                 /> 
+                                :  
+                                <Image
+                                src={ArrowDown.src}
+                                width="100"
+                                height="100"
+                                />}
                         </span>
                     </div>
 
@@ -65,7 +73,7 @@ export default function Dropdown() {
                     <div 
                     className="dropdown__link-container" 
                     onClick={toggleDropdown} >
-                        <a>Our services</a>
+                        <div className="nav__link--extra-a">Tjenester</div>
                         <span className="dropdown__select--img">
                            <Image
                                 src={dropdownOpen ? ArrowUpWhite.src : ArrowDownWhite.src}
@@ -87,14 +95,20 @@ export default function Dropdown() {
 
                     {service.map((s) => (
                         <div key={s.id} className="link__container dropdown__container-link">
-                            <Link href="/service/[slug]" as={`/service/${s.slug}`} className="dropdown__option--link">
+                            <Link href={`/${s.slug}`} className="dropdown__option--link">
                                 <div as="option" className="dropdown__option">
                                     <img src={s.icon} alt={`service icon ${s.title}`} className="dropdown__option--img" />
-                                    <span className="dropdown__option--a">{s.title}</span> 
+                                    <p className="dropdown__option--a">{s.title}</p> 
                                 </div>
                             </Link> 
                         </div>
                     ))}
+
+                    {isDesktop ? 
+                        <div className="link__container dropdown__text">
+                            <p>En tett pipe er en viktig forsikring mot brann, og i tillegg er det bra for miljøet.</p>
+                        </div>
+                    : '' }
 
                 </div>
             </div>

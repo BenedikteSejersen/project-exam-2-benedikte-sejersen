@@ -1,0 +1,85 @@
+.rehabilitering__h1 {
+    margin-bottom: 15px;
+}
+
+// Rehabilitering
+.rehabilitering-container {
+    @include respond-to('small') {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.rehabilitering__text-container {
+    @include respond-to('small') {
+        flex: 45%;
+    }
+}
+
+.rehabilitering__img-1{
+    @include respond-to('small') {
+        flex: 55%;
+        max-width: 300px;
+        position: relative;
+        top: 50px;
+        margin-left: 30px;
+    }
+
+    @include respond-to('large') {
+        max-width: 450px;
+        top: -20px;
+    }
+
+    @include respond-to('x-large') {
+        max-width: 500px;
+        top: -50px;
+    }
+}
+
+.rehabilitering__p--1 {
+    margin-bottom: 10px;
+
+    @include respond-to('large') {
+        max-width: 700px;
+    }
+}
+
+.rehabilitering__p--2 {
+    margin-bottom: 15px;
+
+    @include respond-to('large') {
+        max-width: 700px;
+    }
+}
+
+// Kamerainspeksjon
+.kamerainspeksjon__heading-container {
+    position: relative;
+    margin-top: 25px;
+
+    .kamerainspeksjon__new {
+        position: absolute;
+        left: -20px;
+        top: -10px;
+    }
+}
+
+.kamerainspeksjon__h1 {
+    margin-bottom: 15px;
+}
+
+.kamerainspeksjon__p--1 {
+    margin-bottom: 15px;
+
+    @include respond-to('large') {
+        max-width: 700px;
+    }
+}
+
+.kamerainspeksjon__btn-container {
+    padding-bottom: 50px;
+
+    @include respond-to('medium') {
+        margin-top: 30px;
+    }
+}

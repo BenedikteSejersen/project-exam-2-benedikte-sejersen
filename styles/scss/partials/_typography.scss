@@ -1,17 +1,16 @@
-h1, h2, h3, h4 {
-    font-family: "libre-franklin", Helvetica, sans-serif;
-    color: $dark-blue;
+h1, h2 {
+    font-family: le-monde-livre-std, serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 h1 {
-    font-size: 35px;
     font-weight: 400;
-    line-height: 50px;
-    letter-spacing: 2px;
+    line-height: 40px;
+    letter-spacing: 1px;
 }
 
 h2 {
-    font-size: 25px;
     font-weight: 400;
     line-height: 35px;
 }
@@ -19,21 +18,16 @@ h2 {
 h3 {
     font-weight: 400;
     line-height: 30px;
-    font-size: 18px;
 }
 
 h4 {
     font-weight: 500;
 }
 
-h6 {
-    font-size: 16px;
-}
-
-p,input, textarea {
-    font-family: 'RNS Sanz Normal';
+p, h3, h4, input, textarea, h6,.form-dropdown__input, .option {
+    font-family: objektiv-mk2, sans-serif;
     font-weight: 400;
-    font-size: 16px;
+    font-style: normal;
     line-height: 25px;
 }
 
@@ -41,14 +35,14 @@ p,input, textarea {
     font-size: 10px;
 }
 
-a, button {
-    font-family: 'Gothic A1';
-    font-size: 16px;
-    font-weight: 600;
+a, .nav__link--extra-a, .dropdown__option--a,  button {
+    font-family: forma-djr-micro, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 1px;
 }
 
 .nav__phone-number {
-    font-size: 18px;
     font-weight: 300;
 }
 
@@ -76,4 +70,9 @@ a, button {
         color: #fff;
     }
     color: #fff;
+}
+
+// Global font variants
+.orange-text {
+    color: $orange;
 }

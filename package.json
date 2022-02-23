@@ -19,6 +19,8 @@
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
     "axios": "^0.21.1",
+    "emailjs-com": "^3.2.0",
+    "embla-carousel-react": "^6.1.1",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5",
     "hamburger-react": "^2.4.1",

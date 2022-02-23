@@ -1,8 +1,15 @@
 // Colours
-$dark-blue: #293846;
+$dark-blue: #364955;
+$darker-blue: #27353E;
+$white: #FFF;
+$darker-white: #f0f0f0;
+$light-grey: #F3F3F3;
+$link: #F74141;
+$grey: #E4E4E4;
+$dark-grey: #D2D2D2;
+$orange: #D45F1C;
+
 $light-blue: #9AC8E4;
-$orange: #F3A451;
-$white: #F3F3F3;
 $beige: #BFAB93;
 $black: #000000;
 $error: #F34150;
@@ -12,8 +19,10 @@ $footer: #424242;
 
 // Breakpoints
 $breakpoints: (
+    'x-small': 345px,
     'small': 767px,
     'medium': 992px,
-    'large': 1200px
+    'large': 1200px,
+    'x-large': 1535px,
+    'xx-large': 1845px
 )
- 

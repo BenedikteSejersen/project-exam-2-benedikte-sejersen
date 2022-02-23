@@ -27,13 +27,13 @@ export default function HomeContact({ heading, children }) {
 
                 <div className="index-container__children">{children}</div>
 
-                <PrimaryBtn link="/contact" text="Contact us" /> 
+                <PrimaryBtn link="/contact" text="Kontakt oss" /> 
             </div>
 
             <div className="index-contact__map-container">
                 <iframe 
                     width="600" 
-                    height="450" 
+                    height="450"  
                     style={{border:0}}
                     loading="lazy" 
                     allowFullScreen

@@ -2,23 +2,18 @@
     margin-bottom: 50px;
 
     @include respond-to('small') {
-        margin-bottom: 100px;
+        margin-top: 100px;
     }
 
     @include respond-to('medium') {
-        margin-bottom: 150px;
-    }
-
-    @include respond-to('large') {
-        margin-bottom: 200px;
-        max-width: 100%;
+        margin-top: 200px;
     }
 }
 
 .use-pro__center {
     @include respond-to('medium') {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
     }
 }
 
@@ -27,45 +22,49 @@
 
     @include respond-to('small') {
         padding: 30px;
+        margin: auto 30px;
     }
 
     @include respond-to('medium') {
         height: 80%;
-        padding: 50px 50px 100px 50px;
-        margin: auto 0;
+        margin: auto;
+        width: 50%;
     }
 
     p {
         @include respond-to('medium') {
-            width: 350px;
+            width: 100%;
         }
     }
 
 }
 
 .use-pro__img-container {
-    text-align: center;
-    width: 100%;
-    max-width: 70%;
-    height: auto;
-    margin-left: 5px;
+    position: relative;
+    z-index: 1;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 
-    @include respond-to('small') {
-        max-width: 50%;
-        margin-left: 25px;
+    @include respond-to('x-small') {
+        width: 80%;
+        left: 0%;
+        right: 0%;
+        margin: 0 auto;
     }
 
     @include respond-to('medium') {
         width: 450px;
-        max-width: 100%;
     }
 }
 
 .use-pro__content--subheading {
-    margin: 50px 0;
+   margin-top: 50px;
+   margin-bottom: 30px;
 }
 
 .use-pro__content--btn {
-    margin-top: 50px;
-    width: 100px;
+    margin-top: 30px;
 }

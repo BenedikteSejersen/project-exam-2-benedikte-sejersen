@@ -6,13 +6,74 @@
 }
 
 body {
-    background-color: #F3F3F3;
+    background-color: $light-grey;
+    color: $dark-blue;
     overflow-x: hidden;
-    max-width: 90%;
+    max-width: 95%;
     margin: 0 auto;
 
     @include respond-to('medium') {
         max-width: 80%;
+    }
+
+    // Font sizes
+    h1, h2 {
+        font-size: 35px;
+
+        @include respond-to('medium')  {
+            font-size: 45px;
+            line-height: 50px;
+        }
+    }
+
+    h3 {
+        font-size: 18px;
+        line-height: 30px;
+        font-weight: 700;
+
+        @include respond-to('medium')  {
+            font-size: 28px;
+            line-height: 45px;
+            font-weight: 400;
+        }
+    }
+
+    h4 {
+        font-size: 18px;
+        line-height: 30px;
+
+        @include respond-to('medium')  {
+            font-size: 20px;
+        }
+    }
+
+    h6 {
+        font-size: 16px;
+
+        @include respond-to('medium')  {
+            font-size: 18px;
+        }
+    }
+
+    p, input, textarea, .contact__dropdown {
+        font-size: 16px;
+
+        @include respond-to('medium')  {
+            font-size: 18px;
+            line-height: 30px;
+        }
+    }
+
+    a, button {
+        font-size: 18px;
+    }
+
+    .nav__phone-number {
+        font-size: 20px;
+
+        @include respond-to('medium')  {
+            font-size: 20px;
+        }
     }
 
     a {
@@ -26,7 +87,7 @@ body {
     section {
         
         @include respond-to('medium') {
-            margin: 200px auto;
+            margin: 100px auto;
         }
     }
 
@@ -44,7 +105,7 @@ body {
             }
 
             &::after {
-                background-color: #000;
+                background-color: $dark-blue;
                 position: absolute;
                 height: 1px;
                 width: 20%;
@@ -114,4 +175,35 @@ body {
     div img {
        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important; 
     }
+}
+
+// Full width images
+.full-width__imgs {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+
+    @include respond-to('small') {
+        width: 100%;
+        left: 0;
+        right: 0;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+// Services
+.services__btns {
+    @include respond-to('x-small') {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+.services__btn-container {
+    margin: 20px 20px 0 0;
 }

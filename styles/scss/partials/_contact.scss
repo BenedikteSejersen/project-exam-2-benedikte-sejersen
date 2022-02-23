@@ -1,193 +1,306 @@
-.contact__white-container {
-    position: relative;
-    z-index: 5;
+.contact  {
+    display: flex;
+    flex-direction: column;
+    max-width: 90%;
+    margin: 0 auto;
+
     @include respond-to('medium') {
-        height: 30%;
-        width: 600px;
-        top: 50px; 
-    }
+        max-width: 80%;
+    } 
 
     @include respond-to('large') {
-        width: 700px
-    } 
-}
-
-.contact {
-    display: flex;
-    flex-direction: column-reverse;
-    padding-top: 50px;
-
-    @include respond-to('medium') {
         flex-direction: row;
         max-width: 90%;
-        margin: 0 auto;
-        position: relative;
-        justify-content: center;
     }
 }
 
 .contact__h1 {
-    margin-left: 10px;
-    margin-top: 50px;
+    margin: 30px 0 0 0;
 
-    @include respond-to('medium') {
-        margin: -10px 0 0px 20px;
+    @include respond-to('small') {
+        margin: 30px 0 0 25px;
     }
-    
-}
-
-.contact__img {
-    width: 100%;
-    height: auto;
 
     @include respond-to('medium') {
-        position: relative;
-        max-width: 350px;
-        width: 50%;
-        height: 100%;
-        margin: auto 0;
-        top: 50px;
+        margin-top: 50px;
     }
 
     @include respond-to('large') {
-        max-width: 500px;
-        top: 50px;
-        margin: auto 0;
-        width: 70%;
+        width: 480px;
+        margin: 100px auto 0 auto;
+        // border: 1px solid blue;
     }
-} 
+}
 
-.contact__form-heading {
-    @include respond-to('small') {
-        margin: auto;
+.form {
+    margin-top: 30px;
+    margin-bottom: 20px;
+
+    @include respond-to('large') {
+        width: 480px;
+        margin: 30px auto 20px auto;
+        // border: 1px solid blue;
     }
+}
+
+fieldset {
+    border: none;
 }
 
 .contact__form-info {
-    display: flex;
-    flex-direction: column;
+    @include respond-to('large') {
+        flex: 50%;
+        margin: 0 auto;
 
-    @include respond-to('small') {
-        flex-direction: row;
-        align-items: flex-end;
+        // border: 1px solid red;
+        // display: flex;
+        // flex-direction: column;
+        // justify-content: center;
     }
 }
 
-// Contact form
+// Input
 .contact__input-container {
-    margin: 25px 10px;
+    margin: 10px 0;
     width: 100%;
+    max-width: 400px;
 
-    @include respond-to('medium') {
-        margin: 5px;
+    // border: 1px solid red;
+
+    @include respond-to('small') {
+        max-width: 300px;
+        margin: 10px 5px;
     }
+
+    @include respond-to('large') {
+        max-width: 200px;
+    }
+}
+
+.contact__input {
+    border: 1px solid $white;
+    background-color: $white;
+    border-radius: 6px;
+    padding: 5px;
+    width: 100%;
+    transition: all ease-in-out .2s;
+    box-shadow: rgba(197, 197, 197, 0.2) 0px 3px 10px;
+    height: 40px;
+    color: $dark-blue;
 }
 
 .contact__form--flex {
     @include respond-to('small') {
         display: flex;
+        flex-wrap: wrap;
     }
 }
 
-.contact__input, .contact__dropdown {
-    width: 90%;
-
-    @include respond-to('small') {
-        width: 100%;
-    }
+.contact__input--p {
+    margin-left: 2px;
 }
 
-.contact__dropdown {
-    width: 90%; 
-
-    @include respond-to('small') {
-        width: 100%;
-    }
-}
-
-.contact__btn {
-    max-width: 300px;
+.contact__input-container--message {
     width: 100%;
-    margin: 30px auto 0 auto;
+    max-width: 400px;
 
-    button {
-        width: 100%;
-        max-width: 300px;
-    }
-}
-
-.contact__btn--required {
-    text-align: center;
-}
-
-.contact__dropdown {
-    cursor: pointer;
-}
-
-// Contact info
-.contact__info-container {
     @include respond-to('small') {
-        margin-bottom: 40px; 
-    }
-
-    @include respond-to('medium') {
-        height: 200px;
-        width: 30%;
+        max-width: 610px;
     }
 
     @include respond-to('large') {
-        width: 40%;
+        max-width: 410px;
     }
 }
 
-.contact__info {
-    display: flex;
-    margin-left: 10px;
-    // margin: -20px 0px -20px 10px;
+.contact__message {
+    width: 100%;
 }
 
-.contact__info--img {
-    min-width: 10px;
-    width: 10px;
-    height: 10px;
-    min-height: 30px;
-    margin: auto 10px auto 0px;
-
-    // @include respond-to()
+textarea:focus, input:focus {
+    outline: none;
 }
 
-// SoMe
+.input:focus {
+    border: 0px;
+    border: 1px solid $white;
+    transition: all ease-in-out .2s;
+    box-shadow: rgba(0, 0, 0, 0.2) -3px 3px 10px;
+}
+
+.contact__info-container {
+    @include respond-to('large') {
+        width: 480px;
+        margin: 0 auto;
+        // border: 1px solid blue;
+    }
+}
+
+// IMG
+.contact__img-container {
+    // border: 1px solid red;
+    @include respond-to('large') {
+        flex: 50%;
+        display: flex;
+        // align-items: flex-end;
+        justify-content: center;
+        position: relative;
+    }
+}
+
+.contact__img {
+    display: none;
+
+    @include respond-to('large') {
+        display: block;
+        width: 450px;
+        margin-top: 75px;
+    }
+
+    @include respond-to('x-large') {
+        width: 500px;
+    }
+}
+
+// BTN
+.contact__btn {
+    max-width: 400px;
+    width: 100%;
+
+    @include respond-to('small') {
+        max-width: 610px;
+        margin-left: 5px;
+    }
+
+    @include respond-to('large') {
+        max-width: 410px;
+    }
+}
+
+.submit {
+    margin-top: 30px;
+    width: 100%;
+    max-width: 400px;
+
+    @include respond-to('small') {
+        max-width: 610px;
+    }
+
+    @include respond-to('large') {
+        max-width: 410px;
+    }
+}
+
+// EMAIL
+.contact__info--email, .contact__some {
+    // border: 1px solid red;
+    width: 100%;
+    max-width: 400px;
+    margin-left: 20px;
+
+    @include respond-to('small') {
+        max-width: 610px;
+        margin-left: 40px;
+    }
+}
+
+// SOME
 .contact__some {
     display: flex;
-    justify-content: center;
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
 
     .some__img {
-        margin: 10px 25px;
-        width: 20px;
-        height: 20px;
-        min-width: 20px;
+        margin-right: 50px;
+        width: 35px;
+        height: 35px;
     }
 }
 
+// CIRCLE
 .contact__circle-info {
-    position: absolute;
-    width: 120px;
-    padding: 30px 0;
     text-align: center;
-    right: 20px;
-    top: -60px;
+    display: flex;
+    align-items: center;
+    width: 175px;
+    height: 175px;
+    float: right;
+    margin-bottom: 30px;
+    margin-top: 20px;
+
+    @include respond-to('x-small') {
+        margin-top: 0;
+    }
+
+    @include respond-to('small') {
+        margin-top: -50px;
+    }
 
     @include respond-to('medium') {
-        top: -70px;
-        right: -50px;
-        width: 160px;
-        padding: 60px 0;
+        margin-top: 0;
+        position: absolute;
+        top: 5px;
+        right: 5px;
     }
 
-    p {
-        @include respond-to('medium') {
-            font-size: 24px;
-        }
+    @include respond-to('large') {
+        top: 20px;
+        right: 20px;
+    }
+
+    @include respond-to('x-large') {
+        // top: 20px;
+        // left: 475px;
+        display: flex;
+        justify-content: center;
     }
 }
+
+// DROPDOWN
+.input-dropdown {
+    position: relative;
+}
+
+.form-dropdown__input {
+    border-radius: 6px;
+    border: 1px solid $white;
+    background-color: $white;
+    width: 100%;
+    cursor: pointer;
+    padding: 7px 5px 5px 5px;
+    transition: all ease-in-out .2s;
+    box-shadow: rgba(197, 197, 197, 0.2) 0px 3px 10px;
+    height: 40px;
+    font-size: 16px;
+    color: $dark-blue;
+
+    @include respond-to('medium')  {
+        font-size: 18px;
+    }
+}
+
+.form-dropdown__input:focus {
+    border: 0px;
+    border: 1px solid $white;
+    transition: all ease-in-out .2s;
+    box-shadow: rgba(0, 0, 0, 0.2) -3px 3px 10px;
+}
+
+.option {
+    font-family: objektiv-mk2 !important;
+    font-weight: 400 !important;
+    font-style: normal !important;
+    letter-spacing: 10px !important;
+    padding: 3px;
+    font-size: 16px;
+    color: $dark-blue;
+
+    @include respond-to('medium')  {
+        font-size: 18px;
+    }
+}
+
+// .contact__dropdown--options {
+//     position: absolute;
+//     height: 500px;
+// }

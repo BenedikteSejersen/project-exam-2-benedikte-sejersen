@@ -13,12 +13,19 @@ import ImageHouse from '../public/images/img-services-house.png'
 import ErrorComponent from '../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import useMediaQuery from '../components/hooks/mediaQuery/MediaQuery';
+
+// Images
+import imageMobile1 from '../public/images/index/cottage-index-1.jpg';
+import imageMobile2 from '../public/images/index/oven-index-2.jpg'
+
 
 export default function Home(props) {
 
   const [authKey, setAuthKey] = useState("");
   const [services, setServices] = useState([]);
   const [fetchError, setFetchError] = useState(false);
+  const isTablet = useMediaQuery("(min-width: 767px)");
 
   useEffect(async() => {
     const abortController = new AbortController();
@@ -65,7 +72,7 @@ export default function Home(props) {
     <div >
       <Head>
         <title>Norsk piperehabilitering AS</title>
-        <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
+        <meta name="description" content="Rehabiliter din pipe, eller få hjelp av oss med å installere inn din peis eller stålpipe." />
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://use.typekit.net/cou5qgt.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -81,94 +88,95 @@ export default function Home(props) {
 
               <div className="index__header--text">
                 <div className="index__text-container index__text--h1">
-                  <h1>{result.heading_header}</h1>
+                  <h1>{result.heading_header}<span className='orange-text'>{result.heading_header_span}</span></h1>
                 </div>
                 <div className="index__text-container index__text--h3">
-                  <h3>{result.description_header}</h3>
+                  <h4>{result.description_header}</h4>
                 </div>
 
                 <div className="index__btn-container">
                   <div className="index__btn--primary-container">
-                    <PrimaryBtn link="/contact" text="Contact us" />
+                    <PrimaryBtn link="/contact" text="Kontakt oss" />
                   </div>
                 </div>
               </div>
 
               <SoMe classname="index__some" width="30" height="30" />
 
-              <div className="index__images-container">
+              <div className="index__images-container full-width__imgs">
                 <div 
-                  className="index__img-1 index__img"
-                  data-aos="fade-up"
-                  data-aos-delay="50"
-                  data-aos-duration="2500"
-                  data-aos-easing="ease-in-out"
+                  className={`index__img ${isTablet ? "index__img-1" : "index__img-1--mobile"}`}
+                  // data-aos="fade-up"
+                  // data-aos-delay="50"
+                  // data-aos-duration="2500"
+                  // data-aos-easing="ease-in-out"
                   >
-                  <Image src={result.img_2} alt="picture" width="300" height="400" />
+                  <Image src={isTablet ? result.img_2 : imageMobile1} alt="picture" width={isTablet ? "400" : "350"} height={isTablet ? "550" : "500"} />
                 </div>
 
                 <div 
-                  className="index__img-2 index__img"
-                  data-aos="fade-up"
-                  data-aos-delay="50"
-                  data-aos-duration="2000"
-                  data-aos-easing="ease-in-out"
+                  className={`index__img ${isTablet ? "index__img-2" : "index__img-2--mobile"}`}
+                  // data-aos="fade-up"
+                  // data-aos-delay="50"
+                  // data-aos-duration="2000"
+                  // data-aos-easing="ease-in-out"
                   >
-                  <Image src={result.img_1} alt="picture" width="400" height="400" />
-                </div> 
+                  <Image src={isTablet ? result.img_1 : imageMobile2} alt="picture" width={isTablet ? "500" : "450"} height={isTablet ? "600" : "500"} />
+                </div>
               </div>
 
             </header>
 
-            {/* Our services */}
+            {/* Våre tjenester */}
             <main className="our-services-container">
               <div>
-                <h2>Our services</h2>
+                <h2>Våre tjenester</h2>
 
-                <div className={services.length > 4 ? "our-services__wrap" : "our-services__services"}>
+                <div className={isTablet ? "our-services__wrap" : "our-services__services"}>
                   {services.map(function(s) {
                     return (
-                        <div 
-                          key={s.id} 
-                          className="our-services__services-container"
-                          data-aos="fade-up"
-                          data-aos-delay="50"
-                          data-aos-duration="1000"
-                          data-aos-easing="ease-in-out"
-                          >
-
-                              <img src={ImageHouse.src} alt="house-shaped image in light blue" className="our_services__services--houseImg"/>
-                          
-                          <div className="our-services__services--info">
-                            <div className="our-services__services--img" >
-                              <Image src={s.icon} width="100" height="100" alt={s.title}/>
-                            </div>
-                              <h4 className="our-services__h4">{s.title}</h4>
-                              <p>{s.short_text_index}</p>
-                              <div className="our-services__btn">
-                                <SecondaryBtn text="Read more" link={`/service/${s.slug}`} />
+                          <div 
+                            key={s.id}  
+                            className="our-services__services-container"
+                            data-aos="fade-up"
+                            data-aos-delay="50"
+                            data-aos-duration="1000"
+                            data-aos-easing="ease-in-out"
+                            >
+                              <div className='our-services__services--btn'>
+                              <a href={`/${s.slug}`}>
+                                <div className="our_services__services--houseImg">
+                                  <Image src={ImageHouse.src} alt="house-shaped image in light blue" width={isTablet ? "210" : "210"} height={isTablet ? "200" : "190"}/>
+                                </div> 
+                              </a>
+                            
+                            <a href={`/${s.slug}`} className="our-services__services--info ">
+                              <div>
+                                <div className="our-services__services--img" >
+                                  <Image src={s.icon} width="100" height="100" alt={s.title}/>
+                                </div>
+                                  <div className='our-services__h4-container'>
+                                    <h6 className="our-services__h4">{s.title}</h6>
+                                  </div>
                               </div>
+                            </a>
+                            </div>
                           </div>
-                        </div>
                       )}
                   )}
                 </div>
 
               </div>
             </main>
-            
-          
+
           </div>
         
         </div>
 
-        {/* Consider rehabilitation */}
+        {/* Vurderer rehabilitering */}
         <section className="consider-rehab">
           <div className="consider-rehab__text">
-            <h2>{result.rehabilitation.heading}</h2>
-            <div className="consider-rehab__btn">
-              < SecondaryBtn link="/" text="Read more" />
-            </div>
+            <h2>{result.rehabilitation.heading} <span className='orange-text'>{result.rehabilitation.heading_span}</span> ?</h2>
           </div>
 
           <div className="consider-rehab__all-cards">
@@ -182,7 +190,6 @@ export default function Home(props) {
                 data-aos-easing="ease-in-out"
                 >
                   <div className="consider-rehab__card--heading">
-                    <div className="consider-rehab__card--number">{r.number}</div>
                     <h3>{r.title}</h3>
                   </div>
                   <p className="consider-rehab__card--p">{r.description}</p>
@@ -193,14 +200,18 @@ export default function Home(props) {
 
           <div className="consider-rehab__img--container">
             <div className="consider-rehab__img">
-               <Image src={result.rehabilitation.img} width="500" height="500" alt="Rehabilitation a chimney" width="400" height="400" />
+               <Image src={result.rehabilitation.img} width="2000" height="2000" alt="Rehabilitation a chimney" />
             </div>
            
+          </div>
+
+          <div className="consider-rehab__btn">
+            < SecondaryBtn link="/rehabilitering" text="Les mer" />
           </div>
           
         </section>
 
-        {/* Use professionals */}
+        {/* Bruk profesjonelle */}
         <section className="use-pro"
                 data-aos="fade-up"
                 data-aos-delay="50"
@@ -213,14 +224,11 @@ export default function Home(props) {
               className="use-pro__content"
               >
                 <h2 className="use-pro__content--subheading">{result.use_professionals.heading}</h2>
-                <p className="p__bold">
-                  {result.use_professionals.description}
-                </p>
                 <p>
                   {result.use_professionals.description_2}
                 </p>
                 <div className="use-pro__content--btn">
-                  < SecondaryBtn link="/about" text="Read more" />
+                  < SecondaryBtn link="/om-oss" text="Les mer" />
                 </div>
             </div>
 
@@ -247,7 +255,7 @@ export default function Home(props) {
               <div key={contact.id}>
                 <div className="index-contact__contact-info">
                   <div className="index-contact__img">
-                    <Image src={contact.contact_icon} width="50" height="50" alt={contact.contact_info} />
+                    <Image src={contact.contact_icon} width="40" height="50" alt={contact.contact_info} />
                   </div>
                   <h4>{contact.contact_info}</h4>
                 </div>

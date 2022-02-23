@@ -36,98 +36,126 @@
 
 .hamburger-inactive {
     position: absolute;
-    right: 3%;
+    right: 15px;
+    display: flex;
+    align-items: center;
 
     @include respond-to('medium') {
         display: none;
     }
 }
 
-.nav__inactive {
-    position: fixed;
-    left: 130%;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    transition: ease-in-out .3s;
-    z-index: 8;
+.hamburger-active {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 15px;
+}
 
-    @include respond-to('medium') {
-        left: 0;
-        position: absolute;
-        height: 0%;
+// Nav hamburger open
+.hamburger-active--p {
+    color: $white;
+}
+
+.hamburger-active {
+    .hamburger-react {
+        color: $white;
     }
 }
 
 .nav__active {
-    background-color: $dark-blue;
+    background-color: $darker-blue;
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    transition: ease-in-out .3s;
+    transition: ease-in-out .2s;
     color: $white;
     z-index: 9;
 
-    .circle {
-        width: 130px;
-        height: 130px;
-        border-radius: 50%;
-        background-color: $light-blue;
-        position: absolute;
-        right: -40px;
-        top: -40px;
-        z-index: 10;
-    }
-
     .logo-active {
-        left: 10px;
-        top: 5px;
-    }
-
-    .nav__menu-links {
-        margin: 50px auto 0 auto;
-    }
-
-    .nav__link {
-        display: flex;
-        justify-content: center;
-    }
-
-    .nav__link a {
-        text-align: center;
-        font-size: 24px;
-        padding: 20px 0;
-        display: inline-block;
-    }
-
-    .nav__menu-links a:hover {
-        color: #FFF;
-    }
-
-    .nav__search-option {
-        text-align: center;
-        width: 100%;
-
-        img {
-            margin-bottom: 10px;
-        }
+        width: 200px;
+        margin: 100px 0 30px 30px;
     }
 
     .nav__phone-option {
-        margin: 20px 0 0 5px;
+        margin-top: 50px;
+        background-color: $dark-blue;
+    }
+
+    .nav__hamburger-open--p {
+        margin: 30px 0 10px 30px;
+    }
+
+    .nav__menu-links {
+        background-color: $dark-blue;
+    }
+
+    .nav__link--extra-a {
+        padding: 15px 0 15px 30px; 
+        font-size: 24px; 
+        cursor: pointer;
+
+        &:hover {
+            color: $link !important;
+        }
+    }
+
+    .dropdown__container-link {
+        position: relative;
+        z-index: 20;
+    }
+
+    .dropdown__select {
+        position: relative;
+        z-index: 9;
+    }
+    .nav__contact-options {
+        background-color: $dark-blue;
+        position: relative;
+        top: 0px;
+        display: flex; 
+        justify-content: space-between;
+        padding: 50px 30px 300px 30px;
+    }
+
+    .nav__phone-option {
+        margin-top: 0;
     }
 
     .nav__phone--icon {
-        margin: 0 10px 0 0;
+        margin-right: 10px;
     }
 
-    .active {
-        color: $orange;
+    // .active {
+    //     color: $orange;
+    // }
+}
+
+.nav__phone-option {
+
+    h3 {
+        @include respond-to('medium') {
+            margin-left: 10px;
+            position: relative;
+            bottom: 7px;
+        }
+    }
+
+    img {
+        @include respond-to('medium') {
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    @include respond-to('medium') {
+        margin: 0 30px 0 0;
     }
 }
 
+// Nav mobile inactive
 .nav__mobile {
     display: flex;
     justify-content: space-between;
@@ -142,64 +170,161 @@
     }
 }
 
-.nav__menu {
-    display: flex;
-    flex-direction: column;
+.nav__inactive {
+    position: fixed;
+    left: 130%;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transition: ease-in-out .2s;
+    z-index: 8;
+    background-color: $darker-blue;
+    color: $white;
+    z-index: 9;
 
     @include respond-to('medium') {
-        flex-direction: row;
-        justify-content: space-between;
-        max-width: 80%;
-        margin: 30px auto;
+        left: 0;
+        top: 0;
+        position: absolute;
+        height: 0%;
+        background-color: transparent;
+        color: $dark-blue;
+    }
+
+    .nav__menu {
+        display: flex;
+        flex-direction: column;
+    
+        @include respond-to('medium') {
+            flex-direction: row;
+            justify-content: space-between;
+            max-width: 80%;
+            margin: 30px auto;
+        }
+    }
+
+    .logo-active {
+        width: 200px;
+        margin: 100px 0 30px 30px;
+
+        @include respond-to('medium') {
+            display: none;
+        }
+    }
+
+    .nav__phone-option {
+        margin-top: 50px;
+        background-color: $dark-blue;
+
+        @include respond-to('medium') {
+            background-color: transparent;
+            margin: 0;
+        }
+    }
+
+    .nav__hamburger-open--p {
+        margin: 30px 0 10px 30px;
+
+        @include respond-to('medium') {
+            visibility: hidden;
+        }
     }
 
     .nav__menu-links {
-        position: relative;
+        background-color: $dark-blue;
 
         @include respond-to('medium') {
             display: flex;
             position: relative;
-            top: 20px;
-            width: 500px;
-            left: 110px;
+            top: -65px;
+            left: 95px;
+            background-color: transparent;
         }
 
         @include respond-to('large') {
-            left: 180px;
-            top: 32px;
+            top: -55px;
+            width: 700px;
+            left: 155px;
         }
+    }
+
+    .nav__link {
+        cursor: pointer;
+
+        @include respond-to('medium') {
+            margin-right: 10px;
+        }
+    }
+
+    .nav__link--extra-a {
+        padding: 15px 0 15px 30px; 
+        font-size: 24px; 
+        cursor: pointer;
+
+        &:hover {
+            color: $link !important;
+        }
+
+        @include respond-to('medium') {
+            font-size: 18px;
+        }
+    }
+
+    .dropdown__container-link {
+        position: relative;
+        z-index: 20;
+    }
+
+    .dropdown__select {
+        position: relative;
+        z-index: 9;
+    }
+
+    .nav__contact-options {
+        background-color: $dark-blue;
+        position: relative;
+        top: 0px;
+        display: flex; 
+        justify-content: space-between;
+        padding: 50px 30px 300px 30px;
+
+        @include respond-to('medium') {
+            background-color: transparent;
+            padding: 0;
+            top: 15px;
+            max-width: 250px;
+            width: 250px;
+            right: -35px;
+            justify-content: flex-end;
+        }
+
+        @include respond-to('large') {
+            top: 25px;
+            justify-content: flex-end;
+        }
+    }
+
+    .search__icon {
+        @include respond-to('medium') {
+            margin-left: 20px;
+        }
+
+        @include respond-to('large') {
+            margin-left: 50px;
+        }
+    }
+
+    .nav__phone-option {
+        margin-top: 0;
+    }
+
+    .nav__phone--icon {
+        margin-right: 10px;
     }
 }
 
 .nav__contact-options, .nav__phone-option {
     display: flex;
-}
-
-.nav__phone-option {
-    margin: 0 30px 0 0;
-
-    h3 {
-        margin: 0 0 10px 10px;
-    }
-
-    img {
-        width: 25px;
-        height: 25px;
-    }
-}
-
-.nav__contact-options {
-    position: relative;
-    top: 15px;
-
-    @include respond-to('medium') {
-        width: 300px;
-        right: -100px;
-    }
-
-    @include respond-to('large') {
-        top: 25px;
-    }
 }
 
 .nav__link a {
@@ -214,52 +339,65 @@
         display: flex;
         position: relative;
         cursor: pointer;
-        max-width: 160px;
-        margin: 0 auto;
+
+        @include respond-to('medium') {
+            padding-bottom: 20px;
+        }
     }
 
     .dropdown__select--img {
-        width: 10px; 
-        height: 10px;
         margin: auto 0 auto 5px;
         position: relative;
-        bottom: 7px;
-
-        @include respond-to('medium') {
-            right: 20px;
-        }
+        bottom: 3px;
+        width: 7px;
     }
 
 
     .dropdown__up {
         display: none;
+
+        @include respond-to('medium') {
+            display: block;
+            position: absolute;
+            z-index: -10;
+            visibility: hidden;
+            transform: translate(-25%, -8%);
+
+            background-color: $light-grey;
+            color: $dark-blue;
+        }
+
+        @include respond-to('large') {
+            transform: translate(-25%, -25%);
+        }
     }
 
     .dropdown__down {
-        background-color: $white;
-        max-width: 300%;
-        width: 300%;
-        margin: 0 auto;
+        background-color: $darker-blue;
+        color: $white;
         overflow-y: scroll;
-        height: 500px;
-        margin-left: -100%;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-
-        @include respond-to('small') {
-            width: 350%;
-            max-width: 350%;
-            margin-left: -125%;
-        }
+        transition: all .3s ease-in-out;
 
         @include respond-to('medium') {
-            position: absolute;
+            background-color: $light-grey;
+            color: $dark-blue;
             height: auto;
             overflow: hidden;
-            top: 17px;
             z-index: 12;
-
-            width: 1000px !important;
+            transform: translate(-25%, -5%);
+            width: 400px;
             display: inline-block;
+            position: absolute;
+            z-index: 8;
+        }
+
+        @include respond-to('large') {
+            width: 1200px;
+            transform: translate(-25%, -10%);
+        }
+
+        @include respond-to('x-large') {
+            width: 1300px;
         }
 
         .dropdown__select {
@@ -267,146 +405,96 @@
 
             @include respond-to('medium') {
                 display: flex;
-                flex-wrap: wrap;
-                margin: 25px 0;
-                overflow: hidden;;
+                flex-direction: column;
+                overflow: hidden;
+                max-width: 90%;
+                margin: 30px auto;
             }  
+
+            @include respond-to('large') {
+                flex-direction: row;
+            } 
         }
 
-        .dropdown__option {
-            background-color: #FFF;
-            color: $black;
-            max-width: 100%;
-            height: 100px;
-            margin: 0 auto;
-            position: relative;
-            padding: 20px;
-
+        .dropdown__container-link {
             @include respond-to('medium') {
-                width: 210px;
-                margin: 0;
+                box-shadow: rgba(114, 114, 114, 0.1) 0px 3px 10px;
+                background-color: $white;
+                margin-bottom: 20px;
+                padding: 15px;
+            }
+
+            @include respond-to('large') {
+                margin: 0 10px 0 0;
+                flex: 30%;
             }
         }
 
         .dropdown__option--img {
-            width: 40px;
-            height: 40px;
-            left: 30px;
-            top: 30px;
-            position: absolute;
+            display: none;
 
-            @include respond-to('small') {
-                left: 25px;
-                top: 20px;
+            @include respond-to('medium') {
+                display: block;
                 width: 50px;
                 height: 50px;
             }
 
+            @include respond-to('large') {
+                margin: 10px auto;
+            }
+        }
+
+        .dropdown__option {
+            margin: 15px 0 15px 30px;
+
+            &:hover {
+                color: $link;
+            }
+
             @include respond-to('medium') {
-                left: 10px;
+                margin: 0;
+                display: flex;
+                flex-direction: row;
+            }
+
+            @include respond-to('large') {
+                flex-direction: column;
             }
         }
 
         .dropdown__option--a {
-            position: absolute;
-            left: 90px;
-            bottom: 30px;
-            display: block;
-            width: 100%;
-            max-width: 200px;
-
-            @include respond-to('small') {
-                left: 100px;
-                bottom: 40px;
-            }
-
-            @include respond-to('medium') {
-                top: 35px;
-                left: 75px;
-                max-width: 165px;
-                height: auto;
-            }
-        }
-
-        .dropdown__option--link a {
-            cursor: pointer;
             font-size: 24px;
-
-            &:hover {
-                color: #000;
-            }
 
             @include respond-to('medium') {
                 font-size: 18px;
+                margin: auto 0;
+                position: relative;
+                left: 30px;
+            }
+
+            @include respond-to('large') {
+                text-align: center;
+                left: 0;
             }
         }
 
-        .dropdown__container-link {
-            max-width: 80%;
-            margin: 30px auto;
-            transition: ease-in-out 0.3s all;
-            display: block;
-
-            &:hover {
-                transform: scale(1.1);
-            } 
+        .dropdown__text {
+            cursor: auto;
 
             @include respond-to('medium') {
-                margin: 15px auto;
-           }
-        }
+                margin-top: 20px;
+            }
 
+            @include respond-to('large') {
+                width: 400px;
+                margin-left: 50px;
+            }
+        }
     }
 
     
     img {
-        // position: absolute;''
         width: 10px;
         height: 100%;
     }
-}
-
-// User
-.nav__user {
-    margin-top: 40px;
-    width: 100%;
-    text-align: center;
-    
-
-    @include respond-to('medium') {
-        right: 10px;
-        top: 10px; 
-        position: absolute;
-        width: 5%;
-        margin-top: 0;
-    }
-     
-}
-
-.nav__user--id, .nav__user--log-out, .search__icon  {
-    transition: ease-in-out 0.3s;
-
-    &:hover {
-        transform: scale(1.2);
-    }
-}
-
-.nav__user--img {
-    width: 25px;
-    height: 25px;
-    margin: 0 auto;
-}
-
-.nav__user--log-out {
-    margin-top: 30px;
-    
-    @include respond-to('medium') {
-       position: relative;
-       margin-top: 0;
-    }
-    
-}
-
-.logout {
-    cursor: pointer;
 }
