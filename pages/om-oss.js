@@ -2,22 +2,19 @@ import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import Nav from '../components/nav/Nav';
 import axios from 'axios';
-import SecondaryBtn from '../components/btn/SecondaryBtn';
 import Image from 'next/image'
 import Footer from '../components/footer/Footer';
-import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import CircleInfo from '../components/containers/CircleInfo';
 import SoMe from '../components/soMe/SoMe';
 import ErrorComponent from '../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import HandleDelete from '../components/dialogBox/HandleDelete';
 import PrimaryBtn from '../components/btn/PrimaryBtn';
 import useMediaQuery from '../components/hooks/mediaQuery/MediaQuery';
+import Services from '../components/services/Services';
 
 export default function About(props) {
 
-    const [authKey, setAuthKey] = useState("");
     const [gallery, setGallery] = useState([]);
     const [fetchError, setFetchError] = useState(false);
 
@@ -48,21 +45,9 @@ export default function About(props) {
 
       }, []);
 
-      console.log(gallery)
-
     useEffect(() => {
         AOS.init();
       }, [])
-    
-    useEffect(() => {
-        const auth = JSON.parse(window.localStorage.getItem("auth"));
-
-        if (!auth) {
-            setAuthKey(null);
-        } else {
-            setAuthKey(auth);
-        }
-    }, [])
 
     if (error) {
         return <ErrorComponent />
@@ -71,7 +56,7 @@ export default function About(props) {
     return (
         <>  
             <Head>
-                <title>About us - Norsk piperehabilitering AS</title>
+                <title>Om oss - NPRAS</title>
                 <meta name="description" content="We help you with rehabilitation of chimney flues, installations of ovens, pipe fittings and installations of steel chimneys." />
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -85,8 +70,6 @@ export default function About(props) {
                <div className='blue-container__margin'>
                <div className='container__padding'>
                 <main>
-
-                    {/* <Breadcrumb path="about" /> */}
                     
                     <div className="about__heading-text">
                         <h1 className="about__h1">{result.heading}</h1>
@@ -136,7 +119,6 @@ export default function About(props) {
                         className="about__good-to-know-container"
                         data-aos="fade-left"
                         data-aos-delay="50"
-                        data-aos-duration="1000"
                         data-aos-easing="ease-in-out"
                         >
                         <h3>{result.good_to_know}</h3>
@@ -146,26 +128,12 @@ export default function About(props) {
                 </div> 
                 </div>
 
-                {/* <section className="about__services">
-                    {service.map((s) => (
-                        <div 
-                            className="about__service-container" 
-                            key={s.id}
-                            data-aos="fade-up"
-                            data-aos-delay="50"
-                            data-aos-duration="1000"
-                            data-aos-easing="ease-in-out"
-                            >
-                            <div className="about__service--img">
-                               <Image src={s.icon} width="100" height="100" /> 
-                            </div>
-                            <div className="about__service--btn">
-                                <SecondaryBtn link={`/service/${s.slug}`} text={s.title} /> 
-                            </div>
-                            
-                        </div>
-                    ))}
-                </section> */}
+                <section
+                data-aos="zoom-in"
+                data-aos-delay="50"
+                data-aos-easing="ease-in-out">
+                    <Services />
+                </section>
 
                 {/* Gallery */}
                 <section>
@@ -174,7 +142,10 @@ export default function About(props) {
 
                     <div className="about__gallery">
                         {gallery.map((g) => (
-                            <div key={g.id} className="about__img-container">
+                            <div key={g.id} className="about__img-container"
+                            data-aos="zoom-in"
+                            data-aos-delay="50"
+                            data-aos-easing="ease-in-out">
                                 <Image src={g.img_url} alt={g.alt_text} width="1000" height="1000" />
                             </div>
                         ))}

@@ -14,17 +14,17 @@ export default function ErrorConf({confirm}) {
                         <Image src={ErrorCircle.src} width="500" height="500" alt="Error dialog appeared. Try again" />
                     </div>
                     <div className="confirmation__heading">
-                        <h4 className="confirmation__heading--text">Oh no! Something went wrong</h4>
+                        <h4 className="confirmation__heading--text">Noe gikk galt</h4>
                     </div>
 
                     <div className="confirmation__p">
                         <p>
-                            Unfortunately, it didn't went.
+                            Meldingen din ble ikke sendt. Du kan kontakte oss på <a href='tel:92 14 13 12'>92 14 13 12.</a>
                         </p>
                     </div>
 
                     <div>
-                        <button onClick={confirm} className="error-btn">Try again</button>
+                        <button onClick={confirm} className="error-btn">Prøv igjen</button>
                     </div>  
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Nav from '../components/nav/Nav';
 import Head from 'next/head'
 import Image from 'next/image'
@@ -8,6 +8,9 @@ import ErrorComponent from '../components/error/ErrorComponent';
 import SecondaryBtn from '../components/btn/SecondaryBtn';
 import PrimaryBtn from '../components/btn/PrimaryBtn';
 import Link from 'next/link';
+import Services from '../components/services/Services';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function ildstederOgOvnsmontering(props) {
 
@@ -18,6 +21,11 @@ export default function ildstederOgOvnsmontering(props) {
   if (error) {
     return <ErrorComponent />
   };
+
+  useEffect(() => {
+    AOS.init();
+  }, [])
+
 
   return (
     <>
@@ -53,7 +61,7 @@ export default function ildstederOgOvnsmontering(props) {
 
           </div>
 
-          <div className='ildsteder'>
+          <div className='ildsteder' >
 
             <div className='ildsteder__text-container'>
               <h3 className='ildsteder__text--h3'>{result.sub_heading_2}</h3>
@@ -63,54 +71,68 @@ export default function ildstederOgOvnsmontering(props) {
             <div className='ildsteder__products' id='ildsteder'>
               {ildsteder.map(function(i) {
                 return (
-                  <div className='ildsteder__product-container' key={i.id}>
-                  <Link href={`/ildsteder/${i.slug}`}>
-                    <>
-                    <div>
-                      <Image src={i.img_1} width='300' height='400' />
-                    </div>
-                    <div className='ildsteder__text-container'>
-                        <h4>{i.title}</h4>
-                        <p className='ildsteder__text--p'>{i.type}</p>
-                        <div className='ildsteder__btn-center'>
-                          <div className='ildsteder__btn'>
-                            <SecondaryBtn link={`/ildsteder/${i.slug}`} text='Les mer' />
+                  <Link href={`/ildsteder/${i.slug}`} key={i.id}>
+                    <div className='ildsteder__product-container'>
+                      {i.recommended === null ? '' :
+                      <>
+                        <div className='ildsteder__recommend'></div>
+                        <p className='ildsteder__recommend--p'>{i.recommended}</p>
+                      </>}
+                      <>
+                      <div>
+                        <Image src={i.img_1} width='300' height='400' />
+                      </div>
+                      <div className='ildsteder__text-container'>
+                          <h4>{i.title}</h4>
+                          <p className='ildsteder__text--p'>{i.type}</p>
+                          <div className='ildsteder__btn-center'>
+                            <div className='ildsteder__btn'>
+                              <SecondaryBtn link={`/ildsteder/${i.slug}`} text='Les mer' />
+                            </div>
                           </div>
-                        </div>
+                      </div>
+                      </>
                     </div>
-                    </>
                   </Link>
-                  </div>
                 )
               })}
             </div>
 
           </div >
 
+          <div id='ovnsmontering'>
+            <div className='ovnsmontering'>
+            <div>
+              <h3 className='ovnsmontering__h3'>{result.sub_heading}</h3>
+              <p>{result.description}</p>
+              <div className='ovnsmontering__btn-container'>
+                <PrimaryBtn link='/kontakt-oss' text='Kontakt oss' />
+              </div>
+            </div>
+
+            <div className='ovnsmontering__imgs'>
+                <div className='ovnsmontering__img1'>
+                  <Image src={result.img_1} width='400' height='500' />
+                </div>
+                <div className='ovnsmontering__img2'>
+                  <Image src={result.img_2} width='400' height='500' />
+                </div>
+            </div>
+            </div>   
+          </div>
+
         </div>
         </div>
         </main>
 
-        <div className='ovnsmontering' id='ovnsmontering'>
-          <div>
-            <h3 className='ovnsmontering__h3'>{result.sub_heading}</h3>
-            <p>{result.description}</p>
-            <div className='ovnsmontering__btn-container'>
-              <PrimaryBtn link='/kontakt-oss' text='Kontakt oss' />
-            </div>
-          </div>
+        <section
+        data-aos="zoom-in"
+        data-aos-duration="1000"
+        data-aos-easing="ease-in-out">
+          <Services />
+        </section>       
 
-          <div className='ovnsmontering__imgs'>
-              <div className='ovnsmontering__img1'>
-                <Image src={result.img_1} width='400' height='500' />
-              </div>
-              <div className='ovnsmontering__img2'>
-                <Image src={result.img_2} width='400' height='500' />
-              </div>
-          </div>
-        </div>          
-
-      <Footer />
+      <Footer /> 
     </>
     )
 }

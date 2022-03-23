@@ -128,14 +128,6 @@ textarea:focus, input:focus {
     box-shadow: rgba(0, 0, 0, 0.2) -3px 3px 10px;
 }
 
-.contact__info-container {
-    @include respond-to('large') {
-        width: 480px;
-        margin: 0 auto;
-        // border: 1px solid blue;
-    }
-}
-
 // IMG
 .contact__img-container {
     // border: 1px solid red;
@@ -191,9 +183,46 @@ textarea:focus, input:focus {
     }
 }
 
+.input__required {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+
+    @include respond-to('small') {
+        max-width: 610px;
+    }
+
+    @include respond-to('large') {
+        max-width: 410px;
+    }
+}
+
+// CONTACT CONTAINER
+.contact__info-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @include respond-to('small') {
+        max-width: 610px;
+        margin-left: 25px;
+    }
+
+    @include respond-to('medium') {
+        max-width: 615px;
+    }
+
+    @include respond-to('large') {
+        max-width: 480px;
+        margin-left: 0;
+        margin: 0 auto;
+    }
+}
+
 // EMAIL
 .contact__info--email, .contact__some {
-    // border: 1px solid red;
     width: 100%;
     max-width: 400px;
     margin-left: 20px;
@@ -201,6 +230,28 @@ textarea:focus, input:focus {
     @include respond-to('small') {
         max-width: 610px;
         margin-left: 40px;
+    }
+
+    @include respond-to('medium') {
+        margin-left: 0px;
+    }
+
+}
+
+.contact__info--email {
+    @include respond-to('small') {
+        width: 145px;
+        margin: 0 auto;
+    }
+
+    @include respond-to('medium') {
+        margin: 0;
+        width: 615px;
+        text-align: center;
+    }
+
+    @include respond-to('large') {
+        width: 415px;
     }
 }
 
@@ -210,10 +261,36 @@ textarea:focus, input:focus {
     margin-top: 20px;
     margin-bottom: 10px;
 
+    @include respond-to('small') {
+        width: 135px;
+        justify-content: space-between;
+        margin: 20px auto 10px auto;
+    }
+
+    @include respond-to('medium') {
+        width: 615px;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    @include respond-to('large') {
+        width: 415px;
+    }
+
     .some__img {
         margin-right: 50px;
         width: 35px;
         height: 35px;
+
+        @include respond-to('small') {
+            margin-right: 0px;
+            width: 25px;
+            height: 25px;
+        }
+
+        @include respond-to('medium') {
+            margin: 0 10px;
+        }
     }
 }
 
@@ -227,6 +304,7 @@ textarea:focus, input:focus {
     float: right;
     margin-bottom: 30px;
     margin-top: 20px;
+    padding: 15px;
 
     @include respond-to('x-small') {
         margin-top: 0;
@@ -241,6 +319,7 @@ textarea:focus, input:focus {
         position: absolute;
         top: 5px;
         right: 5px;
+        padding: 0;
     }
 
     @include respond-to('large') {
@@ -249,8 +328,7 @@ textarea:focus, input:focus {
     }
 
     @include respond-to('x-large') {
-        // top: 20px;
-        // left: 475px;
+        right: 190px;
         display: flex;
         justify-content: center;
     }
@@ -287,7 +365,7 @@ textarea:focus, input:focus {
 }
 
 .option {
-    font-family: objektiv-mk2 !important;
+    font-family: objektiv-mk2, arial !important;
     font-weight: 400 !important;
     font-style: normal !important;
     letter-spacing: 10px !important;
@@ -300,7 +378,7 @@ textarea:focus, input:focus {
     }
 }
 
-// .contact__dropdown--options {
-//     position: absolute;
-//     height: 500px;
-// }
+// ERROR TEXT
+.contat__error--text {
+    color: $error;
+}

@@ -22,7 +22,6 @@ import imageMobile2 from '../public/images/index/oven-index-2.jpg'
 
 export default function Home(props) {
 
-  const [authKey, setAuthKey] = useState("");
   const [services, setServices] = useState([]);
   const [fetchError, setFetchError] = useState(false);
   const isTablet = useMediaQuery("(min-width: 767px)");
@@ -49,16 +48,6 @@ export default function Home(props) {
 
   useEffect(() => {
     AOS.init();
-  }, [])
-
-  useEffect(() => {
-      const auth = window.localStorage.getItem("auth");
-
-      if (!auth) {
-          setAuthKey(null);
-      } else {
-          setAuthKey(auth);
-      }
   }, [])
 
   const result = props.result;
@@ -105,22 +94,12 @@ export default function Home(props) {
 
               <div className="index__images-container full-width__imgs">
                 <div 
-                  className={`index__img ${isTablet ? "index__img-1" : "index__img-1--mobile"}`}
-                  // data-aos="fade-up"
-                  // data-aos-delay="50"
-                  // data-aos-duration="2500"
-                  // data-aos-easing="ease-in-out"
-                  >
+                  className={`index__img ${isTablet ? "index__img-1" : "index__img-1--mobile"}`}>
                   <Image src={isTablet ? result.img_2 : imageMobile1} alt="picture" width={isTablet ? "400" : "350"} height={isTablet ? "550" : "500"} />
                 </div>
 
                 <div 
-                  className={`index__img ${isTablet ? "index__img-2" : "index__img-2--mobile"}`}
-                  // data-aos="fade-up"
-                  // data-aos-delay="50"
-                  // data-aos-duration="2000"
-                  // data-aos-easing="ease-in-out"
-                  >
+                  className={`index__img ${isTablet ? "index__img-2" : "index__img-2--mobile"}`}>
                   <Image src={isTablet ? result.img_1 : imageMobile2} alt="picture" width={isTablet ? "500" : "450"} height={isTablet ? "600" : "500"} />
                 </div>
               </div>
@@ -128,7 +107,11 @@ export default function Home(props) {
             </header>
 
             {/* Våre tjenester */}
-            <main className="our-services-container">
+            <main className="our-services-container"
+            data-aos="zoom-in"
+            data-aos-duration="1000"
+            data-aos-easing="ease-in-out"
+            >
               <div>
                 <h2>Våre tjenester</h2>
 
@@ -138,10 +121,9 @@ export default function Home(props) {
                           <div 
                             key={s.id}  
                             className="our-services__services-container"
-                            data-aos="fade-up"
-                            data-aos-delay="50"
-                            data-aos-duration="1000"
+                            data-aos="zoom-in"
                             data-aos-easing="ease-in-out"
+                            data-aos-duration="1000"
                             >
                               <div className='our-services__services--btn'>
                               <a href={`/${s.slug}`}>
@@ -182,13 +164,8 @@ export default function Home(props) {
           <div className="consider-rehab__all-cards">
             {result.rehabilitation.cards.map(r => (
               <div 
-                key={r.number} 
-                className="consider-rehab__card"
-                data-aos="fade-up"
-                data-aos-delay="50"
-                data-aos-duration="1000"
-                data-aos-easing="ease-in-out"
-                >
+                key={r.number}
+                className='consider-rehab__card'>
                   <div className="consider-rehab__card--heading">
                     <h3>{r.title}</h3>
                   </div>
@@ -212,17 +189,11 @@ export default function Home(props) {
         </section>
 
         {/* Bruk profesjonelle */}
-        <section className="use-pro"
-                data-aos="fade-up"
-                data-aos-delay="50"
-                data-aos-duration="1000"
-                data-aos-easing="ease-in-out"
-                >
+        <section className="use-pro">
 
           <div className="use-pro__center">
             <div 
-              className="use-pro__content"
-              >
+              className="use-pro__content">
                 <h2 className="use-pro__content--subheading">{result.use_professionals.heading}</h2>
                 <p>
                   {result.use_professionals.description_2}
@@ -239,12 +210,7 @@ export default function Home(props) {
             
         </section>
         
-        <div 
-        data-aos="fade-up"
-        data-aos-delay="50"
-        data-aos-duration="1000"
-        data-aos-easing="ease-in-out"
-        >
+        <div>
           <Testimonials />
         </div>
 

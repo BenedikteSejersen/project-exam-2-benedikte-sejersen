@@ -48,7 +48,7 @@
 .hamburger-active {
     display: flex;
     align-items: center;
-    position: absolute;
+    position: fixed;
     right: 15px;
 }
 
@@ -188,7 +188,7 @@
         position: absolute;
         height: 0%;
         background-color: transparent;
-        color: $dark-blue;
+        color: $darker-blue;
     }
 
     .nav__menu {
@@ -249,8 +249,6 @@
     }
 
     .nav__link {
-        cursor: pointer;
-
         @include respond-to('medium') {
             margin-right: 10px;
         }
@@ -306,7 +304,12 @@
 
     .search__icon {
         @include respond-to('medium') {
+            transition: 0.2s all ease-in-out;
             margin-left: 20px;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
 
         @include respond-to('large') {
@@ -338,7 +341,6 @@
     .dropdown__link-container {
         display: flex;
         position: relative;
-        cursor: pointer;
 
         @include respond-to('medium') {
             padding-bottom: 20px;
@@ -416,16 +418,23 @@
             } 
         }
 
+        .dropdown__container-link  {
+            &:hover {
+                color: $link;
+            }
+        }
+
         .dropdown__container-link {
+            cursor: pointer;
             @include respond-to('medium') {
-                box-shadow: rgba(114, 114, 114, 0.1) 0px 3px 10px;
+                box-shadow: rgba(131, 131, 131, 0.1) 0px 3px 10px;
                 background-color: $white;
                 margin-bottom: 20px;
                 padding: 15px;
             }
 
             @include respond-to('large') {
-                margin: 0 10px 0 0;
+                margin: 0 10px 0 15px;
                 flex: 30%;
             }
         }
@@ -447,10 +456,6 @@
         .dropdown__option {
             margin: 15px 0 15px 30px;
 
-            &:hover {
-                color: $link;
-            }
-
             @include respond-to('medium') {
                 margin: 0;
                 display: flex;
@@ -470,6 +475,7 @@
                 margin: auto 0;
                 position: relative;
                 left: 30px;
+                line-height: 25px;
             }
 
             @include respond-to('large') {
@@ -497,4 +503,9 @@
         width: 10px;
         height: 100%;
     }
+}
+
+.nav__phone--number {
+    position: relative;
+    top: 10px;
 }

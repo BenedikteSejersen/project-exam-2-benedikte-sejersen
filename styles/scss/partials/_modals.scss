@@ -82,15 +82,6 @@
 }
 
 // Success
-.success-btn {
-    background-color: $success;
-
-    &:hover {
-        background-color: #299755;
-        color: #FFF;
-    }
-}
-
 .success-box__img {
 
     &::before {
@@ -109,22 +100,13 @@
 }
 
 // Error
-.error-btn {
-    background-color: $error;
-    color: #FFF;
-
-    &:hover {
-        background-color: #a02c35;
-    }
-}
-
 .error-box__img {
 
     &::before {
         content: "";
         background-image: url(../../public/images/icons-confirmation/error.png);
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: 70% 90%;
         background-position: center;
         position: absolute;
         top: -20px;

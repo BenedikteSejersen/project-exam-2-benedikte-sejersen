@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import ErrorComponent from '../components/error/ErrorComponent';
 import Nav from '../components/nav/Nav';
@@ -6,6 +6,9 @@ import Head from 'next/head'
 import Footer from '../components/footer/Footer';
 import Image from 'next/image';
 import PrimaryBtn from '../components/btn/PrimaryBtn';
+import Services from '../components/services/Services';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function rehailitering(props) {
 
@@ -15,6 +18,10 @@ export default function rehailitering(props) {
   if (error) {
     return <ErrorComponent />
   };
+
+  useEffect(() => {
+    AOS.init();
+  }, [])
 
   return (
     <>
@@ -56,7 +63,7 @@ export default function rehailitering(props) {
             
             <div className='kamerainspeksjon__text-container'>
               <div className='kamerainspeksjon__heading-container'>
-                <div className='orange-text kamerainspeksjon__new'>NY</div>
+                <p className='orange-text kamerainspeksjon__new'>NY</p>
                 <h3 className='kamerainspeksjon__h1'>{result.sub_heading}</h3>
               </div>
               <p className='kamerainspeksjon__p--1'>{result.sub_description}</p>
@@ -71,6 +78,13 @@ export default function rehailitering(props) {
         </div>
       </div>
     </main>
+
+    <section
+    data-aos="zoom-in"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out">
+        <Services />
+      </section>
 
     <Footer />
 

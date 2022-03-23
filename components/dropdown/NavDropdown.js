@@ -3,11 +3,11 @@ import Image from 'next/image'
 import useMediaQuery from '../hooks/mediaQuery/MediaQuery';
 import axios from 'axios'
 import Link from 'next/link'
-import ArrowUp from '../../public/icons/noun-arrow-blue-up.png';
 import ArrowDown from '../../public/icons/noun-arrow-blue.png';
 import ArrowDownWhite from '../../public/icons/noun-arrow-white.png';
 import ArrowUpWhite from '../../public/icons/noun-arrow-white-up.png';
 import ArrowUpRed from '../../public/icons/noun-arrow-red-up.png';
+import { useRouter } from 'next/router'
 
 export default function Dropdown() {
 
@@ -15,6 +15,8 @@ export default function Dropdown() {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [fetchError, setFetchError] = useState(false); 
     const isDesktop = useMediaQuery("(min-width: 992px)");
+
+    const router = useRouter();
 
     const toggleDropdown = () => {
         setDropdownOpen(!dropdownOpen);
@@ -51,7 +53,12 @@ export default function Dropdown() {
                     onMouseEnter={() => setDropdownOpen(true)}
                     onMouseLeave={() => setDropdownOpen(false)} 
                     >
-                        <div className="nav__link--extra-a">Tjenester</div>
+                        <div className={`nav__link--extra-a 
+                        ${router.pathname == "/rehabilitering" ? "active" : ""}
+                        ${router.pathname == "/taksikring-og-pipebeslag" ? "active" : ""}
+                        ${router.pathname == "/stalpipe" ? "active" : ""}
+                        ${router.pathname == "/ildsteder-og-ovnsmontering" ? "active" : ""}
+                        `}>Tjenester</div>
                         <span className="dropdown__select--img">
                             {dropdownOpen ? 
                                 <Image
@@ -73,7 +80,13 @@ export default function Dropdown() {
                     <div 
                     className="dropdown__link-container" 
                     onClick={toggleDropdown} >
-                        <div className="nav__link--extra-a">Tjenester</div>
+                        <div className={`nav__link--extra-a 
+                        ${router.pathname == "/rehabilitering" ? "active" : ""}
+                        ${router.pathname == "/taksikring-og-pipebeslag" ? "active" : ""}
+                        ${router.pathname == "/stalpipe" ? "active" : ""}
+                        ${router.pathname == "/ildsteder-og-ovnsmontering" ? "active" : ""}
+                        `}>
+                            Tjenester</div>
                         <span className="dropdown__select--img">
                            <Image
                                 src={dropdownOpen ? ArrowUpWhite.src : ArrowDownWhite.src}
@@ -85,7 +98,7 @@ export default function Dropdown() {
 
             }
 
-                {/* TERNARY OPERATOR ISDESKTOP.... */}
+                {/* TERNARY OPERATOR ISDESKTOP.... */} 
                 <div 
                 className={dropdownOpen ? "dropdown__down" : "dropdown__up"}
                 onMouseEnter={() => setDropdownOpen(true)} 
@@ -94,14 +107,14 @@ export default function Dropdown() {
                 <div className="dropdown__select"> 
 
                     {service.map((s) => (
-                        <div key={s.id} className="link__container dropdown__container-link">
-                            <Link href={`/${s.slug}`} className="dropdown__option--link">
-                                <div as="option" className="dropdown__option">
-                                    <img src={s.icon} alt={`service icon ${s.title}`} className="dropdown__option--img" />
-                                    <p className="dropdown__option--a">{s.title}</p> 
+                            <Link key={s.id} href={`/${s.slug}`} className="dropdown__option--link">
+                                <div className="link__container dropdown__container-link">
+                                    <div as="option" className="dropdown__option">
+                                        <img src={s.icon} alt={`service icon ${s.title}`} className="dropdown__option--img" />
+                                        <p className={`dropdown__option--a ${router.pathname === `/${s.slug}` ? "active" : ""}`}>{s.title}</p> 
+                                    </div>
                                 </div>
                             </Link> 
-                        </div>
                     ))}
 
                     {isDesktop ? 

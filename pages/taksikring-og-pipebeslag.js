@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import ErrorComponent from '../components/error/ErrorComponent';
 import Nav from '../components/nav/Nav';
@@ -8,11 +8,13 @@ import SecondaryBtn from '../components/btn/SecondaryBtn';
 import Image from 'next/image';
 import PrimaryBtn from '../components/btn/PrimaryBtn';
 import useMediaQuery from '../components/hooks/mediaQuery/MediaQuery';
+import Services from '../components/services/Services';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function taksikringOgPipebeslag(props) {
 
   const result = props.result;
-  console.log(result)
 
   const isTablet = useMediaQuery("(min-width: 767px)");
 
@@ -21,6 +23,10 @@ export default function taksikringOgPipebeslag(props) {
   if (error) {
     return <ErrorComponent />
   };
+
+  useEffect(() => {
+    AOS.init();
+  }, [])
 
   return (
     <>
@@ -87,6 +93,13 @@ export default function taksikringOgPipebeslag(props) {
       </div>
       </div>
       </main>
+
+      <section
+      data-aos="zoom-in"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out">
+        <Services />
+      </section>
 
       <Footer />
 

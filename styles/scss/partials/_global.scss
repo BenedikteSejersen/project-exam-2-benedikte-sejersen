@@ -5,9 +5,13 @@
     word-wrap: break-word;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: $light-grey;
-    color: $dark-blue;
+    color: $darker-blue;
     overflow-x: hidden;
     max-width: 95%;
     margin: 0 auto;

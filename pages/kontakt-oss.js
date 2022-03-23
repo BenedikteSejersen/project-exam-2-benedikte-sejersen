@@ -76,11 +76,14 @@ export default function Contact(props) {
 
     // Form submit function
     const onSubmit = (e) => {
-
-        // e.preventDefault();
         setSubmitting(true);
 
         send(
+            // 'service_tqkqmk4',
+            // 'template_p79dm3l',
+            // toSend,
+            // 'aQnjCHLb0XF_LwwqR'
+
             'service_27mvh1t',
             'template_3iftnuo',
             toSend,
@@ -119,8 +122,6 @@ export default function Contact(props) {
 
             <div className="blue-container">
 
-                {/* <Breadcrumb path="contact" /> */}
-
                 <div className="contact">
 
                         <main className="contact__form-info">
@@ -141,7 +142,7 @@ export default function Contact(props) {
                                                     value={toSend.from_name}
                                                     name='from_name'
                                                     />
-                                                    {errors.from_name && <FormError>{errors.from_name.message}</FormError>}
+                                                    <div className='contat__error--text'>{errors.from_name && <FormError>{errors.from_name.message}</FormError>}</div>
                                             </div>
                                                 {/* Dropdown */}
                                                 <div className="contact__input-container">
@@ -154,7 +155,6 @@ export default function Contact(props) {
                                                         value={toSend.service}
                                                         name='service'
                                                         >
-                                                            {/* <div className='contact__dropdown--options'> */}
                                                                 <option
                                                                 className='option'
                                                                 value=''
@@ -169,10 +169,9 @@ export default function Contact(props) {
                                                                 <option className="option" value="Spørsmål" >Spørsmål</option>
                                                                 <option className="option" value="Befaring" >Befaring</option>
                                                                 <option className="option" value="Annet">Annet</option>
-                                                            {/* </div> */}
                                                         </select>
                                                 </div>
-                                                    {errors.service && <FormError>{errors.service.message}</FormError>}
+                                                <div className='contat__error--text'>{errors.service && <FormError>{errors.service.message}</FormError>}</div>
                                             </div>  
                                         </div>
                                             
@@ -186,7 +185,7 @@ export default function Contact(props) {
                                                 value={toSend.number}
                                                 name='number'
                                                  />
-                                                {errors.number && <FormError>{errors.number.message}</FormError>}
+                                                <div className='contat__error--text'>{errors.number && <FormError>{errors.number.message}</FormError>}</div>
                                             </div>
                                             <div className="contact__input-container">
                                                 <p className='contact__input--p'>E-post:</p>
@@ -197,7 +196,7 @@ export default function Contact(props) {
                                                 value={toSend.reply_to}
                                                 name='reply_to'
                                                 />
-                                                {errors.reply_to && <FormError>{errors.reply_to.message}</FormError>}
+                                                <div className='contat__error--text'>{errors.reply_to && <FormError>{errors.reply_to.message}</FormError>}</div>
                                             </div>
                                         </div> 
 
@@ -210,7 +209,7 @@ export default function Contact(props) {
                                             value={toSend.message_to}
                                             name='message_to' 
                                             />
-                                            {errors.message_to && <FormError>{errors.message_to.message}</FormError> }
+                                            <div className='contat__error--text'>{errors.message_to && <FormError>{errors.message_to.message}</FormError>}</div>
                                         </div>
 
                                         <div className="contact__btn">
@@ -223,17 +222,8 @@ export default function Contact(props) {
                             </div>
 
                             <div className="contact__info-container">
-                                {/* {props.contact.contact.contact_methods.map(c => (
-                                    <div className="contact__info" key={c.id}>
-                                        <div  className="contact__info--img">
-                                            <Image src={c.contact_icon} alt="contact icon" width="30" height="30" />
-                                        </div>
-                                        <h4 className="p__normal">{c.contact_info}</h4>
-                                    </div>
-                                ))} */}
-
                                 <div className='contact__info--email'>
-                                    <p>janne@npras.no</p>
+                                    <a href='mailto:janne@npras.no'>janne@npras.no</a>
                                 </div>
 
                                 <SoMe classname="contact__some" width="50" height="50" />
@@ -248,7 +238,7 @@ export default function Contact(props) {
 
                             <div>
                                 <CircleInfo
-                                    text="Mandag - Fredag 07.00 - 15.00" 
+                                    text='Åpningstid: Mandag - Fredag 07.00 - 15.00'
                                     classname="contact__circle-info" />
                             </div>
                             

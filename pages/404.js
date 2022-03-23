@@ -14,8 +14,6 @@ export default function Custom404() {
 
         <div className="not-found">
 
-        {/* <div className="not-found__house-shape"> */}
-
         <div className="not-found__house-shape">
             <Image src={HouseShape.src} width="2000" height="2000" />
         </div>

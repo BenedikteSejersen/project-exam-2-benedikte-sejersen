@@ -3,39 +3,21 @@ import axios from 'axios';
 import Head from 'next/head';
 import Navigation from '../../components/nav/Nav';
 import Image from 'next/image';
-import Breadcrumb from '../../components/breadcrumb/Breadcrumb';
 import Footer from '../../components/footer/Footer';
-import Update from '../../components/admin/UpdateServices';
-import SecondaryBtn from '../../components/btn/SecondaryBtn';
 import ErrorComponent from '../../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PrimaryBtn from '../../components/btn/PrimaryBtn';
 
-export default function ildsted({ildsted, error}) {
-
-    const [authKey, setAuthKey] = useState("");
-    const [clicked, setClicked] = useState(false);
+export default function ildsted({ildsted, error, ildsteder}) {
 
     const ildstedT = ildsted[0];
+
+    console.log(ildsteder)
 
     useEffect(() => {
         AOS.init();
       }, [])
-
-  useEffect(() => {
-      const auth = window.localStorage.getItem("auth");
-
-      if (!auth) {
-          setAuthKey(null);
-      } else {
-          setAuthKey(auth);
-      }
-  }, [])
-
-  const handleClick = () => {
-    setClicked(true);
-  }
 
   if (error) {
       return <ErrorComponent />
@@ -59,6 +41,7 @@ export default function ildsted({ildsted, error}) {
             <div className='blue-container__margin'>
                 <div>
                     <div className='ildsted__heading-container'>
+                        <p className='orange-text ildsteder__recommend--p ildsted__recommend'>{ildstedT.recommended}</p>
                         <h1 className='ildsted__h1'>{ildstedT.title}</h1>
                         <h4>{ildstedT.type}</h4> 
                     </div>
@@ -99,11 +82,12 @@ export default function ildsted({ildsted, error}) {
             </div>
             </main>
 
-            {/* <section>
+            <section>
                 <div>
-                    <h3>Andre ildsteder du kanskje vil like</h3>
+                    <h3>Produkter du kanskje vil like</h3>
+                    <RelatedProducts product={ildsteder} />
                 </div>
-            </section> */}
+            </section>
 
            <Footer /> 
         </div>
@@ -115,16 +99,22 @@ export async function getServerSideProps(content) {
     const url = process.env.NEXT_PUBLIC_API_ILDSTEDER + `?slug=${content.params.slug}`;
 
     let ildsted = [];
+    let ildsteder = [];
 
     try {
         const res = await axios.get(url);
         ildsted = res.data;
+
+        const res2 = await axios.get(process.env.NEXT_PUBLIC_API_ILDSTEDER);
+        ildsteder = res2.data;
+
     } catch(err) {
         console.log(err);
         return {
             props: {
                 error: true,
                 ildsted: ildsted,
+                ildsteder: ildsteder,
             },
         };
     }
@@ -133,6 +123,29 @@ export async function getServerSideProps(content) {
         props: {
             error: false,
             ildsted: ildsted,
+            ildsteder: ildsteder,
         },
     };
+}
+
+const RelatedProducts = ({product}) => {
+
+    let products = [];
+
+    for (let i = 0; i < 3; i++) {
+        let productArr = product.map(p => {
+            return (
+                <div>
+                    <div>
+                        <Image width='500' height='500' src={p.img_1} />
+                    </div>
+                    <h4>{p.title}</h4>
+                </div>
+            )
+                
+        })
+        products.push(...productArr);
+    }
+
+    return products;
 }

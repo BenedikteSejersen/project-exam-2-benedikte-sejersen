@@ -1,10 +1,19 @@
 .ildsted__heading-container {
     margin: 10px 0;
     max-width: 1300px;
+    position: relative;
 
     @include respond-to('large') {
         margin: 50px auto 30px auto;
     }
+}
+
+.ildsted__recommend {
+    position: absolute;
+    text-transform: uppercase;
+    top: -15px;
+    font-size: 14px;
+    font-weight: 700;
 }
 
 .ildsted__product {
@@ -42,7 +51,7 @@
         margin-right: 100px;
         margin-bottom: 40px;
         flex: 30%;
-        max-width: 500px;
+        max-width: 600px;
     }
 
     @include respond-to('x-large') {

@@ -7,6 +7,9 @@ import Footer from '../components/footer/Footer';
 import Image from 'next/image';
 import PrimaryBtn from '../components/btn/PrimaryBtn';
 import useMediaQuery from '../components/hooks/mediaQuery/MediaQuery';
+import Services from '../components/services/Services';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function stålpipe(props) {
 
@@ -15,11 +18,13 @@ export default function stålpipe(props) {
 
   const isTablet = useMediaQuery("(min-width: 767px)");
 
-  console.log(result)
-
   if (error) {
     return <ErrorComponent />
   };
+
+  useEffect(() => {
+    AOS.init();
+  }, [])
   
   return( 
     <>
@@ -64,6 +69,13 @@ export default function stålpipe(props) {
           </div>
         </div>
       </main>
+
+      <section
+      data-aos="zoom-in"
+      data-aos-duration="1000"
+      data-aos-easing="ease-in-out">
+        <Services />
+      </section>
 
       <Footer />
 

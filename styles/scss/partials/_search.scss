@@ -1,12 +1,17 @@
+.search {
+    position: absolute;
+    z-index: 101;
+}
+
 .search__background {
-    background-color: $dark-blue;
+    background-color: $darker-blue;
     position: fixed;
     top: 0;
     left: 0;
     right: 0; 
     bottom: 0;
     z-index: 100;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .search__icon {
@@ -17,40 +22,43 @@
 .search__content {
     position: fixed;
     z-index: 101;
-    color: #FFF;
-    width: 90%;
-    margin: auto;
-    top: 25%;
+    color: $white;
+    width: 70%;
+    top: 20%;
+    left: 10%;
 
     @include respond-to('medium') {
-        margin: 0;
-        left: 25%;
-        width: 50%;
+        max-width: 600px;
+        top: 30%;
+    }
+    @include respond-to('large') {
+        left: 30%;
     }
 }
 
 .search__input {
     border: 0;
-    border-bottom: 2px solid #FFF;
+    border-bottom: 2px solid $white;
     background-color: transparent;
     font-size: 25px;
-    padding: 10px;
-    width: 80%;
+    padding: 10px; 
+    width: 100%;
+    display: block;
 
     @include respond-to('medium') {
         width: 100%;
-        padding: 20px 40px;
+        padding: 5px 10px;
         font-size: 35px;
     }
 }
 
 .search__input[type="text"] {
-    color: #FFF;
+    color: $white;
 }
 
 .search__input::placeholder {
     font-size: 25px;
-    color: #FFF;
+    color: $white;
     opacity: 1;
 
     @include respond-to('medium') {
@@ -61,27 +69,63 @@
 .search__close {
     cursor: pointer;
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 30px;
+    right: 35px;
     z-index: 101 !important;
-    width: 50px;
-    height: 50px;
+    width: 25px;
+    height: 25px;
     transition: ease-in-out 0.3s all;
+
+    @include respond-to('medium') {
+        width: 35px;
+        height: 35px;
+        top: 35px;
+    }
 
     &:hover {
         transform: scale(1.2);
     }
 }
 
+.search__no-result {
+    margin-top: 10px;
+}
+
 // Results
 .search__result--list {
-    margin: 30px auto;
+    margin: 0 auto;
+    overflow-y: auto;
+    height: 70vh;
+    width: 100%;
+    cursor: pointer;
+
+    @include respond-to('medium') {
+        height: 60vh;
+    }
 }
 
 .search__result-container {
     margin: 20px auto;
+    border-bottom: 1px solid rgb(172, 172, 172);
+    transition: 0.2s ease-in-out all;
 
     &:hover {
-        text-decoration: underline;
+        color: $link;
     }
+
+    &:active {
+        color: $orange;
+    }
+}
+
+// FIREPLACES
+.search__fireplaces--result {
+    @include respond-to('small') {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.search__fireplaces--img {
+    width: 80px;
 }

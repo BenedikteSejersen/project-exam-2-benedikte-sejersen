@@ -1,0 +1,43 @@
+.services-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px auto;
+
+    @include respond-to('small') {
+        max-width: 85%;
+    }
+
+    @include respond-to('medium') {
+        max-width: 80%;
+    }
+
+    @include respond-to('large') {
+        max-width: 1000px;
+    }
+}
+
+.service__link {
+    cursor: pointer;
+    margin: 15px auto;
+    padding: 10px 0;
+    width: 150px;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.services__icon {
+    width: 50px;
+    height: 50px;
+    margin: 5px auto;
+}
+
+.services__p-container {
+    text-align: center;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

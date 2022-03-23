@@ -4,7 +4,7 @@ import '../styles/fonts/rns-sanz/stylesheet.css';
 import '../styles/fonts/gothic-a1/stylesheet.css';
 import React, { useEffect, useState } from "react";
 import {Router} from 'next/router';
-import { ClimbingBoxLoader } from 'react-spinners';
+import { BeatLoader } from 'react-spinners';
 import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
@@ -41,8 +41,7 @@ function MyApp({ Component, pageProps }) {
       {loading ? (
         <>
           <div className="loader-container">
-            <h4 className="loader-text">Loading page</h4>
-            <ClimbingBoxLoader />
+            <BeatLoader />
           </div>
         </>
         ) : (

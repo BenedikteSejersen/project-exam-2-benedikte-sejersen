@@ -129,27 +129,14 @@
 
 // Buttons
 button {
-    // border: 0px;
-    // cursor: pointer;
-    // height: 40px;
-    // border-radius: 20px;
-    // width: 150px;
-    // text-align: center;
-    // display: inline-block;
-    // position: relative;
-    // transition: 0.2s ease-in-out;
-
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.20) 0px 3px 6px;
-    background-color: $link;
-    border: 2px solid $link;
     display: inline-block;
     height: 50px;
     width: 170px;
     position: relative;
     transition: .2s ease-in-out;
     z-index: 4;
-    color: $white;
     cursor: pointer;
 
     @include respond-to('small') {
@@ -157,8 +144,6 @@ button {
     }
 
     &:hover {
-        background-color: $orange;
-        border: 2px solid $orange;
         letter-spacing: 2px;
     }
 
@@ -171,6 +156,18 @@ button {
     }
 }
 
+.submit {
+    background-color: $link;
+    border: 2px solid $link;
+    color: $white;
+
+    &:hover {
+        background-color: $orange;
+        border: 2px solid $orange;
+    }
+
+}
+
 // Services
 .our-services__services--btn {
     transition: ease-in-out .2s;
@@ -181,12 +178,26 @@ button {
 }
 
 // Dialog boxes
-.success__btn {
+.success-btn {
     background-color: $success;
+    border: 2px solid $success;
+    color: #000;
+
+    &:hover {
+        background-color: #185a32 !important;
+        border: 2px solid #185a32;
+    }
 }
 
-.error__btn {
+.error-btn {
     background-color: $error;
+    border: 2px solid $error;
+    color: $white;
+
+    &:hover {
+        background-color: #af2f3a;
+        border: 2px solid #af2f3a;
+    }
 }
 
 .contact-link {

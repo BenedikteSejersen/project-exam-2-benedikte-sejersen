@@ -5,10 +5,10 @@ import Image from 'next/image'
 import Filter from '../filtering/Filter'
 import NavLogo from '../../public/images/logo/logo-black.png'
 import NavLogoWhite from '../../public/images/logo/npr-logo-white.png'
-import PhoneBlackIcon from '../../public/images/icons/phone-icon.png'
-import PhoneWhiteIcon from '../../public/images/icons/phone-white-icon.png'
-import SearchBlackIcon from '../../public/images/icons/search-black-icon.png'
-import SearchWhiteIcon from '../../public/images/icons/search-white-icon.png'
+import PhoneBlackIcon from '../../public/icons/tlf-blå.svg'
+import PhoneWhiteIcon from '../../public/icons/tlf-hvit.svg'
+import SearchBlackIcon from '../../public/icons/searh-icon.svg';
+import SearchWhiteIcon from '../../public/icons/searh-icon-white.svg'
 import { Squash as Hamburger } from 'hamburger-react';
 import Dropdown from '../dropdown/NavDropdown'
 import useMediaQuery from '../hooks/mediaQuery/MediaQuery';
@@ -21,15 +21,6 @@ export default function Navigation() {
     const [open, setOpen] = useState(false);
 
     const isDesktop = useMediaQuery('992px');
-
-    // Log out
-    function handleClickLogout() {
-        setOpenLogout(true);
-    }
-
-    function handleCancel() {
-        setOpenLogout(false);
-    }
 
     function handleClick() {
         setOpen(!open);
@@ -49,7 +40,9 @@ export default function Navigation() {
                 <div className="nav__mobile">
                     <li className='logo logo-active'>
                         <Link href="/" > 
-                            <Image src={NavLogo.src} width='300' height='80' />
+                            <div>
+                                <Image src={NavLogo.src} width='300' height='80' />
+                            </div>
                         </Link>
                     </li>
 
@@ -64,11 +57,11 @@ export default function Navigation() {
                     <div className="nav__menu">
 
                         {isDesktop ? ' ' : 
-                        <div className="logo logo-active">
-                            <Link href="/" > 
+                        <Link href="/" > 
+                            <div className="logo logo-active">
                                 <Image src={NavLogoWhite.src} alt="Norsk piperehabilitering AS logo" width='300' height='80' />
-                            </Link>
-                        </div>}
+                            </div>
+                        </Link>}
                         
                         <div> 
 
@@ -110,7 +103,9 @@ export default function Navigation() {
                                 {hamburgerOpen ? 
                                  <span className="nav__phone-option">
                                     <img src={PhoneWhiteIcon.src} alt="phone icon" width="30" height="30" className="nav__phone--icon" />
-                                    <Link href="tel:+47 921 41 312" >92 14 13 12</Link>
+                                    <Link href="tel:+47 921 41 312" >
+                                        <p className='nav__phone--number'>92 14 13 12</p>
+                                        </Link>
                                 </span> 
                                 : 
                                 <>
@@ -128,26 +123,6 @@ export default function Navigation() {
                         </div>
                         </div>
 
-                        {/* {authKey ?  
-                        <div className="nav__user">
-                            <a href="/admin" className="nav__user--id">
-                                {hamburgerOpen ? 
-                                <div className="nav__user--img">
-                                    <Image src={UserWhite.src} alt="user icon" width="30" height="35" />
-                                </div> 
-                                : 
-                                <div className="nav__user--img">
-                                    <Image src={User.src} alt="user icon" width="30" height="35" />
-                                </div>}
-                                <p className="nav__user--id">{userId}</p> 
-                            </a>
-                        
-                            <div className="nav__user--log-out">
-                                <p className="logout" onClick={() => handleClickLogout()}>Logout</p>
-                            </div>
-                        </div>
-                        : "" } */}
-
                     </div>
                 </div>
 
@@ -157,12 +132,6 @@ export default function Navigation() {
         <span className="nav__search-option">
             {open && (<Filter click={() => handleClick()} />)}
         </span>
-
-        {/* <span>
-            {openLogout ?
-                <Logout HandleCancel={() => handleCancel()} />
-            : "" }
-        </span> */}
         </>
     )
 }

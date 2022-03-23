@@ -14,17 +14,17 @@ export default function Success({confirm}) {
                         <Image src={SuccessCircle.src} width="500" height="500" alt="Message successfully sent" />
                     </div>
                     <div className="confirmation__heading">
-                        <h4 className="confirmation__heading--text">Yes, message is sent!</h4>
+                        <h4 className="confirmation__heading--text">Meldingen er sendt!</h4>
                     </div>
 
                     <div className="confirmation__p">
                         <p>
-                            Thank you for contacting us. We will be answering you as fast as possible.
+                            Takk for at du kontakter oss. Vi vil ta kontakt så fort vi har mulighet.
                         </p>
                     </div>
 
                     <div>
-                        <button onClick={confirm} className="success-btn">Continue</button>
+                        <button onClick={confirm} className="success-btn">Fortsett</button>
                     </div>  
                 </div>
             </div>
