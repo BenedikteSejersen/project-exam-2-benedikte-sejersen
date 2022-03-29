@@ -3,7 +3,6 @@ import UpdateIcon from '../../public/images/icons/update-icon.png'
 import Image from 'next/image'
 import Link from 'next/link'
 import axios from 'axios';
-import UserIcon from '../../public/images/icons/user.svg';
 import UseLocalStorage from '../../hooks/UseLocalStorage';
 import ErrorConf from '../dialogBox/ErrorConf';
 import { useForm } from "react-hook-form";
