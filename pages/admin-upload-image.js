@@ -7,7 +7,6 @@ import Footer from '../components/footer/Footer';
 import UseLocalStorage from '../hooks/UseLocalStorage';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import WhiteContainer from '../components/containers/WhiteContainer';
-import UserIcon from '../public/images/icons/user.svg';
 import Image from 'next/image'
 import { useForm } from "react-hook-form";
 import * as yup from "yup";

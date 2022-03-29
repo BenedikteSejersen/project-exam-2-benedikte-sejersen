@@ -10,7 +10,6 @@ import FormError from '../components/login/FormError';
 import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import WhiteContainer from '../components/containers/WhiteContainer';
 import axios from 'axios'
-import UserIcon from '../public/images/icons/user.svg'
 import Image from 'next/image'
 import TextareaAutosize from 'react-textarea-autosize';
 import Footer from '../components/footer/Footer';
