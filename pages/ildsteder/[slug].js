@@ -13,8 +13,6 @@ export default function ildsted({ildsted, error, ildsteder}) {
 
     const ildstedT = ildsted[0];
 
-    console.log(ildsteder)
-
     useEffect(() => {
         AOS.init();
       }, [])
@@ -85,7 +83,7 @@ export default function ildsted({ildsted, error, ildsteder}) {
             <section>
                 <div>
                     <h3>Produkter du kanskje vil like</h3>
-                    <RelatedProducts product={ildsteder} />
+                    <RelatedProducts ti={ildstedT.title} ty={ildstedT.type} product={ildsteder} />
                 </div>
             </section>
 
@@ -128,24 +126,40 @@ export async function getServerSideProps(content) {
     };
 }
 
-const RelatedProducts = ({product}) => {
+const RelatedProducts = ({ti, ty, product}) => {
 
-    let products = [];
+    console.log(product)
 
-    for (let i = 0; i < 3; i++) {
-        let productArr = product.map(p => {
-            return (
-                <div>
-                    <div>
-                        <Image width='500' height='500' src={p.img_1} />
-                    </div>
-                    <h4>{p.title}</h4>
-                </div>
-            )
-                
-        })
-        products.push(...productArr);
+    if (ty === null) {
+        ty = 'undefined';
     }
+    
+    console.log(ty)
 
-    return products;
+    const productArr = product.map((p) => (
+        // let pTitle = p.title;
+        // console.log(p)
+    // for (let i = 0; i < p.length; i++) {
+    //     // let productArr = product.map(p => {
+            
+                // {t.includes(p) ?
+                        (<div>  
+                            {ti.includes(p.title), ty.includes(p.type) ? '' :
+                            <>
+                                <div>
+                                    <Image width='500' height='600' src={p.img_1} />
+                                </div>
+                                <h4>{p.title}</h4>
+                                <h4>{p.type}</h4>
+                            </>
+                            }         
+                        </div>)
+                
+                // : ('')
+                // }
+    ))
+
+    // products.push(...productArr)
+
+    return productArr;
 }
