@@ -9,7 +9,7 @@ html {
     scroll-behavior: smooth;
     overflow-x: hidden;
 
-    @include respond-to('medium') {
+    @include respond-to('small') {
         overflow-x: visible;
     }
 }
@@ -20,6 +20,10 @@ body {
     overflow-x: hidden;
     max-width: 100%;
     margin: 0 auto;
+
+    @include respond-to('small') {
+        max-width: 90%;
+    }
 
     @include respond-to('medium') {
         max-width: 80%;
@@ -65,11 +69,11 @@ body {
     }
 
     p, input, textarea, .contact__dropdown {
-        font-size: 16px;
+        font-size: 18px;
+        line-height: 30px;
 
         @include respond-to('medium')  {
             font-size: 18px;
-            line-height: 30px;
         }
     }
 

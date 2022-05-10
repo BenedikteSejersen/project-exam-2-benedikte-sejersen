@@ -4,6 +4,7 @@
     max-width: 100%;
     width: 150px;
     cursor: pointer;
+    left: 10px;
 
     @include respond-to('medium') {
         left: -40px;
@@ -127,10 +128,6 @@
     .nav__phone--icon {
         margin-right: 10px;
     }
-
-    // .active {
-    //     color: $orange;
-    // }
 }
 
 .nav__phone-option {
