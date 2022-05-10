@@ -4008,6 +4008,24 @@ textarea:focus, input:focus {
   }
 }
 
+.ildsted__related {
+  border: 1px solid green;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.related-ild__products {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.related-ild__product-container {
+  margin: 30px;
+}
+
 .tak-pipe__text-container {
   margin-bottom: 50px;
 }
@@ -4195,6 +4213,11 @@ textarea:focus, input:focus {
 
 .rehabilitering__h1 {
   margin-bottom: 15px;
+}
+@media (min-width: 992px) {
+  .rehabilitering__h1 {
+    margin-bottom: 25px;
+  }
 }
 
 @media (min-width: 767px) {

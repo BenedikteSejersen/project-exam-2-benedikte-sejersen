@@ -84,7 +84,8 @@ export default function ildstederOgOvnsmontering(props) {
                       </div>
                       <div className='ildsteder__text-container'>
                           <h4>{i.title}</h4>
-                          <p className='ildsteder__text--p'>{i.type}</p>
+                          {i.type === 'Standard' ? '' :
+                          <p className='ildsteder__text--p'>{i.type}</p>}
                           <div className='ildsteder__btn-center'>
                             <div className='ildsteder__btn'>
                               <SecondaryBtn link={`/ildsteder/${i.slug}`} text='Les mer' />

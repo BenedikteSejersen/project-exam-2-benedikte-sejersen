@@ -192,3 +192,27 @@
     }
 }
 
+// RELATED
+.ildsted__related {
+    border: 1px solid green;
+
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.related-ild__products {
+    // margin: 0 auto;
+    // max-width: 40%;
+
+    // border: 1px solid red;
+}
+
+.related-ild__products {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: center;
+}
+
+.related-ild__product-container {
+    margin: 30px;
+}   

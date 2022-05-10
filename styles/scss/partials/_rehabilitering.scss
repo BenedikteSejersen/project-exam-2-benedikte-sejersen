@@ -1,5 +1,9 @@
 .rehabilitering__h1 {
     margin-bottom: 15px;
+
+    @include respond-to('medium') {
+        margin-bottom: 25px;
+    }
 }
 
 // Rehabilitering

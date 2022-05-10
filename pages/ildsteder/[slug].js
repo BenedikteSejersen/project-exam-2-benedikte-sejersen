@@ -8,6 +8,8 @@ import ErrorComponent from '../../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PrimaryBtn from '../../components/btn/PrimaryBtn';
+import SecondaryBtn from '../../components/btn/SecondaryBtn';
+// import uniqueRandomArray from 'unique-random-array';
 
 export default function ildsted({ildsted, error, ildsteder}) {
 
@@ -41,7 +43,8 @@ export default function ildsted({ildsted, error, ildsteder}) {
                     <div className='ildsted__heading-container'>
                         <p className='orange-text ildsteder__recommend--p ildsted__recommend'>{ildstedT.recommended}</p>
                         <h1 className='ildsted__h1'>{ildstedT.title}</h1>
-                        <h4>{ildstedT.type}</h4> 
+                        {ildstedT.type === 'Standard' ? '' :
+                        <h4>{ildstedT.type}</h4>} 
                     </div>
         
                     <div className='ildsted__product'>
@@ -81,9 +84,11 @@ export default function ildsted({ildsted, error, ildsteder}) {
             </main>
 
             <section>
-                <div>
+                <div className='ildsted__related'>
                     <h3>Produkter du kanskje vil like</h3>
-                    <RelatedProducts ti={ildstedT.title} ty={ildstedT.type} product={ildsteder} />
+                   <div>
+                       <RelatedProducts slug={ildstedT.slug} ildsteder={ildsteder} />
+                   </div>
                 </div>
             </section>
 
@@ -126,40 +131,38 @@ export async function getServerSideProps(content) {
     };
 }
 
-const RelatedProducts = ({ti, ty, product}) => {
+const RelatedProducts = ({slug, ildsteder}) => {
 
-    console.log(product)
+    const [relProd, setRelProd] = useState(ildsteder);
 
-    if (ty === null) {
-        ty = 'undefined';
-    }
-    
-    console.log(ty)
-
-    const productArr = product.map((p) => (
-        // let pTitle = p.title;
-        // console.log(p)
-    // for (let i = 0; i < p.length; i++) {
-    //     // let productArr = product.map(p => {
-            
-                // {t.includes(p) ?
-                        (<div>  
-                            {ti.includes(p.title), ty.includes(p.type) ? '' :
-                            <>
-                                <div>
-                                    <Image width='500' height='600' src={p.img_1} />
-                                </div>
-                                <h4>{p.title}</h4>
-                                <h4>{p.type}</h4>
-                            </>
-                            }         
-                        </div>)
-                
-                // : ('')
-                // }
-    ))
-
-    // products.push(...productArr)
-
-    return productArr;
+    return (
+        <div
+        className='related-ild__products'
+        >
+            {relProd.filter(i => i.slug !== slug)
+            // .sort(() => Math.random())   
+            .slice(0, 4)
+            .map(p => {
+                console.log(p.slug)
+                return (
+                    <div 
+                    className='related-ild__product-container'
+                    key={p.slug}
+                    >
+                        <div>
+                            <Image src={p.img_1} width='250' height='300' />
+                        </div>
+                        <div>
+                            {p.title}
+                        </div>
+                        <div>
+                            {p.type === 'Standard' ? '' : p.type}
+                        </div>
+                        <div>
+                            <SecondaryBtn text='Les mer' link={`/ildsteder/${p.slug}`} />
+                        </div>
+                    </div>
+            )})}
+        </div> 
+        ) 
 }
