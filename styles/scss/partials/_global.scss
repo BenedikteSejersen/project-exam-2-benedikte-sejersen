@@ -18,7 +18,7 @@ body {
     background-color: $light-grey;
     color: $darker-blue;
     overflow-x: hidden;
-    max-width: 95%;
+    max-width: 100%;
     margin: 0 auto;
 
     @include respond-to('medium') {
