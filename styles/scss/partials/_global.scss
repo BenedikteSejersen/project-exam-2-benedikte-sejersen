@@ -104,32 +104,6 @@ body {
         }
     }
 
-    .breadcrumb {
-        display: flex;
-        padding: 10px;
-
-        .breadcrumb__line {
-            width: 20px;
-            height: 20px;
-            position: relative;
-            
-            &::after, &::before {
-                content: "";
-            }
-
-            &::after {
-                background-color: $dark-blue;
-                position: absolute;
-                height: 1px;
-                width: 20%;
-                text-align: center;
-                margin-left: 8px;
-                margin-top: 10px;
-            }
-
-        }
-    }
-
     // Additional info in circles
     .circle-info {
         background-color: $dark-blue;
@@ -221,4 +195,20 @@ body {
 
 .services__btn-container {
     margin: 20px 20px 0 0;
+}
+
+// Breadcrumb
+.breadcrumb {
+    display: flex;
+    margin-top: 20px;
+    padding-bottom: 20px;
+
+
+    a {
+        transition: ease-in-out .2s;
+    }
+
+    a:hover {
+        color: $link;
+    }
 }

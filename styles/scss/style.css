@@ -186,29 +186,6 @@ body ul {
     margin: 100px auto;
   }
 }
-body .breadcrumb {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 10px;
-}
-body .breadcrumb .breadcrumb__line {
-  width: 20px;
-  height: 20px;
-  position: relative;
-}
-body .breadcrumb .breadcrumb__line::after, body .breadcrumb .breadcrumb__line::before {
-  content: "";
-}
-body .breadcrumb .breadcrumb__line::after {
-  background-color: #364955;
-  position: absolute;
-  height: 1px;
-  width: 20%;
-  text-align: center;
-  margin-left: 8px;
-  margin-top: 10px;
-}
 body .circle-info {
   background-color: #364955;
   border-radius: 50%;
@@ -298,6 +275,21 @@ body .some__img:hover, body .delete:hover {
 
 .services__btn-container {
   margin: 20px 20px 0 0;
+}
+
+.breadcrumb {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+.breadcrumb a {
+  -webkit-transition: ease-in-out 0.2s;
+  transition: ease-in-out 0.2s;
+}
+.breadcrumb a:hover {
+  color: #E34156;
 }
 
 .logo {
@@ -2736,6 +2728,9 @@ textarea:focus, input:focus {
   margin-top: 20px;
   padding: 15px;
 }
+.contact__circle-info p {
+  font-size: 18px;
+}
 @media (min-width: 345px) {
   .contact__circle-info {
     margin-top: 0;
@@ -2950,7 +2945,7 @@ textarea:focus, input:focus {
 }
 @media (min-width: 992px) {
   .about__circle {
-    width: 135px;
+    width: 125px;
     top: 120px;
   }
 }
@@ -3944,7 +3939,12 @@ textarea:focus, input:focus {
 .ildsted__related {
   border: 1px solid green;
   margin: 0 auto;
-  max-width: 100%;
+  max-width: 95%;
+}
+@media (min-width: 992px) {
+  .ildsted__related {
+    max-width: 100%;
+  }
 }
 
 .related-ild__products {
@@ -3956,7 +3956,18 @@ textarea:focus, input:focus {
 }
 
 .related-ild__product-container {
-  margin: 30px;
+  margin: 0 30px 30px 0;
+  border: 1px solid red;
+  width: 200px;
+}
+
+.related__ild--btn {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: end;
+      align-content: flex-end;
 }
 
 .tak-pipe__text-container {

@@ -9,7 +9,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PrimaryBtn from '../../components/btn/PrimaryBtn';
 import SecondaryBtn from '../../components/btn/SecondaryBtn';
-// import uniqueRandomArray from 'unique-random-array';
+import Link from 'next/link'
 
 export default function ildsted({ildsted, error, ildsteder}) {
 
@@ -78,19 +78,23 @@ export default function ildsted({ildsted, error, ildsteder}) {
                         </div>
                     </div>
 
+                    <div className='breadcrumb'>
+                        <Link href='/ildsteder-og-ovnsmontering'>Tilbake til ildsteder</Link>
+                    </div>
+
                 </div>
             </div>
             </div>
             </main>
 
-            <section>
+            {/* <section>
                 <div className='ildsted__related'>
                     <h3>Produkter du kanskje vil like</h3>
                    <div>
                        <RelatedProducts slug={ildstedT.slug} ildsteder={ildsteder} />
                    </div>
                 </div>
-            </section>
+            </section> */}
 
            <Footer /> 
         </div>
@@ -158,7 +162,7 @@ const RelatedProducts = ({slug, ildsteder}) => {
                         <div>
                             {p.type === 'Standard' ? '' : p.type}
                         </div>
-                        <div>
+                        <div className='related__ild--btn'>
                             <SecondaryBtn text='Les mer' link={`/ildsteder/${p.slug}`} />
                         </div>
                     </div>

@@ -306,6 +306,10 @@ textarea:focus, input:focus {
     margin-top: 20px;
     padding: 15px;
 
+    p {
+        font-size: 18px;
+    }
+
     @include respond-to('x-small') {
         margin-top: 0;
     }
