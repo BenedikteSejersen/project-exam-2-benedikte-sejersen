@@ -215,6 +215,8 @@ body .circle-info {
 }
 body .circle-info .circle-info__h3 {
   color: #FFF !important;
+  font-size: 16px;
+  line-height: 25px;
 }
 body .some__img, body .delete {
   cursor: pointer;
