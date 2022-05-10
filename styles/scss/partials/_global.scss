@@ -7,6 +7,11 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+
+    @include respond-to('medium') {
+        overflow-x: auto;
+    }
 }
 
 body {

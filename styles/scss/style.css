@@ -92,6 +92,12 @@ a, .nav__link--extra-a, .dropdown__option--a, button {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+@media (min-width: 992px) {
+  html {
+    overflow-x: auto;
+  }
 }
 
 body {
