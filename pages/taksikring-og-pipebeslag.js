@@ -42,7 +42,7 @@ export default function taksikringOgPipebeslag(props) {
 
       <main>
       <div className="blue-container">
-      <div className='blue-container__margin'>
+      <div className='blue-container__margin services__text-layout'>
         <div className='container__padding tak-pipe__text-container'>
           <h1>{result.heading}</h1>
 
@@ -81,11 +81,11 @@ export default function taksikringOgPipebeslag(props) {
           </div>
 
           <div className='pipebeslag__imgs full-width__imgs'>
-            <div className='pipebeslag__img-1'>
-              <Image src={result.img_2} width='1000' height='1000' />
-            </div>
             <div className='pipebeslag__img-2'>
               <Image src={isTablet ? result.img_4 : result.img_3} width='1000' height={isTablet ? '1350' : '1000'} />
+            </div>
+            <div className='pipebeslag__img-1'>
+              <Image src={result.img_2} width='1000' height='1000' />
             </div>
           </div>
         </div>

@@ -85,7 +85,7 @@ export default function Home(props) {
 
                 <div className="index__btn-container">
                   <div className="index__btn--primary-container">
-                    <PrimaryBtn link="/contact" text="Kontakt oss" />
+                    <PrimaryBtn link="/kontakt-oss" text="Kontakt oss" />
                   </div>
                 </div>
               </div>

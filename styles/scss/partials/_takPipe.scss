@@ -1,61 +1,22 @@
 .tak-pipe__text-container {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 
 // Taksikring
-.taksikring-container {
-    @include respond-to('small') {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    @include respond-to('large') {
-        margin-top: 100px;
-    }
-}
-
 .taksikring__h3 {
     margin-bottom: 15px;
 }
 
 .taksikring__p--1 {
     margin-bottom: 10px;
-
-    @include respond-to('large') {
-        max-width: 700px;
-    }
 }
 
 .taksikring__p--2 {
     margin-bottom: 15px;
-
-    @include respond-to('large') {
-        max-width: 700px;
-    }
-}
-
-.taksikring__img-1 {
-    @include respond-to('small') {
-        margin-left: 20px;
-        max-width: 250px;
-    }
-
-    @include respond-to('large') {
-        max-width: 350px;
-    }
-
-    @include respond-to('x-large') {
-        max-width: 400px;
-    }
 }
 
 // Pipebeslag
 .pipebeslag-container {
-    @include respond-to('small') {
-        display: flex;
-        justify-content: space-between;
-    }
-
     @include respond-to('large') {
         margin-bottom: 50px;
     }
@@ -65,30 +26,16 @@
     }
 }
 
-.pipebeslag__text-container {
-    @include respond-to('small') {
-        flex: 65%;
-    }
-}
-
 .pipebeslag__h3 {
     margin: 30px 0 15px 0;
 }
 
 .pipebeslag__p--1 {
     margin-bottom: 10px;
-
-    @include respond-to('large') {
-        max-width: 700px;
-    }
 }
 
 .pipebeslag__p--2 {
     margin-bottom: 15px;
-
-    @include respond-to('large') {
-        max-width: 700px;
-    }
 }
 
 .tak-pipe__btn-container {
@@ -101,30 +48,20 @@
 
 .pipebeslag__imgs {
     display: flex;
+    position: relative;
 
     @include respond-to('small') {
-        display: inline-block;
-        position: relative;
-        flex: 35%;
+        margin-bottom: 50px;
     }
 
     .pipebeslag__img-1 {
         flex: 50%;
 
         @include respond-to('small') {
-            position: absolute;
-            right: 0;
-            width: 180px;
-            top: 60px;
+            position: relative;
+            flex: 65%;
+            right: 20px;
             z-index: 1;
-        }
-
-        @include respond-to('large') {
-            width: 240px;
-        }
-    
-        @include respond-to('x-large') {
-            width: 280px;
         }
     }
 
@@ -132,22 +69,19 @@
         flex: 50%;
 
         @include respond-to('small') {
-            position: absolute;
-            right: 110px;
-            width: 120px;
+            flex: 35%;
+            position: relative;
             top: 150px;
+            left: 20px;
             z-index: 2;
         }
 
         @include respond-to('large') {
-            width: 150px;
             top: 200px;
-            right: 150px;
         }
     
         @include respond-to('x-large') {
-            width: 180px;
-            right: 165px;
+            top: 230px;
         }
     }
 }

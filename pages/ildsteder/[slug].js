@@ -11,7 +11,11 @@ import PrimaryBtn from '../../components/btn/PrimaryBtn';
 import SecondaryBtn from '../../components/btn/SecondaryBtn';
 import Link from 'next/link'
 
-export default function ildsted({ildsted, error, ildsteder}) {
+// Image carousel
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+
+export default function ildsted({ildsted, error}) {
 
     const ildstedT = ildsted[0];
 
@@ -32,6 +36,7 @@ export default function ildsted({ildsted, error, ildsteder}) {
                 <link rel="icon" href="/favicon.ico" />
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+                <link rel="stylesheet" href="carousel.css"/>
             </Head>
 
             <Navigation />
@@ -49,7 +54,15 @@ export default function ildsted({ildsted, error, ildsteder}) {
         
                     <div className='ildsted__product'>
                         <div className='ildsted__img1'>
-                            <Image src={ildstedT.img_1} width="750" height="850" />
+                            <Carousel showArrows={true} showThumbs={true}>
+                                {ildstedT.images_product.map((p) => 
+                                    (
+                                        <div key={p.id}>
+                                            <Image src={p.img} width="750" height="850" />
+                                        </div>
+                                    )
+                                )}
+                            </Carousel>
                         </div>
                         <div className='specification-container white-box-container'>
                             <h3 className='specification__h3'>Spesifikasjoner</h3>
@@ -86,15 +99,6 @@ export default function ildsted({ildsted, error, ildsteder}) {
             </div>
             </div>
             </main>
-
-            {/* <section>
-                <div className='ildsted__related'>
-                    <h3>Produkter du kanskje vil like</h3>
-                   <div>
-                       <RelatedProducts slug={ildstedT.slug} ildsteder={ildsteder} />
-                   </div>
-                </div>
-            </section> */}
 
            <Footer /> 
         </div>
@@ -133,40 +137,4 @@ export async function getServerSideProps(content) {
             ildsteder: ildsteder,
         },
     };
-}
-
-const RelatedProducts = ({slug, ildsteder}) => {
-
-    const [relProd, setRelProd] = useState(ildsteder);
-
-    return (
-        <div
-        className='related-ild__products'
-        >
-            {relProd.filter(i => i.slug !== slug)
-            // .sort(() => Math.random())   
-            .slice(0, 4)
-            .map(p => {
-                console.log(p.slug)
-                return (
-                    <div 
-                    className='related-ild__product-container'
-                    key={p.slug}
-                    >
-                        <div>
-                            <Image src={p.img_1} width='250' height='300' />
-                        </div>
-                        <div>
-                            {p.title}
-                        </div>
-                        <div>
-                            {p.type === 'Standard' ? '' : p.type}
-                        </div>
-                        <div className='related__ild--btn'>
-                            <SecondaryBtn text='Les mer' link={`/ildsteder/${p.slug}`} />
-                        </div>
-                    </div>
-            )})}
-        </div> 
-        ) 
 }

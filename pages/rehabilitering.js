@@ -38,7 +38,7 @@ export default function rehailitering(props) {
 
     <main className='rehabilitering'>
       <div className="blue-container">
-        <div className='blue-container__margin'>
+        <div className='blue-container__margin services__text-layout'>
 
           <div>
 

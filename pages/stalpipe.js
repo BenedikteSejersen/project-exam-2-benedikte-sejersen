@@ -39,9 +39,9 @@ export default function stålpipe(props) {
 
       <Nav />
 
-      <main className='rehabilitering'>
+      <main className='rehabilitering'> 
         <div className="blue-container">
-          <div className='blue-container__margin'>
+          <div className='blue-container__margin services__text-layout'>
 
             <div className='container__padding'>
               <h1 className='stålpipe__h1'>{result.heading}</h1>
@@ -57,11 +57,11 @@ export default function stålpipe(props) {
               </div>
 
               <div className='stålpipe__imgs full-width__imgs'>
+              <div className='stålpipe__img-2'>
+                  <Image src={isTablet ? result.img_3 : result.img_1} width={isTablet ? '1000' : '1000'} height={isTablet ? '1500' : '1000'} />
+                </div>
                 <div className='stålpipe__img-1'>
                   <Image src={result.img_2} width='1000' height='1000' />
-                </div>
-                <div className='stålpipe__img-2'>
-                  <Image src={isTablet ? result.img_3 : result.img_1} width={isTablet ? '1000' : '1000'} height={isTablet ? '1500' : '1000'} />
                 </div>
               </div>
             </div>

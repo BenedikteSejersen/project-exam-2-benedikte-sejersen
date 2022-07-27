@@ -38,7 +38,6 @@
 .blue-container__margin {
     width: 90%;
     margin: 0 auto;
-    // border: 1px solid red;
     padding-top: 20px;
 
     @include respond-to('medium') {

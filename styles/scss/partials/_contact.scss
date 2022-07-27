@@ -306,8 +306,10 @@ textarea:focus, input:focus {
     margin-top: 20px;
     padding: 15px;
 
-    p {
-        font-size: 18px;
+    .circle-info__h3 {
+        @include respond-to('medium') {
+            font-size: 18px !important;
+        }
     }
 
     @include respond-to('x-small') {

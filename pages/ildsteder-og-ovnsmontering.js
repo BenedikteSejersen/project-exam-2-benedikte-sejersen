@@ -44,7 +44,7 @@ export default function ildstederOgOvnsmontering(props) {
 
       <div className="blue-container">
 
-        <div className='blue-container__margin'>
+        <div className='blue-container__margin services__text-layout'>
 
           <div className='container__padding'>
 

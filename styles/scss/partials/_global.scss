@@ -185,6 +185,12 @@ body {
 }
 
 // Services
+.services__text-layout {
+    @include respond-to('medium') {
+        max-width: 60% !important;
+    }
+}
+
 .services__btns {
     @include respond-to('x-small') {
         display: flex;
@@ -198,11 +204,15 @@ body {
 }
 
 // Breadcrumb
-.breadcrumb {
+.breadcrumb { 
     display: flex;
-    margin-top: 20px;
     padding-bottom: 20px;
+    margin: 20px auto;
 
+    @include respond-to('large') {
+        max-width: 1300px;
+        margin: 20px auto;
+    }
 
     a {
         transition: ease-in-out .2s;

@@ -5,13 +5,11 @@ import axios from 'axios';
 import Img from '../public/images/contact-img.jpg'
 import Image from 'next/image';
 import Footer from '../components/footer/Footer';
-import WhiteContainer from '../components/containers/WhiteContainer';
 import SoMe from '../components/soMe/SoMe';
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from '../components/login/FormError';
-import Breadcrumb from '../components/breadcrumb/Breadcrumb';
 import TextareaAutosize from 'react-textarea-autosize';
 import CircleInfo from '../components/containers/CircleInfo';
 import { send } from 'emailjs-com';
@@ -79,15 +77,15 @@ export default function Contact(props) {
         setSubmitting(true);
 
         send(
-            // 'service_tqkqmk4',
-            // 'template_p79dm3l',
-            // toSend,
-            // 'aQnjCHLb0XF_LwwqR'
-
-            'service_27mvh1t',
-            'template_3iftnuo',
+            'service_tqkqmk4',
+            'template_p79dm3l',
             toSend,
-            'user_P1SkhYsGnLeEEwTAgFD9t'
+            'aQnjCHLb0XF_LwwqR'
+
+            // 'service_27mvh1t',
+            // 'template_3iftnuo',
+            // toSend,
+            // 'user_P1SkhYsGnLeEEwTAgFD9t'
           )
             .then((response) => {
               console.log('SUCCESS!', response.status, response.text);
