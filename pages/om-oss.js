@@ -67,7 +67,7 @@ export default function About(props) {
             
             <div className="about">
                <div className="blue-container">
-               <div className='blue-container__margin'>
+               <div className='blue-container__margin services__text-layout'>
                <div className='container__padding'>
                 <main>
                     
@@ -88,16 +88,22 @@ export default function About(props) {
                         <PrimaryBtn link="/kontakt-oss" text="Kontakt oss"/>  
                         </div>
                     </div>
+
+                    {isDesktop ? <CircleInfo 
+                                    classname="about__circle" 
+                                    text={result.info} /> : ""
+                    }
                     
                     <div className="about__img-some">
 
-                        {isDesktop ? <CircleInfo 
-                                    classname="about__circle" 
-                                    text={result.info} /> : ""
+                        {isDesktop ? ''
+                        :  <CircleInfo 
+                            classname="about__circle" 
+                            text={result.info} />
                         }
                         
                         <div className="about__img full-width__imgs">
-                            <Image src={isTablet ? result.img : result.img_description} alt="an recently installed oven" width={'1000'} height={isTablet ? '1400' : '550'} />
+                            <Image src={isTablet ? result.img : result.img_description} alt="an recently installed oven" width={isTablet ? '1200' : '900'} height={isTablet ? '1250' : '500'} />
                         </div>
 
                         <SoMe 
@@ -107,11 +113,6 @@ export default function About(props) {
                             />
                     </div>
                 </div>
-
-                {isDesktop ? "" : <CircleInfo 
-                                    classname="about__circle" 
-                                    text={result.info} /> 
-                }
 
                 </main>
 

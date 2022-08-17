@@ -76,7 +76,7 @@ export default function taksikringOgPipebeslag(props) {
             <p className='pipebeslag__p--2'>{result.sub_description_2}</p>
 
             <div className='tak-pipe__btn-container'>
-              <PrimaryBtn link='/kontaks-oss' text='Kontakt oss' />
+              <PrimaryBtn link='/kontakt-oss' text='Kontakt oss' />
             </div>
           </div>
 

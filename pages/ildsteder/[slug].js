@@ -8,7 +8,6 @@ import ErrorComponent from '../../components/error/ErrorComponent';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PrimaryBtn from '../../components/btn/PrimaryBtn';
-import SecondaryBtn from '../../components/btn/SecondaryBtn';
 import Link from 'next/link'
 
 // Image carousel
@@ -26,6 +25,16 @@ export default function ildsted({ildsted, error}) {
   if (error) {
       return <ErrorComponent />
   }
+  
+const settings = {
+    showArrows: true,
+    dynamicHeight: false,
+    showStatus: true,
+    showThumbs: true,
+    showIndicators: true,
+    swipeable: true,
+    emulateTouch: true,
+  };
 
     return (
         <div>
@@ -43,7 +52,7 @@ export default function ildsted({ildsted, error}) {
 
             <main>
             <div className="blue-container">
-            <div className='blue-container__margin'>
+            <div className='blue-container__margin services__text-layout'>
                 <div>
                     <div className='ildsted__heading-container'>
                         <p className='orange-text ildsteder__recommend--p ildsted__recommend'>{ildstedT.recommended}</p>
@@ -54,7 +63,7 @@ export default function ildsted({ildsted, error}) {
         
                     <div className='ildsted__product'>
                         <div className='ildsted__img1'>
-                            <Carousel showArrows={true} showThumbs={true}>
+                            <Carousel {...settings}>
                                 {ildstedT.images_product.map((p) => 
                                     (
                                         <div key={p.id}>

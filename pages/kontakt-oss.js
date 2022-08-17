@@ -211,7 +211,7 @@ export default function Contact(props) {
                                         </div>
 
                                         <div className="contact__btn">
-                                            <button onClick={handleConfrimMsg} className="submit">Send</button>
+                                            <button onClick={handleConfrimMsg} className="submit btn">Send</button>
                                             <p className="input__required contact__btn--required">Alle felt må fylles ut</p>
                                         </div>
                                         </fieldset>

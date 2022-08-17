@@ -48,7 +48,6 @@
     }
 
     @include respond-to('large') {
-        margin-right: 100px;
         margin-bottom: 40px;
         flex: 30%;
         max-width: 600px;
