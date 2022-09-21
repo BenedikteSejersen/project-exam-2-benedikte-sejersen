@@ -9,7 +9,7 @@ export default function ErrorConf({confirm}) {
         </div>
 
             <div className="confirmation-box">
-                <div class="error-box__img">
+                <div className="error-box__img">
                     <div className="confirmation__img">
                         <Image src={ErrorCircle.src} width="500" height="500" alt="Error dialog appeared. Try again" />
                     </div>
@@ -24,7 +24,7 @@ export default function ErrorConf({confirm}) {
                     </div>
 
                     <div>
-                        <button onClick={confirm} className="error-btn">Prøv igjen</button>
+                        <button onClick={confirm} className="error-btn confirmation-btns">Prøv igjen</button>
                     </div>  
                 </div>
             </div>

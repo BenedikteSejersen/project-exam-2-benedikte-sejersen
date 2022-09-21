@@ -179,10 +179,21 @@
 }
 
 // Dialog boxes
+.confirmation-btns {
+    padding: 10px;
+    transition: .2s ease-in-out;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.20) 0px 3px 6px;
+    width: 50%;
+    cursor: pointer;
+}
+
 .success-btn {
     background-color: $success;
     border: 2px solid $success;
     color: #000;
+    position: relative;
+    z-index: 50;
 
     &:hover {
         background-color: #185a32 !important;
@@ -194,6 +205,8 @@
     background-color: $error;
     border: 2px solid $error;
     color: $white;
+    position: relative;
+    z-index: 50;
 
     &:hover {
         background-color: #af2f3a;

@@ -6,7 +6,7 @@ import Img from '../public/images/contact-img.jpg'
 import Image from 'next/image';
 import Footer from '../components/footer/Footer';
 import SoMe from '../components/soMe/SoMe';
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from '../components/login/FormError';
@@ -17,8 +17,6 @@ import { send } from 'emailjs-com';
 import Success from '../components/dialogBox/Success';
 import ErrorConf from '../components/dialogBox/ErrorConf';
 import ErrorComponent from '../components/error/ErrorComponent';
-import ArrowUp from '../public/images/icons/arrow-up.png'
-import ArrowDown from '../public/images/icons/arrow-down.png'
 
 const schema = yup.object().shape({
 	from_name: yup.string().required("Navn må fylles ut"),
@@ -33,8 +31,6 @@ export default function Contact(props) {
     const [submitting, setSubmitting] = useState(false);
     const [serverError, setServerError] = useState(false);
     const [showConfirm, setShowConfirm] = useState(false);
-    const [show, setShow] = useState(false);
-    const [selectedSubject, setSelectedSubject] = useState("");
     const [toSend, setToSend] = useState({
         from_name: '',
         message_to: '',
@@ -43,59 +39,54 @@ export default function Contact(props) {
         service: '',
       });
 
-    const handleDropdown = () => setShow(!show);
-
-    function handleChange(e) {
-        setSelectedSubject(e)
-        setShow(false);
-    }
-
     const error = props.error;
     const service = props.services;
 
     const form = useRef();
 
     // Form yup resolver
-    const { handleC, register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema),
     });
 
     // Confirmation dialog form successfully sent
-    const handleConfirm = () => {
-        form.current.submit();
-    }
+    const handleConfirm = (e) => {
+        form.current.submit(e);
+    }     
+    
+    const handleConfrimMsg = (e) => {
+        setShowConfirm(true);
 
-    const handleConfrimMsg = () => {
-        if (Object.entries(errors).length === 0) {
-            return setShowConfirm(false);
-        } 
-        return false;
+        // if (Object.entries(errors).length === 0) {
+        //     return setShowConfirm(false);
+        // } 
+        // return false;
     }
 
     // Form submit function
-    const onSubmit = (e) => {
+    const onSubmit = () => {
         setSubmitting(true);
+    
+           send(
+            // NPRAS EMAIL
+                // 'service_tqkqmk4',
+                // 'template_p79dm3l',
+                // toSend,
+                // 'aQnjCHLb0XF_LwwqR'
 
-        send(
-            'service_tqkqmk4',
-            'template_p79dm3l',
-            toSend,
-            'aQnjCHLb0XF_LwwqR'
-
-            // 'service_27mvh1t',
-            // 'template_3iftnuo',
-            // toSend,
-            // 'user_P1SkhYsGnLeEEwTAgFD9t'
-          )
-            .then((response) => {
-              console.log('SUCCESS!', response.status, response.text);
-              setShowConfirm(true);
-            })
-            .catch((err) => {
-              console.log('FAILED...', err);
-              setServerError(true);
-              setShowConfirm(false);
-            });
+                'service_27mvh1t',
+                'template_3iftnuo',
+                toSend,
+                'user_P1SkhYsGnLeEEwTAgFD9t'
+              )
+              .then((response) => {
+                setShowConfirm(true);
+              })
+              .catch((err) => {
+                setShowConfirm(false);
+                setServerError(true);
+              }); 
+            
       };
     
       const handleSend= (e) => {
@@ -165,7 +156,6 @@ export default function Contact(props) {
                                                                         >{s.title}</option>
                                                                 ))}
                                                                 <option className="option" value="Spørsmål" >Spørsmål</option>
-                                                                <option className="option" value="Befaring" >Befaring</option>
                                                                 <option className="option" value="Annet">Annet</option>
                                                         </select>
                                                 </div>
@@ -211,7 +201,8 @@ export default function Contact(props) {
                                         </div>
 
                                         <div className="contact__btn">
-                                            <button onClick={handleConfrimMsg} className="submit btn">Send</button>
+                                            {/* <button type='submit' onClick={handleConfrimMsg} className="submit btn">Send</button> */}
+                                            <button type='submit' className="submit btn">Send</button>
                                             <p className="input__required contact__btn--required">Alle felt må fylles ut</p>
                                         </div>
                                         </fieldset>

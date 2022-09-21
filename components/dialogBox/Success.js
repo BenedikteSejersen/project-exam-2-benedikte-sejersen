@@ -9,7 +9,7 @@ export default function Success({confirm}) {
         </div>
 
             <div className="confirmation-box">
-                <div class="success-box__img">
+                <div className="success-box__img">
                     <div className="confirmation__img">
                         <Image src={SuccessCircle.src} width="500" height="500" alt="Message successfully sent" />
                     </div>
@@ -24,7 +24,7 @@ export default function Success({confirm}) {
                     </div>
 
                     <div>
-                        <button onClick={confirm} className="success-btn">Fortsett</button>
+                        <button onClick={confirm} className="success-btn confirmation-btns">Fortsett</button>
                     </div>  
                 </div>
             </div>

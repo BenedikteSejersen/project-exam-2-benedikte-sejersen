@@ -1,5 +1,6 @@
 .use-pro {
     margin-bottom: 50px;
+    max-width: 95%;
 
     @include respond-to('small') {
         margin-top: 100px;
@@ -7,13 +8,14 @@
 
     @include respond-to('medium') {
         margin-top: 200px;
+        max-width: 80%;
     }
 }
 
 .use-pro__center {
     @include respond-to('medium') {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
     }
 }
 
@@ -21,14 +23,13 @@
     padding: 10px;
 
     @include respond-to('small') {
-        padding: 30px;
-        margin: auto 30px;
+        padding-right: 20px;
     }
 
     @include respond-to('medium') {
-        height: 80%;
-        margin: auto;
         width: 50%;
+        max-width: 600px;
+        padding: 0 20px 0 0;
     }
 
     p {
