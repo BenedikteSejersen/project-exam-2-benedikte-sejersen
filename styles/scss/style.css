@@ -3402,9 +3402,9 @@ textarea:focus, input:focus {
     display: flex;
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
-    -webkit-box-pack: start;
-        -ms-flex-pack: start;
-            justify-content: start;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 @media (min-width: 767px) {
@@ -3425,14 +3425,9 @@ textarea:focus, input:focus {
     width: 40%;
   }
 }
-@media (min-width: 767px) {
+@media (min-width: 1200px) {
   .ildsteder__products .ildsteder__product-container {
     width: 30%;
-  }
-}
-@media (min-width: 1535px) {
-  .ildsteder__products .ildsteder__product-container {
-    width: 20%;
   }
 }
 .ildsteder__products .ildsteder__text-container {

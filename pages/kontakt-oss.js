@@ -56,11 +56,6 @@ export default function Contact(props) {
     
     const handleConfrimMsg = (e) => {
         setShowConfirm(true);
-
-        // if (Object.entries(errors).length === 0) {
-        //     return setShowConfirm(false);
-        // } 
-        // return false;
     }
 
     // Form submit function
@@ -68,16 +63,10 @@ export default function Contact(props) {
         setSubmitting(true);
     
            send(
-            // NPRAS EMAIL
-                // 'service_tqkqmk4',
-                // 'template_p79dm3l',
-                // toSend,
-                // 'aQnjCHLb0XF_LwwqR'
-
-                'service_27mvh1t',
-                'template_3iftnuo',
+                process.env.NEXT_PUBLIC_SERVICE_ID, 
+                process.env.NEXT_PUBLIC_TEMPLATE_ID,
                 toSend,
-                'user_P1SkhYsGnLeEEwTAgFD9t'
+                process.env.NEXT_PUBLIC_PUBLIC_KEY
               )
               .then((response) => {
                 setShowConfirm(true);
@@ -201,7 +190,6 @@ export default function Contact(props) {
                                         </div>
 
                                         <div className="contact__btn">
-                                            {/* <button type='submit' onClick={handleConfrimMsg} className="submit btn">Send</button> */}
                                             <button type='submit' className="submit btn">Send</button>
                                             <p className="input__required contact__btn--required">Alle felt må fylles ut</p>
                                         </div>

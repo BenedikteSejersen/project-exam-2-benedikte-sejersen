@@ -19,7 +19,7 @@
     @include respond-to('x-small') {
         display: flex;
         flex-wrap: wrap;
-        justify-content: start;
+        justify-content: center;
     }
 
     @include respond-to('small') {
@@ -35,16 +35,9 @@
             width: 40%;
         }
 
-        @include respond-to('small') {
-            width: 30%;
-        }
-
         @include respond-to('large') {
-        }
-
-        @include respond-to('x-large') {
-            width: 20%;
-        }  
+            width: 30%;
+        } 
     }
 
     .ildsteder__text-container {
